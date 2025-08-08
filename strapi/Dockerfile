@@ -12,6 +12,10 @@ RUN npm install
 
 COPY . .
 
+# Create uploads directory and set permissions
+RUN mkdir -p /opt/app/public/uploads && \
+    chmod 777 /opt/app/public/uploads
+
 EXPOSE 1338
 
 CMD ["npm", "run", "develop"]

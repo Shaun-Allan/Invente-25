@@ -43,6 +43,7 @@ services:
     volumes:
       - ./strapi:/opt/app
       - strapi-node-modules:/opt/app/node_modules
+      - ./strapi/public/uploads:/opt/app/public/uploads
     ports:
       - "1338:1338"
     networks:
