@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "schedules",
+  "info": {
+    "singularName": "schedule",
+    "pluralName": "schedules",
+    "displayName": "Schedule",
+    "description": "Event schedules for both days"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "DAY_1": {
+      "type": "component",
+      "repeatable": true,
+      "component": "schedule.schedule-item"
+    },
+    "DAY_2": {
+      "type": "component",
+      "repeatable": true,
+      "component": "schedule.schedule-item"
+    }
+  }
+}

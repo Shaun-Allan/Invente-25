@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_schedule_schedule_rounds",
+  "info": {
+    "displayName": "Schedule Round",
+    "icon": "clock"
+  },
+  "options": {},
+  "attributes": {
+    "roundName": {
+      "type": "string",
+      "required": true
+    },
+    "timeRange": {
+      "type": "string",
+      "required": true
+    },
+    "venue": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

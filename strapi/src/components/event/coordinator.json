@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_event_coordinators",
+  "info": {
+    "displayName": "Coordinator",
+    "icon": "user"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

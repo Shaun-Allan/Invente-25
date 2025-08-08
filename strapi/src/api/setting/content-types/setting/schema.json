@@ -1,0 +1,43 @@
+{
+  "kind": "singleType",
+  "collectionName": "settings",
+  "info": {
+    "singularName": "setting",
+    "pluralName": "settings",
+    "displayName": "Settings",
+    "description": "Global settings and constants"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "busRoutesUrl": {
+      "type": "string",
+      "required": false
+    },
+    "registrationUrl": {
+      "type": "string",
+      "required": false
+    },
+    "contactEmail": {
+      "type": "email",
+      "required": false
+    },
+    "contactPhone": {
+      "type": "string",
+      "required": false
+    },
+    "eventDate": {
+      "type": "date",
+      "required": false
+    },
+    "venue": {
+      "type": "string",
+      "required": false
+    },
+    "socialLinks": {
+      "type": "json"
+    }
+  }
+}

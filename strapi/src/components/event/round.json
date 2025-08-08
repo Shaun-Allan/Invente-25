@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_event_rounds",
+  "info": {
+    "displayName": "Round",
+    "icon": "layer"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

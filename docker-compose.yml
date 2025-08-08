@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: strapi-db
+    environment:
+      POSTGRES_DB: strapi
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: strapi123
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    networks:
+      - strapi-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U strapi"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  strapi:
+    build:
+      context: ./strapi
+      dockerfile: Dockerfile
+    container_name: strapi-app
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: strapi
+      DATABASE_USERNAME: strapi
+      DATABASE_PASSWORD: strapi123
+      DATABASE_SSL: false
+      JWT_SECRET: changeme123456789
+      ADMIN_JWT_SECRET: changeme987654321
+      APP_KEYS: key1,key2,key3,key4
+      API_TOKEN_SALT: saltytoken123
+      NODE_ENV: development
+      HOST: 0.0.0.0
+      PORT: 1338
+    volumes:
+      - ./strapi:/opt/app
+      - strapi-node-modules:/opt/app/node_modules
+    ports:
+      - "1338:1338"
+    networks:
+      - strapi-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:1338/admin"]
+      interval: 30s
+      timeout: 30s
+      retries: 10
+      start_period: 120s
+
+  nextjs:
+    build:
+      context: .
+      dockerfile: Dockerfile.nextjs
+    container_name: nextjs-app
+    environment:
+      NEXT_PUBLIC_STRAPI_URL: http://localhost:1338
+      STRAPI_API_URL: http://strapi:1338
+    ports:
+      - "3005:3005"
+    networks:
+      - strapi-network
+    depends_on:
+      strapi:
+        condition: service_healthy
+    volumes:
+      - ./app:/app/app
+      - ./public:/app/public
+
+networks:
+  strapi-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  strapi-node-modules:

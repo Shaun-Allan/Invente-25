@@ -1,0 +1,84 @@
+{
+  "kind": "collectionType",
+  "collectionName": "events",
+  "info": {
+    "singularName": "event",
+    "pluralName": "events",
+    "displayName": "Event",
+    "description": "Event management for the festival"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "poster": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "department": {
+      "type": "enumeration",
+      "enum": [
+        "SSN_CSE",
+        "SNU_CSE",
+        "IT",
+        "ECE",
+        "EEE",
+        "MECH",
+        "CHEM",
+        "CIVIL",
+        "BME",
+        "COM"
+      ],
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "TECHNICAL",
+        "NON_TECHNICAL",
+        "HACKATHON",
+        "WORKSHOP"
+      ],
+      "required": true
+    },
+    "prizeDetails": {
+      "type": "component",
+      "repeatable": true,
+      "component": "event.prize-detail"
+    },
+    "day": {
+      "type": "enumeration",
+      "enum": ["DAY_1", "DAY_2"],
+      "required": true
+    },
+    "location": {
+      "type": "string",
+      "required": true
+    },
+    "participantCount": {
+      "type": "string",
+      "required": true
+    },
+    "rounds": {
+      "type": "component",
+      "repeatable": true,
+      "component": "event.round"
+    },
+    "coordinators": {
+      "type": "component",
+      "repeatable": true,
+      "component": "event.coordinator"
+    }
+  }
+}

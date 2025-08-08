@@ -1,102 +1,265 @@
-import Image from "next/image";
+import { getEvents, getSponsors, getSchedule, getSettings } from '@/lib/api';
 
-export default function Home() {
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+export default async function Home() {
+  const [events, sponsors, schedule, settings] = await Promise.all([
+    getEvents(),
+    getSponsors(),
+    getSchedule(),
+    getSettings(),
+  ]);
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="max-w-7xl mx-auto px-4 py-12">
+      <header className="mb-12">
+        <h1 className="text-5xl font-bold mb-4">Invente 2025</h1>
+        <p className="text-xl text-gray-600">
+          Tech Festival • {settings?.attributes.venue || 'SSN College of Engineering'}
+        </p>
+        {settings?.attributes.eventDate && (
+          <p className="text-lg text-gray-500 mt-2">
+            {new Date(settings.attributes.eventDate).toLocaleDateString('en-US', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
+          </p>
+        )}
+      </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Quick Links */}
+      {settings && (settings.attributes.busRoutesUrl || settings.attributes.registrationUrl) && (
+        <div className="mb-12 p-6 bg-blue-50 rounded-lg">
+          <h2 className="text-2xl font-semibold mb-4">Quick Links</h2>
+          <div className="flex gap-4 flex-wrap">
+            {settings.attributes.registrationUrl && (
+              <a
+                href={settings.attributes.registrationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+              >
+                Register Now
+              </a>
+            )}
+            {settings.attributes.busRoutesUrl && (
+              <a
+                href={settings.attributes.busRoutesUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition"
+              >
+                Bus Routes
+              </a>
+            )}
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      )}
+
+      {/* Events Section */}
+      <section className="mb-12">
+        <h2 className="text-3xl font-bold mb-6">Events</h2>
+        
+        {/* Day 1 Events */}
+        <div className="mb-8">
+          <h3 className="text-2xl font-semibold mb-4 text-blue-600">Day 1</h3>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {events
+              .filter((event) => event.attributes.day === 'DAY_1')
+              .map((event) => (
+                <div
+                  key={event.id}
+                  className="border rounded-lg p-6 hover:shadow-lg transition-shadow"
+                >
+                  <div className="flex justify-between items-start mb-2">
+                    <h4 className="text-xl font-semibold">{event.attributes.name}</h4>
+                    <span className={`px-2 py-1 rounded text-xs font-medium ${
+                      event.attributes.type === 'TECHNICAL' ? 'bg-purple-100 text-purple-700' :
+                      event.attributes.type === 'WORKSHOP' ? 'bg-green-100 text-green-700' :
+                      event.attributes.type === 'HACKATHON' ? 'bg-orange-100 text-orange-700' :
+                      'bg-gray-100 text-gray-700'
+                    }`}>
+                      {event.attributes.type}
+                    </span>
+                  </div>
+                  
+                  <p className="text-sm text-gray-500 mb-3">
+                    {event.attributes.department} • {event.attributes.location}
+                  </p>
+                  
+                  <p className="text-gray-700 mb-3 line-clamp-3">
+                    {event.attributes.description}
+                  </p>
+                  
+                  <div className="text-sm text-gray-600">
+                    <p className="mb-1">👥 {event.attributes.participantCount}</p>
+                    {event.attributes.prizeDetails && event.attributes.prizeDetails.length > 0 && (
+                      <p className="font-medium text-green-600">
+                        🏆 Prizes worth ₹{event.attributes.prizeDetails.reduce((sum, prize) => sum + prize.amount, 0).toLocaleString()}
+                      </p>
+                    )}
+                  </div>
+
+                  {event.attributes.rounds && event.attributes.rounds.length > 0 && (
+                    <div className="mt-3 pt-3 border-t">
+                      <p className="text-sm font-medium text-gray-600">
+                        {event.attributes.rounds.length} Round{event.attributes.rounds.length > 1 ? 's' : ''}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))}
+          </div>
+        </div>
+
+        {/* Day 2 Events */}
+        <div>
+          <h3 className="text-2xl font-semibold mb-4 text-blue-600">Day 2</h3>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {events
+              .filter((event) => event.attributes.day === 'DAY_2')
+              .map((event) => (
+                <div
+                  key={event.id}
+                  className="border rounded-lg p-6 hover:shadow-lg transition-shadow"
+                >
+                  <div className="flex justify-between items-start mb-2">
+                    <h4 className="text-xl font-semibold">{event.attributes.name}</h4>
+                    <span className={`px-2 py-1 rounded text-xs font-medium ${
+                      event.attributes.type === 'TECHNICAL' ? 'bg-purple-100 text-purple-700' :
+                      event.attributes.type === 'WORKSHOP' ? 'bg-green-100 text-green-700' :
+                      event.attributes.type === 'HACKATHON' ? 'bg-orange-100 text-orange-700' :
+                      'bg-gray-100 text-gray-700'
+                    }`}>
+                      {event.attributes.type}
+                    </span>
+                  </div>
+                  
+                  <p className="text-sm text-gray-500 mb-3">
+                    {event.attributes.department} • {event.attributes.location}
+                  </p>
+                  
+                  <p className="text-gray-700 mb-3 line-clamp-3">
+                    {event.attributes.description}
+                  </p>
+                  
+                  <div className="text-sm text-gray-600">
+                    <p className="mb-1">👥 {event.attributes.participantCount}</p>
+                    {event.attributes.prizeDetails && event.attributes.prizeDetails.length > 0 && (
+                      <p className="font-medium text-green-600">
+                        🏆 Prizes worth ₹{event.attributes.prizeDetails.reduce((sum, prize) => sum + prize.amount, 0).toLocaleString()}
+                      </p>
+                    )}
+                  </div>
+
+                  {event.attributes.rounds && event.attributes.rounds.length > 0 && (
+                    <div className="mt-3 pt-3 border-t">
+                      <p className="text-sm font-medium text-gray-600">
+                        {event.attributes.rounds.length} Round{event.attributes.rounds.length > 1 ? 's' : ''}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Sponsors Section */}
+      {sponsors.length > 0 && (
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold mb-6">Our Sponsors</h2>
+          
+          {/* Title Sponsors */}
+          {sponsors.filter(s => s.attributes.type === 'TITLE').length > 0 && (
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold mb-4 text-gold">Title Sponsors</h3>
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {sponsors
+                  .filter(s => s.attributes.type === 'TITLE')
+                  .map((sponsor) => (
+                    <a
+                      key={sponsor.id}
+                      href={sponsor.attributes.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="border rounded-lg p-6 hover:shadow-lg transition-shadow flex flex-col items-center"
+                    >
+                      {sponsor.attributes.logo?.data && (
+                        <img
+                          src={`${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1338'}${sponsor.attributes.logo.data.attributes.url}`}
+                          alt={sponsor.attributes.name}
+                          className="h-20 object-contain mb-3"
+                        />
+                      )}
+                      <h4 className="text-lg font-semibold">{sponsor.attributes.name}</h4>
+                    </a>
+                  ))}
+              </div>
+            </div>
+          )}
+
+          {/* Other Sponsors */}
+          <div className="grid gap-4 md:grid-cols-4 lg:grid-cols-6">
+            {sponsors
+              .filter(s => s.attributes.type !== 'TITLE')
+              .map((sponsor) => (
+                <a
+                  key={sponsor.id}
+                  href={sponsor.attributes.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border rounded-lg p-4 hover:shadow-md transition-shadow flex flex-col items-center"
+                >
+                  {sponsor.attributes.logo?.data && (
+                    <img
+                      src={`${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1338'}${sponsor.attributes.logo.data.attributes.url}`}
+                      alt={sponsor.attributes.name}
+                      className="h-12 object-contain mb-2"
+                    />
+                  )}
+                  <p className="text-sm text-center">{sponsor.attributes.name}</p>
+                </a>
+              ))}
+          </div>
+        </section>
+      )}
+
+      {/* Contact Section */}
+      {settings && (settings.attributes.contactEmail || settings.attributes.contactPhone) && (
+        <section className="mb-12 p-6 bg-gray-50 rounded-lg">
+          <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
+          <div className="flex gap-6 flex-wrap">
+            {settings.attributes.contactEmail && (
+              <a
+                href={`mailto:${settings.attributes.contactEmail}`}
+                className="text-blue-600 hover:underline"
+              >
+                📧 {settings.attributes.contactEmail}
+              </a>
+            )}
+            {settings.attributes.contactPhone && (
+              <a
+                href={`tel:${settings.attributes.contactPhone}`}
+                className="text-blue-600 hover:underline"
+              >
+                📱 {settings.attributes.contactPhone}
+              </a>
+            )}
+          </div>
+        </section>
+      )}
+
+      <footer className="mt-16 pt-8 border-t text-center text-gray-500">
+        <p>
+          Next.js (Port 3005) ↔ Strapi CMS (Port 1338) ↔ PostgreSQL (Port 5433)
+        </p>
+        <p className="mt-2 text-sm">
+          Events: {events.length} • Sponsors: {sponsors.length}
+        </p>
       </footer>
     </div>
   );

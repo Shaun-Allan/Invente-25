@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_event_prize_details",
+  "info": {
+    "displayName": "Prize Detail",
+    "icon": "trophy"
+  },
+  "options": {},
+  "attributes": {
+    "amount": {
+      "type": "integer",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

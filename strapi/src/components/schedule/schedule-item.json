@@ -1,0 +1,51 @@
+{
+  "collectionName": "components_schedule_schedule_items",
+  "info": {
+    "displayName": "Schedule Item",
+    "icon": "calendar"
+  },
+  "options": {},
+  "attributes": {
+    "eventName": {
+      "type": "string",
+      "required": true
+    },
+    "subTitle": {
+      "type": "string",
+      "required": false
+    },
+    "location": {
+      "type": "string",
+      "required": true
+    },
+    "timeRange": {
+      "type": "string",
+      "required": true
+    },
+    "rounds": {
+      "type": "component",
+      "repeatable": true,
+      "component": "schedule.schedule-round"
+    },
+    "highlightNotInDeptPremises": {
+      "type": "boolean",
+      "default": false
+    },
+    "department": {
+      "type": "enumeration",
+      "enum": [
+        "SSN_CSE",
+        "SNU_CSE",
+        "IT",
+        "ECE",
+        "EEE",
+        "MECH",
+        "CHEM",
+        "CIVIL",
+        "BME",
+        "COM"
+      ],
+      "required": true
+    }
+  }
+}
