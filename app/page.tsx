@@ -108,7 +108,7 @@ export default async function Home() {
             {/* Mobile/Tablet Linear Layout */}
             <div className="block lg:hidden space-y-4">
               {/* All Events */}
-              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-lg border border-white/10 h-48 sm:h-56">
+              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-lg border border-white/10 h-48 sm:h-56 cursor-pointer transition-transform hover:scale-105">
                 <Image src="/all_events.png" alt="All Events" fill className="object-cover" unoptimized />
                 <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 text-white font-dm-sans font-bold text-xl sm:text-2xl tracking-wide">
                   All events
@@ -116,7 +116,7 @@ export default async function Home() {
               </div>
               
               {/* Hackathons & Workshops */}
-              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-lg border border-white/10 h-48 sm:h-56">
+              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-lg border border-white/10 h-48 sm:h-56 cursor-pointer transition-transform hover:scale-105">
                 <Image src="/hacks_workshops.png" alt="Hackathons & Workshops" fill className="object-cover" unoptimized />
                 <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 text-white font-dm-sans font-bold text-xl sm:text-2xl tracking-wide">
                   Hackathons & Workshops
@@ -124,7 +124,7 @@ export default async function Home() {
               </div>
               
               {/* Schedule */}
-              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-lg border border-white/10 h-48 sm:h-56">
+              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-lg border border-white/10 h-48 sm:h-56 cursor-pointer transition-transform hover:scale-105">
                 <Image src="/schedule.png" alt="Schedule" fill className="object-cover" unoptimized />
                 <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 text-white font-dm-sans font-bold text-xl sm:text-2xl tracking-wide">
                   Schedule
@@ -132,7 +132,7 @@ export default async function Home() {
               </div>
               
               {/* Sponsors */}
-              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-lg border border-white/10 h-48 sm:h-56">
+              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-lg border border-white/10 h-48 sm:h-56 cursor-pointer transition-transform hover:scale-105">
                 <Image src="/sponsors.png" alt="Sponsors" fill className="object-cover" unoptimized />
                 <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 text-white font-dm-sans font-bold text-xl sm:text-2xl tracking-wide">
                   Sponsors
@@ -140,7 +140,7 @@ export default async function Home() {
               </div>
               
               {/* Gallery */}
-              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-lg border border-white/10 h-48 sm:h-56">
+              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-lg border border-white/10 h-48 sm:h-56 cursor-pointer transition-transform hover:scale-105">
                 <Image src="/gallery.png" alt="Gallery" fill className="object-cover" unoptimized />
                 <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 text-white font-dm-sans font-bold text-xl sm:text-2xl tracking-wide">
                   Gallery
@@ -148,7 +148,7 @@ export default async function Home() {
               </div>
               
               {/* Hospitality */}
-              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-lg border border-white/10 h-48 sm:h-56">
+              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-lg border border-white/10 h-48 sm:h-56 cursor-pointer transition-transform hover:scale-105">
                 <Image src="/Hospitality.png" alt="Hospitality" fill className="object-cover" unoptimized />
                 <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 text-white font-dm-sans font-bold text-xl sm:text-2xl tracking-wide">
                   Hospitality
@@ -156,52 +156,52 @@ export default async function Home() {
               </div>
             </div>
 
-            {/* Desktop Bento Grid Layout (unchanged for 1440px) */}
+            {/* Desktop Bento Grid Layout with Hover Effects */}
             <div className="hidden lg:grid grid-cols-6 grid-rows-2 gap-4 h-[600px]">
               {/* All Events - Large (Top-Left) */}
-              <div className="col-span-3 row-span-1 relative rounded-2xl overflow-hidden shadow-lg border border-white/10">
-                <Image src="/all_events.png" alt="All Events" fill className="object-cover" unoptimized />
-                <div className="absolute bottom-6 left-6 text-white font-dm-sans font-bold text-2xl tracking-wide">
+              <div className="col-span-3 row-span-1 relative rounded-2xl overflow-hidden shadow-lg border border-white/10 cursor-pointer group">
+                <Image src="/all_events.png" alt="All Events" fill className="object-cover transition-transform group-hover:scale-105" unoptimized />
+                <div className="absolute bottom-6 left-6 text-white font-dm-sans font-bold text-2xl tracking-wide transition-all duration-300 group-hover:left-1/2 group-hover:top-1/2 group-hover:-translate-x-1/2 group-hover:-translate-y-1/2 group-hover:text-center">
                   All events
                 </div>
               </div>
               
               {/* Hackathons & Workshops - Large (Top-Right) */}
-              <div className="col-span-3 row-span-1 relative rounded-2xl overflow-hidden shadow-lg border border-white/10">
-                <Image src="/hacks_workshops.png" alt="Hackathons & Workshops" fill className="object-cover" unoptimized />
-                <div className="absolute bottom-6 left-6 text-white font-dm-sans font-bold text-2xl tracking-wide">
+              <div className="col-span-3 row-span-1 relative rounded-2xl overflow-hidden shadow-lg border border-white/10 cursor-pointer group">
+                <Image src="/hacks_workshops.png" alt="Hackathons & Workshops" fill className="object-cover transition-transform group-hover:scale-105" unoptimized />
+                <div className="absolute bottom-6 left-6 text-white font-dm-sans font-bold text-2xl tracking-wide transition-all duration-300 group-hover:left-1/2 group-hover:top-1/2 group-hover:-translate-x-1/2 group-hover:-translate-y-1/2 group-hover:text-center">
                   Hackathons & Workshops
                 </div>
               </div>
               
               {/* Schedule - Medium (Bottom-Left) */}
-              <div className="col-span-2 row-span-1 relative rounded-2xl overflow-hidden shadow-lg border border-white/10">
-                <Image src="/schedule.png" alt="Schedule" fill className="object-cover" unoptimized />
-                <div className="absolute bottom-6 left-6 text-white font-dm-sans font-bold text-2xl tracking-wide">
+              <div className="col-span-2 row-span-1 relative rounded-2xl overflow-hidden shadow-lg border border-white/10 cursor-pointer group">
+                <Image src="/schedule.png" alt="Schedule" fill className="object-cover transition-transform group-hover:scale-105" unoptimized />
+                <div className="absolute bottom-6 left-6 text-white font-dm-sans font-bold text-2xl tracking-wide transition-all duration-300 group-hover:left-1/2 group-hover:top-1/2 group-hover:-translate-x-1/2 group-hover:-translate-y-1/2 group-hover:text-center">
                   Schedule
                 </div>
               </div>
               
               {/* Sponsors - Small (Bottom-Middle-Left) */}
-              <div className="col-span-1 row-span-1 relative rounded-2xl overflow-hidden shadow-lg border border-white/10">
-                <Image src="/sponsors.png" alt="Sponsors" fill className="object-cover" unoptimized />
-                <div className="absolute bottom-6 left-6 text-white font-dm-sans font-bold text-lg tracking-wide">
+              <div className="col-span-1 row-span-1 relative rounded-2xl overflow-hidden shadow-lg border border-white/10 cursor-pointer group">
+                <Image src="/sponsors.png" alt="Sponsors" fill className="object-cover transition-transform group-hover:scale-105" unoptimized />
+                <div className="absolute bottom-6 left-6 text-white font-dm-sans font-bold text-lg tracking-wide transition-all duration-300 group-hover:left-1/2 group-hover:top-1/2 group-hover:-translate-x-1/2 group-hover:-translate-y-1/2 group-hover:text-center">
                   Sponsors
                 </div>
               </div>
               
               {/* Gallery - Small (Bottom-Middle-Right) */}
-              <div className="col-span-1 row-span-1 relative rounded-2xl overflow-hidden shadow-lg border border-white/10">
-                <Image src="/gallery.png" alt="Gallery" fill className="object-cover" unoptimized />
-                <div className="absolute bottom-6 left-6 text-white font-dm-sans font-bold text-lg tracking-wide">
+              <div className="col-span-1 row-span-1 relative rounded-2xl overflow-hidden shadow-lg border border-white/10 cursor-pointer group">
+                <Image src="/gallery.png" alt="Gallery" fill className="object-cover transition-transform group-hover:scale-105" unoptimized />
+                <div className="absolute bottom-6 left-6 text-white font-dm-sans font-bold text-lg tracking-wide transition-all duration-300 group-hover:left-1/2 group-hover:top-1/2 group-hover:-translate-x-1/2 group-hover:-translate-y-1/2 group-hover:text-center">
                   Gallery
                 </div>
               </div>
               
               {/* Hospitality - Medium (Bottom-Right) */}
-              <div className="col-span-2 row-span-1 relative rounded-2xl overflow-hidden shadow-lg border border-white/10">
-                <Image src="/Hospitality.png" alt="Hospitality" fill className="object-cover" unoptimized />
-                <div className="absolute bottom-6 left-6 text-white font-dm-sans font-bold text-2xl tracking-wide">
+              <div className="col-span-2 row-span-1 relative rounded-2xl overflow-hidden shadow-lg border border-white/10 cursor-pointer group">
+                <Image src="/Hospitality.png" alt="Hospitality" fill className="object-cover transition-transform group-hover:scale-105" unoptimized />
+                <div className="absolute bottom-6 left-6 text-white font-dm-sans font-bold text-2xl tracking-wide transition-all duration-300 group-hover:left-1/2 group-hover:top-1/2 group-hover:-translate-x-1/2 group-hover:-translate-y-1/2 group-hover:text-center">
                   Hospitality
                 </div>
               </div>

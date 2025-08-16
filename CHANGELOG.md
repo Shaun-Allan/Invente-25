@@ -2,6 +2,36 @@
 
 All notable changes to the Invente 25 project will be documented in this file.
 
+## [2025-08-16] - Footer Layout & Bento Grid Interactions
+
+### 🎨 UI/UX Improvements
+
+#### Footer Layout Fixes
+- **Mobile**: Computer image now appears below "Designed and Developed by" text
+- **Tablet**: Computer image positioned next to credits text, stuck to right edge
+- **Desktop**: Computer image in original absolute position on right
+- **Spacing**: Reduced gaps between "PARTICIPATE", "KNOW MORE", "GET IN TOUCH" sections
+- **Component**: Moved footer code to reusable component (`components/events/Footer.js`)
+
+#### Bento Grid Interactions
+- **Laptop Hover**: Labels move from bottom-left to center of each card on hover
+- **Mobile/Tablet**: Cards are clickable for navigation (ready for page routing)
+- **Visual Feedback**: Images scale up slightly on hover/touch
+- **Smooth Animations**: 300ms transitions for professional feel
+
+### 🔧 Technical Changes
+- **Footer**: Modularized as reusable component
+- **Responsive Design**: Different layouts for mobile, tablet, and desktop
+- **Hover Effects**: CSS transitions for smooth label animations
+- **Click Handling**: Added cursor pointers and touch feedback
+
+### 📱 Device-Specific Behavior
+- **Mobile**: Stacked layout with computer image below credits
+- **Tablet**: Horizontal layout with computer image on right
+- **Desktop**: Original layout with hover effects on bento grid
+
+---
+
 ## [2025-08-16] - Fetch Error Resolution & Application Resilience
 
 ### 🐛 Fixed
