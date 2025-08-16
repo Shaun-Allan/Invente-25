@@ -1,265 +1,179 @@
 import { getEvents, getSponsors, getSchedule, getSettings } from '@/lib/api';
+import Image from 'next/image';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export default async function Home() {
-  const [events, sponsors, schedule, settings] = await Promise.all([
+  const [events, sponsors, schedule, settings] = await Promise.allSettled([
     getEvents(),
     getSponsors(),
     getSchedule(),
     getSettings(),
   ]);
 
+  const eventsData = events.status === 'fulfilled' ? events.value : [];
+  const sponsorsData = sponsors.status === 'fulfilled' ? sponsors.value : [];
+  const scheduleData = schedule.status === 'fulfilled' ? schedule.value : null;
+  const settingsData = settings.status === 'fulfilled' ? settings.value : null;
+
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
-      <header className="mb-12">
-        <h1 className="text-5xl font-bold mb-4">Invente 2025</h1>
-        <p className="text-xl text-gray-600">
-          Tech Festival • {settings?.attributes.venue || 'SSN College of Engineering'}
-        </p>
-        {settings?.attributes.eventDate && (
-          <p className="text-lg text-gray-500 mt-2">
-            {new Date(settings.attributes.eventDate).toLocaleDateString('en-US', {
-              weekday: 'long',
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })}
-          </p>
-        )}
-      </header>
-
-      {/* Quick Links */}
-      {settings && (settings.attributes.busRoutesUrl || settings.attributes.registrationUrl) && (
-        <div className="mb-12 p-6 bg-blue-50 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">Quick Links</h2>
-          <div className="flex gap-4 flex-wrap">
-            {settings.attributes.registrationUrl && (
-              <a
-                href={settings.attributes.registrationUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
-              >
-                Register Now
-              </a>
-            )}
-            {settings.attributes.busRoutesUrl && (
-              <a
-                href={settings.attributes.busRoutesUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition"
-              >
-                Bus Routes
-              </a>
-            )}
+    <div className="min-h-screen bg-black">
+      {/* Hero Section*/}
+      <section className="relative h-screen hero-bg" style={{ backgroundImage: 'url(/hero.png)', backgroundPosition: '40% 80%', backgroundSize: 'cover', backgroundAttachment: 'scroll' }}>
+        {/* Top Navigation */}
+        <div className="absolute top-0 left-0 right-0 z-10 p-6">
+          <div className="flex justify-between items-center">
+            {/* Menu Icon*/}
+            <div className="w-12 h-12 bg-[#A0522D] rounded-full flex items-center justify-center shadow-lg menu-button">
+              <div className="space-x-1 flex">
+                <span className="block w-1 h-1 bg-white rounded-full"></span>
+                <span className="block w-1 h-1 bg-white rounded-full"></span>
+                <span className="block w-1 h-1 bg-white rounded-full"></span>
+              </div>
+            </div>
+            
+            {/* Center Logo */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 top-6 text-center">
+              <Image src="/invente.png" alt="Invente 24" width={300} height={100} className="w-auto h-24 mx-auto" unoptimized />
+              
+            </div>
+            
+            {/* SSN Logo - Top right*/}
+            <Image src="/ssn.png" alt="SSN" width={60} height={60} className="h-12 w-auto" unoptimized />
           </div>
         </div>
-      )}
 
-      {/* Events Section */}
-      <section className="mb-12">
-        <h2 className="text-3xl font-bold mb-6">Events</h2>
+        {/* Hero Content*/}
+        {/* Title*/}
+        <div className="absolute top-[18%] left-[50%] transform -translate-x-1/2">
+          <Image src="/title.png" alt="chrono shift" width={400} height={160} className="w-auto h-24 md:h-32 lg:h-40" unoptimized />
+        </div>
         
-        {/* Day 1 Events */}
-        <div className="mb-8">
-          <h3 className="text-2xl font-semibold mb-4 text-blue-600">Day 1</h3>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {events
-              .filter((event) => event.attributes.day === 'DAY_1')
-              .map((event) => (
-                <div
-                  key={event.id}
-                  className="border rounded-lg p-6 hover:shadow-lg transition-shadow"
-                >
-                  <div className="flex justify-between items-start mb-2">
-                    <h4 className="text-xl font-semibold">{event.attributes.name}</h4>
-                    <span className={`px-2 py-1 rounded text-xs font-medium ${
-                      event.attributes.type === 'TECHNICAL' ? 'bg-purple-100 text-purple-700' :
-                      event.attributes.type === 'WORKSHOP' ? 'bg-green-100 text-green-700' :
-                      event.attributes.type === 'HACKATHON' ? 'bg-orange-100 text-orange-700' :
-                      'bg-gray-100 text-gray-700'
-                    }`}>
-                      {event.attributes.type}
-                    </span>
-                  </div>
-                  
-                  <p className="text-sm text-gray-500 mb-3">
-                    {event.attributes.department} • {event.attributes.location}
-                  </p>
-                  
-                  <p className="text-gray-700 mb-3 line-clamp-3">
-                    {event.attributes.description}
-                  </p>
-                  
-                  <div className="text-sm text-gray-600">
-                    <p className="mb-1">👥 {event.attributes.participantCount}</p>
-                    {event.attributes.prizeDetails && event.attributes.prizeDetails.length > 0 && (
-                      <p className="font-medium text-green-600">
-                        🏆 Prizes worth ₹{event.attributes.prizeDetails.reduce((sum, prize) => sum + prize.amount, 0).toLocaleString()}
-                      </p>
-                    )}
-                  </div>
-
-                  {event.attributes.rounds && event.attributes.rounds.length > 0 && (
-                    <div className="mt-3 pt-3 border-t">
-                      <p className="text-sm font-medium text-gray-600">
-                        {event.attributes.rounds.length} Round{event.attributes.rounds.length > 1 ? 's' : ''}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              ))}
-          </div>
+        {/* Date Block - Black rectangle, no rounded corners, positioned on arms - moved left and up */}
+        <div className="absolute top-[45%] left-[25%] bg-black text-white px-6 py-3 font-dm-sans font-bold text-lg shadow-lg inline-block">
+          SEPT 27 - 28
         </div>
+        
+        {/* Description Text - Black text, progressively indented, positioned right */}
+        <div className="absolute top-[65%] left-[40%] text-black text-left font-century-gothic leading-relaxed text-lg">
+          <p className="mb-2">Looking for fun? You've come to the</p>
+          <p className="mb-2 ml-16">right place! Since 2016, Invente has</p>
+          <p className="mb-2 ml-24">been our flagship tech fest,</p>
+          <p className="mb-2 ml-32">catered to challenge the</p>
+          <p className="mb-2 ml-42">spirits and intellects of</p>
+          <p className="mb-2 ml-48">students nationwide.</p>
+        </div>
+        
+        {/* Get Passes Button - Black, no rounded corners, positioned more down */}
+        <button className="absolute top-[90%] left-[70%] bg-black text-white px-8 py-3 font-dm-sans font-bold uppercase shadow-lg hover:bg-gray-900 transition-colors">
+          GET PASSES
+        </button>
+      </section>
 
-        {/* Day 2 Events */}
-        <div>
-          <h3 className="text-2xl font-semibold mb-4 text-blue-600">Day 2</h3>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {events
-              .filter((event) => event.attributes.day === 'DAY_2')
-              .map((event) => (
-                <div
-                  key={event.id}
-                  className="border rounded-lg p-6 hover:shadow-lg transition-shadow"
-                >
-                  <div className="flex justify-between items-start mb-2">
-                    <h4 className="text-xl font-semibold">{event.attributes.name}</h4>
-                    <span className={`px-2 py-1 rounded text-xs font-medium ${
-                      event.attributes.type === 'TECHNICAL' ? 'bg-purple-100 text-purple-700' :
-                      event.attributes.type === 'WORKSHOP' ? 'bg-green-100 text-green-700' :
-                      event.attributes.type === 'HACKATHON' ? 'bg-orange-100 text-orange-700' :
-                      'bg-gray-100 text-gray-700'
-                    }`}>
-                      {event.attributes.type}
-                    </span>
-                  </div>
-                  
-                  <p className="text-sm text-gray-500 mb-3">
-                    {event.attributes.department} • {event.attributes.location}
-                  </p>
-                  
-                  <p className="text-gray-700 mb-3 line-clamp-3">
-                    {event.attributes.description}
-                  </p>
-                  
-                  <div className="text-sm text-gray-600">
-                    <p className="mb-1">👥 {event.attributes.participantCount}</p>
-                    {event.attributes.prizeDetails && event.attributes.prizeDetails.length > 0 && (
-                      <p className="font-medium text-green-600">
-                        🏆 Prizes worth ₹{event.attributes.prizeDetails.reduce((sum, prize) => sum + prize.amount, 0).toLocaleString()}
-                      </p>
-                    )}
-                  </div>
-
-                  {event.attributes.rounds && event.attributes.rounds.length > 0 && (
-                    <div className="mt-3 pt-3 border-t">
-                      <p className="text-sm font-medium text-gray-600">
-                        {event.attributes.rounds.length} Round{event.attributes.rounds.length > 1 ? 's' : ''}
-                      </p>
-                    </div>
-                  )}
+            {/* Bento Grid Section*/}
+      <section className="bg-[#DEE8CE] min-h-screen flex items-center justify-center p-8">
+        <div className="w-full max-w-7xl">
+          <div className="bg-[#15021A] rounded-3xl p-8">
+            <div className="grid grid-cols-6 grid-rows-2 gap-4 h-[600px]">
+              {/* All Events - Large (Top-Left) - Vintage Office Setup */}
+              <div className="col-span-3 row-span-1 relative rounded-2xl overflow-hidden shadow-lg border border-white/10">
+                <Image src="/all_events.png" alt="All Events" fill className="object-cover" unoptimized />
+                <div className="absolute bottom-6 left-6 text-white font-dm-sans font-bold text-2xl tracking-wide">
+                  All events
                 </div>
-              ))}
+              </div>
+               
+              {/* Hackathons & Workshops - Large (Top-Right) - Modern Office Space */}
+              <div className="col-span-3 row-span-1 relative rounded-2xl overflow-hidden shadow-lg border border-white/10">
+                <Image src="/hacks_workshops.png" alt="Hackathons & Workshops" fill className="object-cover" unoptimized />
+                <div className="absolute bottom-6 left-6 text-white font-dm-sans font-bold text-2xl tracking-wide">
+                  Hackathons & Workshops
+                </div>
+              </div>
+               
+              {/* Schedule - Medium (Bottom-Left) - Clock Collection */}
+              <div className="col-span-2 row-span-1 relative rounded-2xl overflow-hidden shadow-lg border border-white/10">
+                <Image src="/schedule.png" alt="Schedule" fill className="object-cover" unoptimized />
+                <div className="absolute bottom-6 left-6 text-white font-dm-sans font-bold text-2xl tracking-wide">
+                  Schedule
+                </div>
+              </div>
+               
+              {/* Sponsors - Small (Bottom-Middle-Left) - Coin Jar */}
+              <div className="col-span-1 row-span-1 relative rounded-2xl overflow-hidden shadow-lg border border-white/10">
+                <Image src="/sponsors.png" alt="Sponsors" fill className="object-cover" unoptimized />
+                <div className="absolute bottom-6 left-6 text-white font-dm-sans font-bold text-lg tracking-wide">
+                  Sponsors
+                </div>
+              </div>
+               
+              {/* Gallery - Small (Bottom-Middle-Right) - Framed Paintings */}
+              <div className="col-span-1 row-span-1 relative rounded-2xl overflow-hidden shadow-lg border border-white/10">
+                <Image src="/gallery.png" alt="Gallery" fill className="object-cover" unoptimized />
+                <div className="absolute bottom-6 left-6 text-white font-dm-sans font-bold text-lg tracking-wide">
+                  Gallery
+                </div>
+              </div>
+               
+              {/* Hospitality - Medium (Bottom-Right) - Apples */}
+              <div className="col-span-2 row-span-1 relative rounded-2xl overflow-hidden shadow-lg border border-white/10">
+                <Image src="/Hospitality.png" alt="Hospitality" fill className="object-cover" unoptimized />
+                <div className="absolute bottom-6 left-6 text-white font-dm-sans font-bold text-2xl tracking-wide">
+                  Hospitality
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Sponsors Section */}
-      {sponsors.length > 0 && (
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-6">Our Sponsors</h2>
-          
-          {/* Title Sponsors */}
-          {sponsors.filter(s => s.attributes.type === 'TITLE').length > 0 && (
-            <div className="mb-8">
-              <h3 className="text-xl font-semibold mb-4 text-gold">Title Sponsors</h3>
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {sponsors
-                  .filter(s => s.attributes.type === 'TITLE')
-                  .map((sponsor) => (
-                    <a
-                      key={sponsor.id}
-                      href={sponsor.attributes.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="border rounded-lg p-6 hover:shadow-lg transition-shadow flex flex-col items-center"
-                    >
-                      {sponsor.attributes.logo?.data && (
-                        <img
-                          src={`${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1338'}${sponsor.attributes.logo.data.attributes.url}`}
-                          alt={sponsor.attributes.name}
-                          className="h-20 object-contain mb-3"
-                        />
-                      )}
-                      <h4 className="text-lg font-semibold">{sponsor.attributes.name}</h4>
-                    </a>
-                  ))}
-              </div>
+      {/* Footer */}
+      <footer className="bg-black text-white relative ">
+        <div className="max-w-7xl mx-auto p-12 flex justify-between items-start">
+          {/* Navigation Links - Left Section */}
+          <div className="flex space-x-20">
+            {/* PARTICIPATE */}
+            <div>
+              <h3 className="font-dm-sans font-bold text-xl mb-6 text-white">PARTICIPATE</h3>
+              <ul className="space-y-3 font-century-gothic text-base text-white">
+                <li>Events</li>
+                <li>Hackathons</li>
+                <li>Workshops</li>
+              </ul>
             </div>
-          )}
-
-          {/* Other Sponsors */}
-          <div className="grid gap-4 md:grid-cols-4 lg:grid-cols-6">
-            {sponsors
-              .filter(s => s.attributes.type !== 'TITLE')
-              .map((sponsor) => (
-                <a
-                  key={sponsor.id}
-                  href={sponsor.attributes.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="border rounded-lg p-4 hover:shadow-md transition-shadow flex flex-col items-center"
-                >
-                  {sponsor.attributes.logo?.data && (
-                    <img
-                      src={`${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1338'}${sponsor.attributes.logo.data.attributes.url}`}
-                      alt={sponsor.attributes.name}
-                      className="h-12 object-contain mb-2"
-                    />
-                  )}
-                  <p className="text-sm text-center">{sponsor.attributes.name}</p>
-                </a>
-              ))}
+            
+            {/* KNOW MORE */}
+            <div>
+              <h3 className="font-dm-sans font-bold text-xl mb-6 text-white">KNOW MORE</h3>
+              <ul className="space-y-3 font-century-gothic text-base text-white">
+                <li>Schedule</li>
+                <li>Sponsors</li>
+                <li>Gallery</li>
+              </ul>
+            </div>
+            
+            {/* GET IN TOUCH */}
+            <div>
+              <h3 className="font-dm-sans font-bold text-xl mb-6 text-white">GET IN TOUCH</h3>
+              <ul className="space-y-3 font-century-gothic text-base text-white">
+                <li>Hospitality</li>
+              </ul>
+            </div>
           </div>
-        </section>
-      )}
-
-      {/* Contact Section */}
-      {settings && (settings.attributes.contactEmail || settings.attributes.contactPhone) && (
-        <section className="mb-12 p-6 bg-gray-50 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
-          <div className="flex gap-6 flex-wrap">
-            {settings.attributes.contactEmail && (
-              <a
-                href={`mailto:${settings.attributes.contactEmail}`}
-                className="text-blue-600 hover:underline"
-              >
-                📧 {settings.attributes.contactEmail}
-              </a>
-            )}
-            {settings.attributes.contactPhone && (
-              <a
-                href={`tel:${settings.attributes.contactPhone}`}
-                className="text-blue-600 hover:underline"
-              >
-                📱 {settings.attributes.contactPhone}
-              </a>
-            )}
+        </div>
+        
+        {/* Computer Asset */}
+        <div className="absolute right-0 bottom-0 h-56">
+          <Image src="/computer.png" alt="Vintage Computer" width={600} height={400} className="h-56 w-auto" unoptimized />
+        </div>
+        
+        {/* Bottom Left Credit */}
+        <div className="max-w-7xl mx-auto px-12 pb-8">
+          <div className="text-sm font-century-gothic text-white opacity-80">
+            Designed and Developed by students of SSN and SNUC
           </div>
-        </section>
-      )}
-
-      <footer className="mt-16 pt-8 border-t text-center text-gray-500">
-        <p>
-          Next.js (Port 3005) ↔ Strapi CMS (Port 1338) ↔ PostgreSQL (Port 5433)
-        </p>
-        <p className="mt-2 text-sm">
-          Events: {events.length} • Sponsors: {sponsors.length}
-        </p>
+        </div>
       </footer>
     </div>
   );
