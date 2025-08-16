@@ -51,7 +51,7 @@ export default async function Home() {
         </div>
         
         {/* Date Block - Black rectangle, no rounded corners, positioned on arms - moved left and up */}
-        <div className="absolute top-[45%] left-[25%] bg-black text-white px-6 py-3 font-dm-sans font-bold text-lg shadow-lg inline-block">
+        <div className="absolute top-[88%] left-[10%] bg-black text-white px-6 py-3 font-dm-sans font-bold text-lg shadow-lg inline-block">
           SEPT 27 - 28
         </div>
         
