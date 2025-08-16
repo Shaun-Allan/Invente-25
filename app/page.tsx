@@ -1,4 +1,3 @@
-import { getEvents, getSponsors, getSchedule, getSettings } from '@/lib/api';
 import Image from 'next/image';
 import Footer from '@/components/events/Footer';
 
@@ -6,17 +5,6 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export default async function Home() {
-  const [events, sponsors, schedule, settings] = await Promise.allSettled([
-    getEvents(),
-    getSponsors(),
-    getSchedule(),
-    getSettings(),
-  ]);
-
-  const eventsData = events.status === 'fulfilled' ? events.value : [];
-  const sponsorsData = sponsors.status === 'fulfilled' ? sponsors.value : [];
-  const scheduleData = schedule.status === 'fulfilled' ? schedule.value : null;
-  const settingsData = settings.status === 'fulfilled' ? settings.value : null;
 
   return (
     <div className="min-h-screen bg-black">
