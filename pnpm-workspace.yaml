@@ -1,3 +1,7 @@
+packages:
+  - .
+  - strapi
+
 ignoredBuiltDependencies:
   - "@tailwindcss/oxide"
 

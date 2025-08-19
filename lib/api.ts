@@ -32,7 +32,10 @@ interface StrapiCollectionResponse<T> {
   };
 }
 
-const STRAPI_URL = process.env.STRAPI_API_URL || process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1338';
+const STRAPI_URL =
+  process.env.STRAPI_API_URL ||
+  process.env.NEXT_PUBLIC_STRAPI_URL ||
+  "http://localhost:1338";
 
 async function fetchAPI<T>(
   path: string,
@@ -41,22 +44,27 @@ async function fetchAPI<T>(
 ): Promise<T> {
   const mergedOptions: RequestInit = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     ...options,
-    cache: 'no-store',
+    cache: "no-store",
   };
 
   const queryString = new URLSearchParams(urlParamsObject).toString();
   const requestUrl = `${STRAPI_URL}/api${path}${
-    queryString ? `?${queryString}` : ''
+    queryString ? `?${queryString}` : ""
   }`;
 
   try {
-    const response = await fetch(requestUrl, mergedOptions, { next: { revalidate: 0 } });
+    const response = await fetch(requestUrl, {
+      ...mergedOptions,
+      next: { revalidate: 0 },
+    });
 
     if (!response.ok) {
-      console.error(`Failed to fetch ${requestUrl}: ${response.status} ${response.statusText}`);
+      console.error(
+        `Failed to fetch ${requestUrl}: ${response.status} ${response.statusText}`
+      );
       throw new Error(`An error occurred: ${response.statusText}`);
     }
 
@@ -80,10 +88,29 @@ async function fetchAPI<T>(
 }
 
 // Event Types
-export type EventType = 'TECHNICAL' | 'NON_TECHNICAL' | 'HACKATHON' | 'WORKSHOP';
-export type Department = 'SSN_CSE' | 'SNU_CSE' | 'IT' | 'ECE' | 'EEE' | 'MECH' | 'CHEM' | 'CIVIL' | 'BME' | 'COM';
-export type Day = 'DAY_1' | 'DAY_2';
-export type SponsorType = 'TITLE' | 'CO_SPONSOR' | 'DEPT' | 'HACKATHON_WORKSHOP' | 'FINTECH';
+export type EventType =
+  | "TECHNICAL"
+  | "NON_TECHNICAL"
+  | "HACKATHON"
+  | "WORKSHOP";
+export type Department =
+  | "SSN_CSE"
+  | "SNU_CSE"
+  | "IT"
+  | "ECE"
+  | "EEE"
+  | "MECH"
+  | "CHEM"
+  | "CIVIL"
+  | "BME"
+  | "COM";
+export type Day = "DAY_1" | "DAY_2";
+export type SponsorType =
+  | "TITLE"
+  | "CO_SPONSOR"
+  | "DEPT"
+  | "HACKATHON_WORKSHOP"
+  | "FINTECH";
 
 export interface PrizeDetail {
   amount: number;
@@ -197,14 +224,15 @@ export async function getEvents(filters?: {
   day?: Day;
 }): Promise<Event[]> {
   const params: any = {
-    populate: '*',
-    sort: 'day:asc,name:asc',
+    populate: "*",
+    sort: "day:asc,name:asc",
   };
 
   if (filters) {
     const filterParams: any = {};
     if (filters.type) filterParams.type = { $eq: filters.type };
-    if (filters.department) filterParams.department = { $eq: filters.department };
+    if (filters.department)
+      filterParams.department = { $eq: filters.department };
     if (filters.day) filterParams.day = { $eq: filters.day };
     if (Object.keys(filterParams).length > 0) {
       params.filters = filterParams;
@@ -212,31 +240,32 @@ export async function getEvents(filters?: {
   }
 
   try {
-    const response = await fetchAPI<StrapiCollectionResponse<Event['attributes']>>(
-      '/events',
-      params
+    const response = await fetchAPI<
+      StrapiCollectionResponse<Event["attributes"]>
+    >("/events", params);
+
+    return (
+      response.data?.map((item) => ({
+        id: item.id,
+        attributes: item.attributes,
+      })) || []
     );
-    
-    return response.data?.map(item => ({
-      id: item.id,
-      attributes: item.attributes
-    })) || [];
   } catch (error) {
-    console.error('Failed to fetch events:', error);
+    console.error("Failed to fetch events:", error);
     return [];
   }
 }
 
 export async function getEventById(id: number): Promise<Event | null> {
   try {
-    const response = await fetchAPI<StrapiSingleResponse<Event['attributes']>>(
+    const response = await fetchAPI<StrapiSingleResponse<Event["attributes"]>>(
       `/events/${id}`,
-      { populate: '*' }
+      { populate: "*" }
     );
-    
+
     return {
       id: response.data.id,
-      attributes: response.data.attributes
+      attributes: response.data.attributes,
     };
   } catch (error) {
     console.error(`Failed to fetch event with id ${id}:`, error);
@@ -244,7 +273,9 @@ export async function getEventById(id: number): Promise<Event | null> {
   }
 }
 
-export async function getEventsByDepartment(department: Department): Promise<Event[]> {
+export async function getEventsByDepartment(
+  department: Department
+): Promise<Event[]> {
   return getEvents({ department });
 }
 
@@ -259,42 +290,42 @@ export async function getEventsByType(type: EventType): Promise<Event[]> {
 // Sponsor Functions
 export async function getSponsors(type?: SponsorType): Promise<Sponsor[]> {
   const params: any = {
-    populate: '*',
-    sort: 'type:asc,name:asc',
+    populate: "*",
+    sort: "type:asc,name:asc",
   };
 
   if (type) {
     params.filters = {
-      type: { $eq: type }
+      type: { $eq: type },
     };
   }
 
   try {
-    const response = await fetchAPI<StrapiCollectionResponse<Sponsor['attributes']>>(
-      '/sponsors',
-      params
+    const response = await fetchAPI<
+      StrapiCollectionResponse<Sponsor["attributes"]>
+    >("/sponsors", params);
+
+    return (
+      response.data?.map((item) => ({
+        id: item.id,
+        attributes: item.attributes,
+      })) || []
     );
-    
-    return response.data?.map(item => ({
-      id: item.id,
-      attributes: item.attributes
-    })) || [];
   } catch (error) {
-    console.error('Failed to fetch sponsors:', error);
+    console.error("Failed to fetch sponsors:", error);
     return [];
   }
 }
 
 export async function getSponsorById(id: number): Promise<Sponsor | null> {
   try {
-    const response = await fetchAPI<StrapiSingleResponse<Sponsor['attributes']>>(
-      `/sponsors/${id}`,
-      { populate: '*' }
-    );
-    
+    const response = await fetchAPI<
+      StrapiSingleResponse<Sponsor["attributes"]>
+    >(`/sponsors/${id}`, { populate: "*" });
+
     return {
       id: response.data.id,
-      attributes: response.data.attributes
+      attributes: response.data.attributes,
     };
   } catch (error) {
     console.error(`Failed to fetch sponsor with id ${id}:`, error);
@@ -309,26 +340,27 @@ export async function getSponsorsByType(type: SponsorType): Promise<Sponsor[]> {
 // Schedule Functions
 export async function getSchedule(): Promise<Schedule | null> {
   try {
-    const response = await fetchAPI<StrapiSingleResponse<Schedule['attributes']>>(
-      '/schedule',
-      { populate: 'deep' }
-    );
-    
+    const response = await fetchAPI<
+      StrapiSingleResponse<Schedule["attributes"]>
+    >("/schedule", { populate: "deep" });
+
     if (!response.data) {
       return null;
     }
-    
+
     return {
       id: response.data.id,
-      attributes: response.data.attributes
+      attributes: response.data.attributes,
     };
   } catch (error) {
-    console.error('Failed to fetch schedule:', error);
+    console.error("Failed to fetch schedule:", error);
     return null;
   }
 }
 
-export async function getScheduleByDay(day: 'DAY_1' | 'DAY_2'): Promise<ScheduleItem[]> {
+export async function getScheduleByDay(
+  day: "DAY_1" | "DAY_2"
+): Promise<ScheduleItem[]> {
   const schedule = await getSchedule();
   if (!schedule) return [];
   return schedule.attributes[day] || [];
@@ -342,29 +374,32 @@ export async function getScheduleByDepartment(department: Department): Promise<{
   if (!schedule) return { DAY_1: [], DAY_2: [] };
 
   return {
-    DAY_1: schedule.attributes.DAY_1.filter(item => item.department === department),
-    DAY_2: schedule.attributes.DAY_2.filter(item => item.department === department),
+    DAY_1: schedule.attributes.DAY_1.filter(
+      (item) => item.department === department
+    ),
+    DAY_2: schedule.attributes.DAY_2.filter(
+      (item) => item.department === department
+    ),
   };
 }
 
 // Settings Functions
 export async function getSettings(): Promise<Settings | null> {
   try {
-    const response = await fetchAPI<StrapiSingleResponse<Settings['attributes']>>(
-      '/setting',
-      { populate: '*' }
-    );
-    
+    const response = await fetchAPI<
+      StrapiSingleResponse<Settings["attributes"]>
+    >("/setting", { populate: "*" });
+
     if (!response.data) {
       return null;
     }
-    
+
     return {
       id: response.data.id,
-      attributes: response.data.attributes
+      attributes: response.data.attributes,
     };
   } catch (error) {
-    console.error('Failed to fetch settings:', error);
+    console.error("Failed to fetch settings:", error);
     return null;
   }
 }
@@ -385,7 +420,7 @@ export async function getContactInfo(): Promise<{
 } | null> {
   const settings = await getSettings();
   if (!settings) return null;
-  
+
   return {
     email: settings.attributes.contactEmail,
     phone: settings.attributes.contactPhone,
