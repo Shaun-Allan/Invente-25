@@ -1,9 +1,46 @@
 @import "tailwindcss";
 
+@layer base {
+  :root {
+    --font-dm-sans: var(--font-dm-sans);
+  }
 
+  .font-dm-sans {
+    font-family: var(--font-dm-sans);
+  }
 
-@font-face {
-    font-family: RubikGlitch;
-    src: url("/RubikGlitch-Regular.woff2");
-    font-weight: 400;
+  .font-century-gothic {
+    font-family: "Century Gothic", "Century", "Georgia", serif;
+  }
+}
+
+@layer components {
+  /* Hero section enhancements for pixel perfection */
+  .hero-bg {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  /* Menu button styling */
+  .menu-button {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .menu-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Date block and button shadows */
+  .hero-shadow {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Text overlay effect */
+  .text-overlay {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
 }

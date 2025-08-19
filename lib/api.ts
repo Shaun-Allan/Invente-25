@@ -53,7 +53,7 @@ async function fetchAPI<T>(
   }`;
 
   try {
-    const response = await fetch(requestUrl, mergedOptions);
+    const response = await fetch(requestUrl, mergedOptions, { next: { revalidate: 0 } });
 
     if (!response.ok) {
       console.error(`Failed to fetch ${requestUrl}: ${response.status} ${response.statusText}`);
@@ -64,7 +64,18 @@ async function fetchAPI<T>(
     return data;
   } catch (error) {
     console.error(`Failed to fetch from Strapi:`, error);
-    throw error;
+    // Return empty data structure instead of throwing
+    return {
+      data: [],
+      meta: {
+        pagination: {
+          page: 1,
+          pageSize: 25,
+          pageCount: 0,
+          total: 0,
+        },
+      },
+    } as T;
   }
 }
 
@@ -200,15 +211,20 @@ export async function getEvents(filters?: {
     }
   }
 
-  const response = await fetchAPI<StrapiCollectionResponse<Event['attributes']>>(
-    '/events',
-    params
-  );
-  
-  return response.data.map(item => ({
-    id: item.id,
-    attributes: item.attributes
-  }));
+  try {
+    const response = await fetchAPI<StrapiCollectionResponse<Event['attributes']>>(
+      '/events',
+      params
+    );
+    
+    return response.data?.map(item => ({
+      id: item.id,
+      attributes: item.attributes
+    })) || [];
+  } catch (error) {
+    console.error('Failed to fetch events:', error);
+    return [];
+  }
 }
 
 export async function getEventById(id: number): Promise<Event | null> {
@@ -253,15 +269,20 @@ export async function getSponsors(type?: SponsorType): Promise<Sponsor[]> {
     };
   }
 
-  const response = await fetchAPI<StrapiCollectionResponse<Sponsor['attributes']>>(
-    '/sponsors',
-    params
-  );
-  
-  return response.data.map(item => ({
-    id: item.id,
-    attributes: item.attributes
-  }));
+  try {
+    const response = await fetchAPI<StrapiCollectionResponse<Sponsor['attributes']>>(
+      '/sponsors',
+      params
+    );
+    
+    return response.data?.map(item => ({
+      id: item.id,
+      attributes: item.attributes
+    })) || [];
+  } catch (error) {
+    console.error('Failed to fetch sponsors:', error);
+    return [];
+  }
 }
 
 export async function getSponsorById(id: number): Promise<Sponsor | null> {
@@ -292,6 +313,10 @@ export async function getSchedule(): Promise<Schedule | null> {
       '/schedule',
       { populate: 'deep' }
     );
+    
+    if (!response.data) {
+      return null;
+    }
     
     return {
       id: response.data.id,
@@ -329,6 +354,10 @@ export async function getSettings(): Promise<Settings | null> {
       '/setting',
       { populate: '*' }
     );
+    
+    if (!response.data) {
+      return null;
+    }
     
     return {
       id: response.data.id,
