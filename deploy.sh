@@ -96,5 +96,3 @@ echo
 echo "[deploy] To auto-start PM2 on boot (macOS launchctl), run the following command once (may require sudo):"
 echo "  pm2 startup"
 echo "  # then re-run: pm2 save"
-
-
