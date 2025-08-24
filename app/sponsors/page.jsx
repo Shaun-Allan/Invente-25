@@ -3,41 +3,20 @@ import React from "react";
 export default function SponsorsPage() {
   return (
     <div
-      className="min-h-screen bg-cover bg-center"
+      className="relative min-h-screen bg-cover bg-center"
       style={{ backgroundImage: 'url("/bg.png")' }}
     >
-      <div className="flex flex-col items-center text-white px-4 py-8">
+      {/* Black Overlay */}
+      <div className="absolute inset-0 bg-black/60"></div>
+
+      {/* Main Content */}
+      <div className="relative flex flex-col items-center text-white px-4 py-8">
         <div
-          className="flex items-center mb-9 mr-auto"
+          className="flex items-center mb-9 mx-auto justify-center"
           style={{ gap: "clamp(10px, 4vw, 40px)" }}
         >
-          <div
-            className="relative flex-shrink-0"
-            style={{
-              width: "clamp(40px, 8vw, 80px)",
-              height: "clamp(40px, 8vw, 80px)",
-            }}
-          >
-       
-            <img src="/circle.png" alt="circle" className="w-full h-full" />
-
-   
-            <img
-              src="/dots.png"
-              alt="dots"
-              className="absolute inset-0 m-auto"
-              style={{
-                width: "60%", 
-                height: "60%",
-              }}
-            />
-          </div>
-
-          <h1
-            className="font-[RubikGlitch] text-[#B83000] tracking-[-0.04em] leading-[100%]"
-            style={{ fontSize: "clamp(30px, 5vw, 65.67px)" }}
-          >
-            Our Sponsors
+          <h1 className="font-playfair-display text-[#B83000] tracking-[-0.04em] leading-[100%] font-bold text-6xl">
+            OUR SPONSORS ❤️
           </h1>
         </div>
 
@@ -56,7 +35,7 @@ export default function SponsorsPage() {
 
         <div className="mb-12 text-center">
           <h2
-            className="text-5xl sm:text-2xl md:text-xl font-[RubikGlitch] text-[#D3633B] mb-4"
+            className="text-5xl sm:text-2xl md:text-xl font-playfair-display text-[#D3633B] mb-4"
             style={{ fontSize: "clamp(30px, 5vw, 40px)" }}
           >
             Co-Sponsors
@@ -69,75 +48,38 @@ export default function SponsorsPage() {
 
         <div className="mb-12 w-full px-4">
           <h2
-            className="text-2xl sm:text-3xl md:text-4xl font-[RubikGlitch] text-[#D3633B] mb-6 text-center"
+            className="text-2xl sm:text-3xl md:text-4xl font-playfair-display text-[#D3633B] mb-6 text-center"
             style={{ fontSize: "clamp(30px, 5vw, 40px)" }}
           >
             Department Sponsors
           </h2>
 
           <div className="space-y-5 mt-20">
-      
-            <div className="grid grid-cols-3 gap-6 justify-items-center">
-              <img
-                src="/tnpl.png"
-                alt=""
-                className="w-[clamp(60px,20vw,250px)] h-auto"
-              />
-              <img
-                src="/indium.png"
-                alt=""
-                className="w-[clamp(60px,20vw,250px)] h-auto"
-              />
-              <img
-                src="/jana.png"
-                alt=""
-                className="w-[clamp(60px,20vw,250px)] h-auto"
-              />
-            </div>
-
-        
-            <div className="grid grid-cols-3 gap-6 justify-items-center">
-              <img
-                src="/tnpl.png"
-                alt=""
-                className="w-[clamp(60px,20vw,250px)] h-auto"
-              />
-              <img
-                src="/indium.png"
-                alt=""
-                className="w-[clamp(60px,20vw,250px)] h-auto"
-              />
-              <img
-                src="/jana.png"
-                alt=""
-                className="w-[clamp(60px,20vw,250px)] h-auto"
-              />
-            </div>
-
-       
-            <div className="grid grid-cols-3 gap-6 justify-items-center">
-              <img
-                src="/tnpl.png"
-                alt=""
-                className="w-[clamp(60px,20vw,250px)] h-auto"
-              />
-              <img
-                src="/indium.png"
-                alt=""
-                className="w-[clamp(60px,20vw,250px)] h-auto"
-              />
-              <img
-                src="/jana.png"
-                alt=""
-                className="w-[clamp(60px,20vw,250px)] h-auto"
-              />
-            </div>
+            {[1, 2, 3].map((row) => (
+              <div key={row} className="grid grid-cols-3 gap-6 justify-items-center">
+                <img
+                  src="/tnpl.png"
+                  alt=""
+                  className="w-[clamp(60px,20vw,250px)] h-auto"
+                />
+                <img
+                  src="/indium.png"
+                  alt=""
+                  className="w-[clamp(60px,20vw,250px)] h-auto"
+                />
+                <img
+                  src="/jana.png"
+                  alt=""
+                  className="w-[clamp(60px,20vw,250px)] h-auto"
+                />
+              </div>
+            ))}
           </div>
         </div>
 
         <div className="mb-12 text-center">
           <h2
-            className="text-2xl sm:text-3xl md:text-4xl font-[RubikGlitch] text-[#D3633B] mb-4"
+            className="text-2xl sm:text-3xl md:text-4xl font-playfair-display text-[#D3633B] mb-4"
             style={{ fontSize: "clamp(30px, 5vw, 40px)" }}
           >
             Workshop & Hackathon Sponsors
@@ -156,10 +98,9 @@ export default function SponsorsPage() {
           </div>
         </div>
 
-     
         <div className="mb-12 text-center">
           <h2
-            className="text-2xl sm:text-3xl md:text-4xl font-[RubikGlitch] text-[#D3633B] mb-4"
+            className="text-2xl sm:text-3xl md:text-4xl font-playfair-display text-[#D3633B] mb-4"
             style={{ fontSize: "clamp(30px, 5vw, 40px)" }}
           >
             Fintech Partner
@@ -170,17 +111,10 @@ export default function SponsorsPage() {
             className="w-[clamp(60px,20vw,250px)] h-auto mx-auto"
           />
         </div>
-
-
       </div>
-      <div className="mt-2 bg-[#A03B3B] w-full py-4 mb-0">
-        <h2
-          className="text-xl sm:text-2xl md:text-2xl font-[RubikGlitch] text-[#D3633B] text-center"
-          style={{ fontSize: "clamp(30px, 5vw, 40px)" }}
-        >
-          Placeholder
-        </h2>
-      </div>
+
+      {/* Footer */}
+     
     </div>
   );
 }
