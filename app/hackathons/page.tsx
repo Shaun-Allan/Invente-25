@@ -61,7 +61,9 @@ const HackathonsPage = () => {
               >
                 ✕
               </button>
-              <h2 className="font-bold text-4xl mb-9 text-[#3a1f1f] text-center">HACKINFINITY</h2>
+              <h2 className="font-bold text-4xl mb-9 text-[#3a1f1f] text-center">
+                HACKINFINITY
+              </h2>
               <ul className="flex justify-center space-x-10 mb-1.5 list-none text-center font-bold text-[19px]">
                 <li>
                   ₹12000<br></br>Winner
@@ -266,15 +268,226 @@ const HackathonsPage = () => {
                 <h2 className="text-2xl font-bold mb-6">Coordinators</h2>
 
                 <div className="flex flex-wrap justify-center gap-8">
-               
                   <div className="bg-[#3a1f1f] text-white px-6 py-4 rounded-2xl shadow-lg w-60">
                     <h3 className="text-lg font-semibold">Sanjay B</h3>
                     <p className="text-sm">+91 73058 34440</p>
                   </div>
 
-    
                   <div className="bg-[#3a1f1f] text-white px-6 py-4 rounded-2xl shadow-lg w-60">
                     <h3 className="text-lg font-semibold">Sanjay B</h3>
+                    <p className="text-sm">+91 73058 34440</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {showImpact && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50">
+            <div
+              className="p-10 border-2 border-black rounded-xl w-11/12 max-w-4xl max-h-[90vh] overflow-y-auto relative "
+              style={{ backgroundImage: "url('/hackathons/bg.jpeg')" }}
+            >
+              <button
+                onClick={() => setShowImpact(false)}
+                className="absolute top-2 right-2 text-black "
+              >
+                ✕
+              </button>
+              <h2 className="font-bold text-4xl mb-9 text-[#3a1f1f] text-center">
+                Impact Arcade(Game jam) 24Hr Hackathon
+              </h2>
+              <ul className="flex justify-center space-x-10 mb-5 list-none text-center font-bold text-[19px]">
+                <li>
+                  ₹8000<br></br>Winner
+                </li>
+                <li>
+                  ₹4000<br></br>Runner
+                </li>
+                <li>
+                  None<br></br>2nd Runner
+                </li>
+                <li>
+                  TBD<br></br>Date
+                </li>
+                <li>
+                  TBD<br></br>Location
+                </li>
+              </ul>
+              <p className="mb-5 text-[17px]">
+                Game Jam is an intense 24-hour game development competition
+                where teams are tasked with creating engaging and thoughtful
+                games based on the theme that will be announced on the day of
+                the competition. This theme will be related to the United
+                Nations Sustainable Development Goals (SDGs), ensuring the games
+                focus on relevant global issues.
+              </p>
+              <div
+                className="w-full max-w-2xl mx-auto bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center px-12 py-16 mb-6"
+                style={{ backgroundImage: "url('/hackathons/paperbg3.png')" }}
+              >
+                <div className="w-[100%] md:w-[80%] text-center">
+                  <h2 className="text-3xl font-bold mb-5">Team Composition</h2>
+
+                  <ol className="list-decimal list-inside space-y-4 text-left text-lg">
+                    <li>
+                      Each team can consist of a maximum of 2 players.
+                      Individual participants are also allowed to compete solo.
+                    </li>
+                  </ol>
+                </div>
+              </div>
+              <div
+                className="w-full max-w-2xl mx-auto bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center px-12 py-16 mb-6"
+                style={{ backgroundImage: "url('/hackathons/paperbg3.png')" }}
+              >
+                <div className="w-[100%] md:w-[80%] text-center">
+                  <h2 className="text-3xl font-bold mb-5">time Limit</h2>
+
+                  <ol className="list-decimal list-inside space-y-4 text-left text-lg">
+                    <li>
+                      The competition runs for 24 hours, starting from the
+                      official theme announcement.
+                    </li>
+                  </ol>
+                </div>
+              </div>
+              <div
+                className="w-full max-w-2xl mx-auto bg-no-repeat bg-cover bg-center flex flex-col mb-6 items-center justify-center px-12 py-16"
+                style={{ backgroundImage: "url('/hackathons/paperbg3.png')" }}
+              >
+                <div className="w-[100%] md:w-[80%] text-center">
+                  <h2 className="text-3xl font-bold mb-5">Judging Criteria</h2>
+
+                  <ol className="list-decimal list-inside space-y-4 text-left text-lg">
+                    <li>
+                      Games will be judged based on creativity, gameplay,
+                      adherence to the theme, and technical execution.
+                    </li>
+                  </ol>
+                </div>
+              </div>
+              <div
+                className="w-full max-w-2xl mx-auto bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center px-12 py-16"
+                style={{ backgroundImage: "url('/hackathons/paperbg3.png')" }}
+              >
+                <div className="w-[100%] md:w-[80%] text-center">
+                  <h2 className="text-3xl font-bold mb-5">Mentor Feedback</h2>
+
+                  <ol className="list-decimal list-inside space-y-4 text-left text-lg">
+                    <li>
+                      Teams can earn additional points by incorporating feedback
+                      from mentors after the first 12 hours of the competition.
+                    </li>
+                  </ol>
+                </div>
+              </div>
+              <div
+                className="w-full max-w-2xl mx-auto bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center px-12 py-16"
+                style={{ backgroundImage: "url('/hackathons/paperbg3.png')" }}
+              >
+                <div className="w-[100%] md:w-[80%] text-center">
+                  <h2 className="text-3xl font-bold mb-5">Original Work</h2>
+
+                  <ol className="list-decimal list-inside space-y-4 text-left text-lg">
+                    <li>
+                      All content, including code, art, and audio, must be
+                      created during the Game Jam. Pre-existing assets are not
+                      allowed, except for fonts and publicly available
+                      libraries/frameworks.
+                    </li>
+                  </ol>
+                </div>
+              </div>
+              <div
+                className="w-full max-w-2xl mx-auto bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center px-12 py-16"
+                style={{ backgroundImage: "url('/hackathons/paperbg3.png')" }}
+              >
+                <div className="w-[100%] md:w-[80%] text-center">
+                  <h2 className="text-3xl font-bold mb-5">Use of Tools</h2>
+
+                  <ol className="list-decimal list-inside space-y-4 text-left text-lg">
+                    <li>
+                      Participants are free to use any game development tools,
+                      engines, or frameworks of their choice, as long as they
+                      adhere to the competition’s theme and time constraints.
+                    </li>
+                  </ol>
+                </div>
+              </div>
+              <div
+                className="w-full max-w-2xl mx-auto bg-no-repeat bg-cover bg-center mb-6 flex flex-col items-center justify-center px-12 py-16"
+                style={{ backgroundImage: "url('/hackathons/paperbg3.png')" }}
+              >
+                <div className="w-[100%] md:w-[80%] text-center">
+                  <h2 className="text-3xl font-bold mb-5">Theme Adherence</h2>
+
+                  <ol className="list-decimal list-inside space-y-4 text-left text-lg">
+                    <li>
+                      Games must clearly reflect the given theme, related to the
+                      United Nations SDGs. Creativity in interpreting and
+                      integrating the theme is encouraged.
+                    </li>
+                  </ol>
+                </div>
+              </div>
+              <div
+                className="w-full max-w-2xl mx-auto bg-no-repeat bg-cover bg-center mb-6 flex flex-col items-center justify-center px-12 py-16"
+                style={{ backgroundImage: "url('/hackathons/paperbg3.png')" }}
+              >
+                <div className="w-[100%] md:w-[80%] text-center">
+                  <h2 className="text-3xl font-bold mb-5">Submission</h2>
+
+                  <ol className="list-decimal list-inside space-y-4 text-left text-lg">
+                    <li>
+                      Games must be submitted before the 24-hour deadline. Late
+                      submissions will not be accepted.
+                    </li>
+                  </ol>
+                </div>
+              </div>
+              <div
+                className="w-full max-w-2xl mx-auto bg-no-repeat bg-cover bg-center mb-6 flex flex-col items-center justify-center px-12 py-16"
+                style={{ backgroundImage: "url('/hackathons/paperbg3.png')" }}
+              >
+                <div className="w-[100%] md:w-[80%] text-center">
+                  <h2 className="text-3xl font-bold mb-5">Platforms</h2>
+
+                  <ol className="list-decimal list-inside space-y-4 text-left text-lg">
+                    <li>
+                      The game must be playable on at least one of the following
+                      platforms: Windows, macOS, Linux, or a web browser.
+                    </li>
+                  </ol>
+                </div>
+              </div>
+              <div
+                className="w-full max-w-2xl mx-auto bg-no-repeat bg-cover bg-center mb-6 flex flex-col items-center justify-center px-12 py-16"
+                style={{ backgroundImage: "url('/hackathons/paperbg3.png')" }}
+              >
+                <div className="w-[100%] md:w-[80%] text-center">
+                  <h2 className="text-3xl font-bold mb-5">Code Submission</h2>
+
+                  <ol className="list-decimal list-inside space-y-4 text-left text-lg">
+                    <li>
+                      The full source code must be submitted alongside the game,
+                      with clear instructions on how to run the game.
+                    </li>
+                  </ol>
+                </div>
+              </div>
+              <div className="w-full text-center">
+                <h2 className="text-2xl font-bold mb-6">Coordinators</h2>
+
+                <div className="flex flex-wrap justify-center gap-8">
+                  <div className="bg-[#3a1f1f] text-white px-6 py-4 rounded-2xl shadow-lg w-60">
+                    <h3 className="text-lg font-semibold">Karunya Harikrishnan</h3>
+                    <p className="text-sm">+91 73058 34440</p>
+                  </div>
+
+                  <div className="bg-[#3a1f1f] text-white px-6 py-4 rounded-2xl shadow-lg w-60">
+                    <h3 className="text-lg font-semibold">Saanjith Reddy</h3>
                     <p className="text-sm">+91 73058 34440</p>
                   </div>
                 </div>
