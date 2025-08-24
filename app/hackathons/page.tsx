@@ -52,7 +52,7 @@ const HackathonsPage = () => {
         {showHackinfinity && (
           <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50">
             <div
-              className="p-10 border-2 border-black rounded-xl w-11/12 max-w-4xl max-h-[80vh] overflow-y-auto relative "
+              className="p-10 border-2 border-black rounded-xl w-11/12 max-w-4xl max-h-[90vh] overflow-y-auto relative "
               style={{ backgroundImage: "url('/hackathons/bg.jpeg')" }}
             >
               <button
