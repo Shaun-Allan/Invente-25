@@ -21,7 +21,7 @@ export default function Navbar() {
     <>
       {/* Navbar */}
       <nav
-        className={`fixed top-0 left-0 w-full z-50 px-6 py-3 flex items-center justify-between transition-colors duration-300 ${navbarStyle}`}
+        className={`fixed top-0 left-0 w-full z-50 px-6 py-0 sm:py-3 flex items-center justify-between transition-colors duration-300 ${navbarStyle}`}
       >
         {/* Left - Menu + Invente Logo */}
         <div className="flex items-center gap-4">
@@ -40,13 +40,13 @@ export default function Navbar() {
               alt="Invente Logo"
               width={122}
               height={40}
-              className="h-auto w-auto ml-4"
+              className="h-auto w-auto ml-0 sm:ml-4"
             />
           </Link>
         </div>
 
-        {/* Right - SNU & SSN Logos */}
-        <div className="flex items-center gap-6">
+        {/* Right - SNU & SSN Logos (hidden on mobile) */}
+        <div className="hidden md:flex items-center gap-6">
           <Link href="/">
             <Image
               src="/logos/snu.svg"
@@ -68,10 +68,10 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Slide-down Bento Grid */}
+      {/* Fade-in Bento Grid Overlay */}
       <div
-        className={`fixed top-0 left-0 w-full h-screen bg-[#DEE8CE] transform transition-transform duration-500 ease-in-out z-40 overflow-y-auto ${
-          menuOpen ? "translate-y-0" : "-translate-y-full"
+        className={`fixed top-0 left-0 w-full h-screen bg-black/70 backdrop-blur-md z-40 transition-opacity duration-500 ease-in-out ${
+          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
         <div className="pt-20">

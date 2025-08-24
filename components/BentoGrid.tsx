@@ -8,7 +8,7 @@ const outlinedText = "drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]";
 
 export default function BentoGrid({ onClose }: { onClose?: () => void }) {
   return (
-    <section className="bg-[#DEE8CE] min-h-screen flex items-center justify-center p-4 md:p-6">
+    <section className=" min-h-screen flex items-center justify-center p-4 md:p-6">
       <div className="w-full max-w-6xl">
         <div
           className="
