@@ -1,85 +1,161 @@
-import Image from 'next/image';
+'use client'; // <-- ADD THIS LINE
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+import { useState } from 'react'; // <-- ADD THIS LINE
+import Image from "next/image";
+import Link from "next/link";
+import FuzzyText from "@/components/FuzzyText";
 
-export default async function Home() {
+export const dynamic = "force-dynamic";
+// export const revalidate = 0;
+
+// Data for the event grid - makes it easy to manage
+const events = [
+  { name: "CSE", imageSrc: "/events/CSE.png", href: "/events?dept=cse" },
+  { name: "CSE (SNUC)", imageSrc: "/events/SNUC.png", href: "/events?dept=snuc" },
+  { name: "IT", imageSrc: "/events/IT.png", href: "/events?dept=it" },
+  { name: "ECE", imageSrc: "/events/ECE.png", href: "/events?dept=ece" },
+  { name: "EEE", imageSrc: "/events/EEE.png", href: "/events?dept=eee" },
+  { name: "BME", imageSrc: "/events/BME.png", href: "/events?dept=bme" },
+  { name: "CHEM", imageSrc: "/events/CHEM.png", href: "/events?dept=chem" },
+  { name: "CIVIL", imageSrc: "/events/CIVIL.png", href: "/events?dept=civil" },
+  { name: "MECH", imageSrc: "/events/MECH.png", href: "/events?dept=mech" },
+];
+
+export default function Home() {
+  // --- START OF CHANGES ---
+  const [isPassesClicked, setIsPassesClicked] = useState(false);
+
+  const handlePassesClick = () => {
+    setIsPassesClicked(true);
+  };
+  // --- END OF CHANGES ---
+
   return (
     <div className="min-h-screen bg-black">
       {/* Hero Section */}
       <section
-        className="relative h-screen hero-bg"
+        className="relative h-screen overflow-hidden"
         style={{
-          backgroundImage: 'url(/hero.png)',
-          backgroundPosition: '40% 80%',
-          backgroundSize: 'cover',
-          backgroundAttachment: 'scroll',
+          backgroundImage: "url(/hero.png)",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
         }}
       >
-        {/* Black Overlay */}
-        <div className="absolute inset-0 bg-black/40"></div>
+        {/* Purple Overlay */}
+        <div className="absolute inset-0 bg-black/60"></div>
 
-        {/* Hero Content */}
-        {/* Title */}
-        <div className="absolute top-[40%] sm:top-[32%] left-[50%] transform -translate-x-1/2 z-10">
-          <Image
-            src="/title.png"
-            alt="Chrono Shift Title"
-            width={800}
-            height={500}
-            className="w-[450px] sm:w-[600px] md:w-[750px] h-auto drop-shadow-[0_0_12px_rgba(0,0,0,0.85)]"
-          />
+        {/* Clock SVG in Background */}
+        <div className="absolute top-[8%] md:left-0 w-[400px] sm:w-[600px] md:w-[750px] lg:w-[900px] opacity-80 z-0">
+          <Image src="/hero_watch.svg" alt="Clock" width={900} height={900} />
         </div>
 
-        {/* Invente Logo - below title */}
-        <div className="absolute top-[18%] sm:top-[15%] left-[50%] transform -translate-x-1/2 z-10">
+        {/* Invente Logo */}
+        <div className="absolute top-[12%] left-1/2 md:left-[65%] transform -translate-x-1/2 z-10">
           <Image
             src="/logos/invente.png"
             alt="Invente Logo"
-            width={300}
-            height={300}
-            className="w-[200px] sm:w-[240px] md:w-[350px] h-auto drop-shadow-[0_0_20px_rgba(255,165,0,0.8)]"
+            width={220}
+            height={120}
+            className="w-[180px] sm:w-[240px] md:w-[280px] lg:w-[320px]"
           />
         </div>
 
-        {/* Mobile Buttons - Below Title */}
-        <div className="block sm:hidden absolute top-[30%] left-[50%] transform -translate-x-1/2 w-full px-4 z-10">
-          <div className="flex justify-center">
-            <button className="bg-black text-white px-6 py-3 font-dm-sans font-bold text-sm uppercase shadow-lg hover:bg-gray-900 transition-colors">
-              GET PASSES
+        {/* ChronoShift Title + Text + Buttons */}
+        <div className="absolute top-[32%] left-1/2 md:left-[65%] transform -translate-x-1/2 z-10 flex w-full max-w-7xl flex-col items-center text-center gap-6 md:gap-8 px-4">
+          <Image
+            src="/chronos.png"
+            alt="Chrono"
+            width={800}
+            height={450}
+            className="w-[400px] sm:w-[480px] md:w-[550px] lg:w-[700px] h-auto drop-shadow-[0_0_30px_rgba(168,85,247,1)]"
+          />
+          <FuzzyText
+            fontFamily="'Space Grotesk', sans-serif"
+            fontWeight="700"
+            fontStyle="italic"
+            fontSize="clamp(80px, 10vw, 130px)"
+            baseIntensity={0.5}
+            hoverIntensity={0.8}
+            enableHover={true}
+            className="leading-none -mt-4 sm:-mt-6 md:-mt-8 lg:-mt-10 drop-shadow-[0_0_30px_rgba(168,85,247,1)]"
+          >
+            Shift
+          </FuzzyText>
+
+          <p className="text-white max-w-2xl text-sm sm:text-lg md:text-xl lg:text-2xl leading-loose font-orbitron">
+            Looking for fun? You've come to the right place! Since 2016,
+            INVENTE has been our flagship tech fest, catered to challenge
+            the spirits and intellects of students across the nation.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button className="uppercase bg-black/80 text-white px-5 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 font-bold text-sm sm:text-base md:text-lg shadow-lg hover:bg-gray-900 transition font-orbitron border border-white">
+              Sept 26 - 27
+            </button>
+
+            {/* --- MODIFIED "Get Passes" BUTTON --- */}
+            <button
+              onClick={handlePassesClick}
+              className="relative overflow-hidden uppercase italic bg-purple-600 text-white px-5 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 font-bold text-sm sm:text-base md:text-lg shadow-lg transition-colors duration-300 ease-in-out font-orbitron group"
+            >
+              {/* Background slide effect */}
+              <div
+                className={`absolute inset-0 bg-white -translate-x-full transition-transform duration-300 ${isPassesClicked ? 'translate-x-0' : 'group-hover:translate-x-0'}`}
+              ></div>
+
+              {/* "Get Passes" text */}
+              <span
+                className={`relative z-10 inline-block transition-transform duration-300 ${isPassesClicked ? 'translate-x-[200%]' : 'group-hover:translate-x-[200%]'}`}
+              >
+                Get Passes
+              </span>
+
+              {/* "Coming Soon" text */}
+              <span
+                className={`absolute inset-0 flex items-center justify-center text-black font-bold -translate-x-full transition-transform duration-300 z-20 ${isPassesClicked ? 'translate-x-0' : 'group-hover:translate-x-0'}`}
+              >
+                Coming Soon
+              </span>
             </button>
           </div>
         </div>
 
-        {/* Desktop Date Block */}
-        <div className="hidden absolute bottom-[8%] md:bottom-[5%] sm:bottom-[12%] left-[3%] sm:left-[10%] 
-        bg-black text-white px-6 sm:px-8 py-3 sm:py-4 
-        font-dm-sans font-bold italic 
-        text-base sm:text-lg md:text-xl 
-        shadow-lg inline-block z-10">
-          SEPT 27 - 28
-        </div>
+        <p className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 lg:bottom-8 lg:left-8 z-10 text-white/80 font-orbitron text-xs sm:text-sm md:text-base">
+          Hosted by CSE dept of SSN and SNUC
+        </p>
 
-        {/* Description Text */}
-        <div className="absolute top-[65%] sm:top-[50%] md:top-[55%] lg:top-[65%] right-[4%] sm:left-[10%] md:left-[20%] lg:left-[40%] text-black text-right sm:text-left font-poppins leading-relaxed text-xs sm:text-base md:text-lg max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg z-10">
-          <p className="mb-1 sm:mb-2">Looking for fun? You've come to the</p>
-          <p className="mb-1 sm:mb-2 ml-4 sm:ml-8 md:ml-12 lg:ml-16">right place! Since 2016, Invente has</p>
-          <p className="mb-1 sm:mb-2 ml-8 sm:ml-12 md:ml-16 lg:ml-24">been our flagship tech fest,</p>
-          <p className="mb-1 sm:mb-2 ml-12 sm:ml-16 md:ml-20 lg:ml-32">catered to challenge the</p>
-          <p className="mb-1 sm:mb-2 ml-16 sm:ml-20 md:ml-24 lg:ml-42">spirits and intellects of</p>
-          <p className="mb-1 sm:mb-2 ml-20 sm:ml-24 md:ml-28 lg:ml-48">students nationwide.</p>
-        </div>
+      </section>
 
-        {/* Desktop Get Passes Button */}
-        <button className="hidden sm:block absolute bottom-[15%] md:bottom-[5%] sm:bottom-[12%] right-[5%] sm:right-[10%] 
-        bg-black text-white 
-        px-6 sm:px-8 md:px-10 
-        py-3 sm:py-4 
-        font-dm-sans italic font-bold 
-        text-sm sm:text-base md:text-lg 
-        uppercase shadow-lg hover:bg-gray-900 transition-colors z-10">
-          GET PASSES
-        </button>
+      {/* --- EVENTS GRID SECTION --- */}
+      <section className="relative py-16 md:py-24">
+        <div className="absolute inset-0 bg-black/80"></div>
+        <div className="relative container mx-auto px-4">
+          <h2 className="text-4xl md:text-6xl font-bold text-purple-400 text-center sm:text-left mb-12 md:mb-16 lg:mb-24 drop-shadow-[0_0_8px_rgba(168,85,247,0.7)] font-michroma" id="events">
+            ALL EVENTS
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {events.map((event) => (
+              <Link
+                key={event.name}
+                href={event.href}
+                className="group relative block overflow-hidden border-2 border-purple-500/30 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/40"
+              >
+                <Image
+                  src={event.imageSrc}
+                  alt={event.name}
+                  width={600}
+                  height={338}
+                  className="w-full h-auto transition-transform duration-300 group-hover:brightness-50"
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity duration-300 opacity-100 p-4">
+                  <span className="text-white text-5xl md:text-7xl tracking-widest drop-shadow-lg font-orbitron text-center">
+                    {event.name}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
       </section>
     </div>
   );

@@ -1,57 +1,47 @@
-// components/Hospitality.tsx
-
 "use client";
 
 import React, { useState } from "react";
 
-// Define the types for our tabs
 type TabId = "instructions" | "howToReach" | "accommodations" | "contacts";
 
 const tabs: { id: TabId; label: string }[] = [
-    { id: "instructions", label: "INSTRUCTIONS" },
-    { id: "howToReach", label: "HOW TO REACH" },
-    { id: "accommodations", label: "ACCOMMODATIONS" },
-    { id: "contacts", label: "CONTACT US" },
+    { id: "instructions", label: "Instructions" },
+    { id: "howToReach", label: "How to Reach" },
+    { id: "accommodations", label: "Accommodations" },
+    { id: "contacts", label: "Contact Us" },
 ];
 
 const Hospitality = () => {
     const [activeTab, setActiveTab] = useState<TabId>("instructions");
 
-    const ContactCard = ({ name, number }: { name: string; number: string }) => (
-        <div className="bg-[#422018] text-white text-center rounded-full px-8 py-4 text-lg font-poppins">
-            <p className="font-semibold">{name}</p>
-            <p>{number}</p>
-        </div>
-    );
-
     const renderContent = () => {
         switch (activeTab) {
             case "instructions":
                 return (
-                    <div className="space-y-4 text-md break-words">
+                    <div className="space-y-6 text-gray-200 break-words font-exo2 sm:text-base leading-relaxed">
                         <div>
-                            <h3 className="font-bold text-[#422018] uppercase">Registration:</h3>
+                            <h3 className="font-michroma font-bold text-purple-400 uppercase text-lg mb-2">Registration :</h3>
                             <p>
                                 Registration for accommodation will be done on the spot in our
                                 campus
                             </p>
                         </div>
                         <div>
-                            <h3 className="font-bold text-[#422018] uppercase">On Arrival:</h3>
-                            <ul className="list-disc pl-5">
+                            <h3 className="font-michroma font-bold text-purple-400 uppercase text-lg mb-2">On Arrival :</h3>
+                            <ul className="list-disc pl-5 space-y-1">
                                 <li>Bring your college ID card.</li>
-                                <li>Show the mail copy of your response ready during check-in.</li>
+                                <li>Have the email copy of your response ready during check-in.</li>
                                 <li>Report at the respective hostel (boys/girls) front office.</li>
                                 <li>
-                                    Hospitality volunteers will be present on-site for assistance.
+                                    Hospitality volunteers will be present on-site for assistance
                                 </li>
                             </ul>
                         </div>
                         <div>
-                            <h3 className="font-bold text-[#422018] uppercase">
-                                Instructions For Participants:
+                            <h3 className="font-michroma font-bold text-purple-400 uppercase text-lg mb-2">
+                                Instructions For Participants :
                             </h3>
-                            <ul className="list-disc pl-5">
+                            <ul className="list-disc pl-5 space-y-1">
                                 <li>
                                     Participants must bring their own bedsheets, pillows and other
                                     necessary items.
@@ -62,35 +52,37 @@ const Hospitality = () => {
                                     or damage.
                                 </li>
                                 <li>
-                                    Participants should arrive on the campus before 8:30 p.m. on the
-                                    day of arrival.
+                                    Participants should arrive the campus before 8.30 pm on the day of
+                                    arrival.
                                 </li>
                             </ul>
                         </div>
                         <div>
-                            <h3 className="font-bold text-[#422018] uppercase">Note:</h3>
-                            <p>
+                            <h3 className="font-michroma font-bold text-purple-400 uppercase text-lg mb-2">Note :</h3>
+                             <ul className="list-disc pl-5 space-y-1">
+                                <li>
                                 Accommodation will be provided on a first-come-first-served basis.
-                            </p>
-                            <p>
+                                </li>
+                                <li>
                                 For single-participant registrations, roommates will be assigned by
                                 the hospitality committee based on availability.
-                            </p>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 );
             case "howToReach":
-                return (
-                    <div className="space-y-4 text-md break-words">
+                 return (
+                    <div className="space-y-4 text-gray-200 break-words font-exo2 sm:text-base leading-relaxed">
                         <div>
-                            <h3 className="font-bold text-[#422018]">SSN CAMPUS</h3>
+                            <h3 className="font-michroma font-bold text-purple-400 uppercase text-lg mb-2">SSN CAMPUS</h3>
                             <p>
                                 Kalavakkam (Near Thiruporur) on Rajiv Gandhi Salai (Old Mahabalipuram
                                 Road)
                             </p>
                         </div>
                         <div>
-                            <h3 className="font-bold text-[#422018]">
+                            <h3 className="font-michroma font-bold text-purple-400 uppercase text-lg mb-2">
                                 FROM CHENNI CENTRAL (44km):
                             </h3>
                             <p>Hire an auto/taxi.</p>
@@ -100,8 +92,8 @@ const Hospitality = () => {
                                 from Airport)
                             </p>
                         </div>
-                        <div>
-                            <h3 className="font-bold text-[#422018]">FROM EGMORE STATION (40 km)</h3>
+                         <div>
+                            <h3 className="font-michroma font-bold text-purple-400 uppercase text-lg mb-2">FROM EGMORE STATION (40 km)</h3>
                             <p>Hire an auto/taxi.</p>
                             <p>
                                 Catch the 40603/40605 train from Egmore Station to Tambaram and 515
@@ -109,7 +101,7 @@ const Hospitality = () => {
                             </p>
                         </div>
                         <div>
-                            <h3 className="font-bold text-[#422018]">FROM CMBT (43km):</h3>
+                            <h3 className="font-michroma font-bold text-purple-400 uppercase text-lg mb-2">FROM CMBT (43km):</h3>
                             <p>Board direct bus 570X from CMBT to SSN.</p>
                             <p>
                                 Take the metro from CMBT to Airport. (Refer below for directions from
@@ -117,7 +109,7 @@ const Hospitality = () => {
                             </p>
                         </div>
                         <div>
-                            <h3 className="font-bold text-[#422018]">FROM AIRPORT (38km):</h3>
+                            <h3 className="font-michroma font-bold text-purple-400 uppercase text-lg mb-2">FROM AIRPORT (38km):</h3>
                             <p>Board direct bus 570X from CMBT to SSN.</p>
                             <p>
                                 Walk to the Tirusulam bus stop (700 m) and board bus
@@ -129,47 +121,47 @@ const Hospitality = () => {
                 );
             case "accommodations":
                 return (
-                    <div className="text-md break-words">
-                        <ul className="list-disc space-y-3 pl-5 text-[#4a2e1a]">
+                    <div className="text-gray-200 break-words font-exo2 sm:text-base leading-relaxed">
+                        <ul className="list-disc space-y-4 pl-5">
                             <li>
-                                <span className="font-bold">Prohibited Activities:</span> Smoking,
+                                <span className="font-michroma font-bold text-purple-400 text-lg">Prohibited Activities:</span> Smoking,
                                 drinking, and the use of illegal substances are strictly prohibited.
                                 The college will take appropriate action if any participant is found
                                 in possession of these items.
                             </li>
                             <li>
-                                <span className="font-bold">Respect for Property:</span> Any damage to
+                                <span className="font-michroma font-bold text-purple-400 text-lg">Respect for Property:</span> Any damage to
                                 college facilities or property provided to participants will result
                                 in serious consequences. The caution deposit will not be refunded if
                                 damage is caused.
                             </li>
                             <li>
-                                <span className="font-bold">Check-in Procedures:</span> Participants
+                                <span className="font-michroma font-bold text-purple-400 text-lg">Check-in Procedures:</span> Participants
                                 must keep their check-in receipts and ID cards safe. Room keys will
                                 be provided and must be safeguarded.
                             </li>
-                            <li>
-                                <span className="font-bold">Key Distribution:</span> Participants will
+                             <li>
+                                <span className="font-michroma font-bold text-purple-400 text-lg">Key Distribution:</span> Participants will
                                 receive room keys during check-in. Keys must be returned upon
                                 check-out, else deductions will be made from the caution deposit.
                             </li>
                             <li>
-                                <span className="font-bold">Valuables Responsibility:</span> The
+                                <span className="font-michroma font-bold text-purple-400 text-lg">Valuables Responsibility:</span> The
                                 college does not assume responsibility for any loss or damage to
                                 personal property or valuables stored in the accommodation.
                             </li>
                             <li>
-                                <span className="font-bold">Settlement of Accounts:</span> Guests must
+                                <span className="font-michroma font-bold text-purple-400 text-lg">Settlement of Accounts:</span> Guests must
                                 settle all outstanding bills upon check-out. Refund of the caution
-                                deposit is subject to room condition and return of keys.
+                                deposit is subject to room condition and return of akey.
                             </li>
                             <li>
-                                <span className="font-bold">Curfew for Participants:</span>{" "}
+                                <span className="font-michroma font-bold text-purple-400 text-lg">Curfew for Participants:</span>{" "}
                                 Participants are expected to strictly adhere to curfew timings:{" "}
                                 <span className="italic">06:00 AM – 08:30 PM</span>.
                             </li>
-                            <li>
-                                <span className="font-bold">Dispute Resolution:</span> In the event of
+                             <li>
+                                <span className="font-michroma font-bold text-purple-400 text-lg">Dispute Resolution:</span> In the event of
                                 any disputes, the decision of the organizers will be final and
                                 binding.
                             </li>
@@ -177,9 +169,9 @@ const Hospitality = () => {
                     </div>
                 );
             case "contacts":
-                return (
-                    <div className="space-y-3 flex flex-col items-center break-words">
-                        <div className="bg-[#422018] text-white text-center rounded-md px-6 py-3 w-full max-w-xs">
+                 return (
+                    <div className="space-y-4 flex flex-col items-center break-words font-exo2 leading-relaxed">
+                        <div className="bg-white bg-opacity-10 border border-gray-500 text-white text-center rounded-md px-6 py-3 w-full max-w-xs">
                             <p className="font-bold text-lg">Pradeep Kumar P</p>
                             <p className="text-md">9942481020</p>
                             <p className="text-xs opacity-80">(CIVIL)</p>
@@ -187,7 +179,7 @@ const Hospitality = () => {
                         <p className="text-center font-semibold pt-2">
                             For any queries with respect to bus routes:
                         </p>
-                        <div className="bg-[#422018] text-white text-center rounded-md px-6 py-3 w-full max-w-xs">
+                         <div className="bg-white bg-opacity-10 border border-gray-500 text-white text-center rounded-md px-6 py-3 w-full max-w-xs">
                             <p className="font-bold text-lg">Karthikeyan S</p>
                             <p className="text-md">9384662552</p>
                         </div>
@@ -199,51 +191,41 @@ const Hospitality = () => {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-200">
-            {/* Main Card */}
-            <div className="min-w-screen min-h-screen max-w-5xl bg-[#F5F5DC] bg-[url('/hospitality/bg.svg')] bg-cover bg-center p-6">
-                <h1 className="font-playfair-display text-5xl text-[#422018] text-center font-bold mb-8">
-                    HOSPITALITY
-                </h1>
+        <div className="min-h-screen w-full bg-[#0d051c] bg-[url('/hospitality/bg.svg')] bg-cover bg-center py-12 px-4 sm:px-6 md:px-10 lg:px-20 font-poppins text-white overflow-hidden">
+            <div className="w-full max-w-5xl mx-auto bg-black bg-opacity-50 border border-gray-700 p-4 sm:p-6 md:p-10 rounded-lg">
+                
+                <div className="flex justify-center mb-4">
+                    <img src="/hospitality/title.svg" alt="Hospitality" className="h-16 sm:h-20 md:h-24" />
+                </div>
+                <p className="text-center text-blue-400 underline cursor-pointer mb-8 sm:mb-10">Bus Routes</p>
 
-                {/* Bus Route Contacts Section */}
-                <div className="mb-6">
-                    <p className="text-center text-[#422018] mb-4 font-medium font-poppins">
-                        For any queries with respect to bus routes, please contact:
-                    </p>
-                    <div className="flex flex-wrap justify-center gap-4">
-                        <ContactCard name="Karthikeyan S" number="9384662552" />
-                        <ContactCard name="Pradeep Kumar P" number="9942481020" />
+                <div className="mb-8 sm:mb-10">
+                    <p className="text-center text-gray-300 mb-4 font-exo2 text-sm sm:text-base">For any queries with respect to bus routes, please contact :</p>
+                    <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+                        <div className="w-full sm:w-1/3 h-12 bg-gray-200 bg-opacity-20 border border-gray-500 rounded-sm"></div>
+                        <div className="w-full sm:w-1/3 h-12 bg-gray-200 bg-opacity-20 border border-gray-500 rounded-sm"></div>
                     </div>
                 </div>
 
-                {/* Tabs + Content */}
-                <div className="flex flex-col lg:flex-row gap-8">
-                    {/* Tab Buttons */}
-                    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-1 gap-3 w-full lg:w-1/4 h-[100%]">
-                        {tabs.map((tab) => (
-                            <button
-                                key={tab.id}
-                                onClick={() => setActiveTab(tab.id)}
-                                className={`
-  w-full px-4 py-2 text-md sm:text-lg font-bold rounded-full transition-all duration-300 
-  border-2 border-[#422018] font-playfair-display break-words text-center
-  ${activeTab === tab.id
-                                        ? "bg-[#422018] text-white"
-                                        : "bg-white text-[#422018] hover:bg-[#422018] hover:text-white"}
-`}
-
-                            >
-                                {tab.label}
-                            </button>
-                        ))}
-                    </div>
-
-                    {/* Content Area */}
-                    <div className="p-4 rounded-lg min-h-[200px] font-poppins w-full lg:w-2/3">
-                        {renderContent()}
-                    </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-6">
+                    {tabs.map((tab) => (
+                        <button
+                            key={tab.id}
+                            onClick={() => setActiveTab(tab.id)}
+                            className={`
+                                w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base md:text-lg font-orbitron font-bold transition-colors duration-300
+                                border border-gray-400 uppercase
+                                hover:bg-white hover:text-indigo-600 focus:outline-none focus:bg-white focus:text-indigo-600
+                                ${activeTab === tab.id ? "bg-white text-indigo-600" : "bg-transparent text-white"}
+                            `}
+                        >
+                            {tab.label}
+                        </button>
+                    ))}
                 </div>
+
+                {/* Content Area */}
+                <div className="min-h-[200px]">{renderContent()}</div>
             </div>
         </div>
     );

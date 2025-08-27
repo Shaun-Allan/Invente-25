@@ -1,225 +1,138 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Mock data for the schedule
 const scheduleData = [
-    {
-        day: 1,
-        dateSvg: "/schedule/schedule_27.svg",
-        events: [
-            {
-                title: "TBA",
-                icon: "/schedule/monkey.svg",
-                location: "-",
-                time: "-",
-            },
-            {
-                title: "TBA",
-                icon: "/schedule/archer.svg",
-                location: "-",
-                time: "-",
-            },
-            {
-                title: "TBA",
-                icon: "/schedule/man.svg",
-                location: "-",
-                time: "-",
-            },
-        ],
-    },
-    {
-        day: 2,
-        dateSvg: "/schedule/schedule_28.svg",
-        events: [
-            {
-                title: "TBA",
-                icon: "/schedule/monkey.svg",
-                location: "-",
-                time: "-",
-            },
-            {
-                title: "TBA",
-                icon: "/schedule/archer.svg",
-                location: "-",
-                time: "-",
-            },
-            {
-                title: "TBA",
-                icon: "/schedule/man.svg",
-                location: "-",
-                time: "-",
-            },
-        ],
-    },
+  {
+    day: 1,
+    titleSvg: "/schedule/day1title.svg",
+    events: [
+      { title: "Inauguration", time: "TBA" },
+      { title: "Event 1", time: "TBA" },
+      { title: "Event 2", time: "TBA" },
+      { title: "Event 3", time: "TBA" },
+    ],
+  },
+  {
+    day: 2,
+    titleSvg: "/schedule/day2title.svg",
+    events: [
+      { title: "Event 4", time: "TBA" },
+      { title: "Event 5", time: "TBA" },
+      { title: "Event 6", time: "TBA" },
+      { title: "Event 7", time: "TBA" },
+    ],
+  },
 ];
 
 const ScheduleCarousel = () => {
-    const [currentDayIndex, setCurrentDayIndex] = useState(0);
-    const [direction, setDirection] = useState("next");
+  const [currentDay, setCurrentDay] = useState(0);
 
-    // Function to navigate to the next day
-    const goToNext = () => {
-        if (currentDayIndex < scheduleData.length - 1) {
-            setDirection("next");
-            setCurrentDayIndex((prevIndex) => prevIndex + 1);
-        }
-    };
+  return (
+    <div
+      className="relative min-h-screen w-full flex items-center justify-center px-4 py-10"
+      style={{
+        backgroundImage: "url('/schedule/bg.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/60"></div>
 
-    // Function to navigate to the previous day
-    const goToPrev = () => {
-        if (currentDayIndex > 0) {
-            setDirection("prev");
-            setCurrentDayIndex((prevIndex) => prevIndex - 1);
-        }
-    };
-
-    const currentDayData = scheduleData[currentDayIndex];
-
-    return (
-        <div
-            className="relative min-h-screen w-full flex items-center justify-center px-4 sm:px-10 py-20 text-[#2c2c2c]"
-            style={{
-                backgroundImage: "url('/background.png')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-            }}
-        >
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-white/30 backdrop-blur-[1px]"></div>
-
-            {/* --- Decorative Pocket Watch (Hidden on mobile) --- */}
-            <AnimatePresence mode="wait" custom={direction}>
-                {currentDayIndex === 0 && (
-                    <motion.div
-                        key={`pocket-watch-${currentDayIndex}`}
-                        className="absolute top-[-40px] left-[60px] hidden lg:block z-10"
-                        custom={direction}
-                        variants={{
-                            enter: (dir) => ({ y: dir === "next" ? 1000 : -1000, opacity: 0 }),
-                            center: { y: 0, opacity: 1 },
-                            exit: (dir) => ({ y: dir === "next" ? -1000 : 1000, opacity: 0 }),
-                        }}
-                        initial="enter"
-                        animate="center"
-                        exit="exit"
-                        transition={{ duration: 0.6, ease: "easeInOut" }}
-                    >
-                        <img
-                            src="/schedule/schedule_clock.svg"
-                            alt="Pocket Watch"
-                            width="420"
-                            height="420"
-                            className="relative top-6 left-4"
-                        />
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
-            {/* --- Content --- */}
-            <div className="relative z-20 w-full max-w-7xl">
-                {/* Day Title + Arrows */}
-                <div className="flex items-center justify-center gap-4 sm:gap-10 mb-12 md:mb-20">
-                    <button
-                        onClick={goToPrev}
-                        disabled={currentDayIndex === 0}
-                        className={`p-2 rounded-full transition-colors ${
-                            currentDayIndex === 0 ? "opacity-30 cursor-not-allowed" : "hover:bg-black/10"
-                        }`}
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="m15 18-6-6 6-6" />
-                        </svg>
-                    </button>
-                    <h1 className="font-instrument-serif text-6xl md:text-8xl text-black drop-shadow-md text-center">
-                        Day {currentDayData.day}
-                    </h1>
-                    <button
-                        onClick={goToNext}
-                        disabled={currentDayIndex === scheduleData.length - 1}
-                        className={`p-2 rounded-full transition-colors ${
-                            currentDayIndex === scheduleData.length - 1 ? "opacity-30 cursor-not-allowed" : "hover:bg-black/10"
-                        }`}
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="m9 18 6-6-6-6" />
-                        </svg>
-                    </button>
-                </div>
-
-                {/* --- Carousel --- */}
-                <div className="overflow-hidden relative">
-                    <div
-                        className="flex transition-transform duration-500 ease-in-out"
-                        style={{ transform: `translateX(-${currentDayIndex * 100}%)` }}
-                    >
-                        {scheduleData.map((dayData) => (
-                            <div
-                                key={dayData.day}
-                                className="flex-shrink-0 w-full flex justify-center px-2"
-                            >
-                                {/* Main Content Wrapper (responsive layout) */}
-                                <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-12 lg:gap-32 max-w-5xl">
-                                    {/* Event List */}
-                                    <div className="flex flex-col gap-10 md:gap-14 w-full lg:w-2/3">
-                                        {dayData.events.map((event, index) => (
-                                            <div key={index} className="flex items-start gap-4 sm:gap-6">
-                                                <img
-                                                    src={event.icon}
-                                                    alt={`${event.title} icon`}
-                                                    width="50"
-                                                    height="50"
-                                                    className="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px]"
-                                                />
-                                                <div className="flex flex-col">
-                                                    <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold font-instrument-serif text-black">
-                                                        {event.title}
-                                                    </h3>
-                                                    <div className="flex text-base sm:text-lg md:text-xl items-center gap-3 text-black/90 font-playfair-display mt-2">
-                                                        <img
-                                                            src="/schedule/map.svg"
-                                                            alt="Location"
-                                                            width="24"
-                                                            height="24"
-                                                        />
-                                                        <span>{event.location}</span>
-                                                    </div>
-                                                    <div className="flex text-base sm:text-lg md:text-xl items-center gap-3 text-black/90 font-playfair-display">
-                                                        <img
-                                                            src="/schedule/time.svg"
-                                                            alt="Time"
-                                                            width="24"
-                                                            height="24"
-                                                        />
-                                                        <span>{event.time}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-
-                                    {/* Date Block (Hidden on mobile) */}
-                                    <div
-                                        className={`hidden lg:flex justify-center w-1/3 transition-transform duration-500 ${
-                                            dayData.day === 2 ? "scale-220 translate-y-32" : "translate-y-1/4"
-                                        }`}
-                                    >
-                                        <img
-                                            src={dayData.dateSvg}
-                                            alt={`Date ${dayData.day}`}
-                                            width="480"
-                                            height="480"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+      <div className="relative z-10 w-full max-w-7xl">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentDay}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            className="w-full"
+          >
+            {/* Title */}
+            <div className="flex items-center justify-start gap-6 mb-16">
+              <Image
+                src={scheduleData[currentDay].titleSvg}
+                alt={`Day ${scheduleData[currentDay].day}`}
+                width={260}
+                height={120}
+                className="w-auto h-24 sm:h-32"
+              />
             </div>
+
+            {/* Events Timeline */}
+            <div className="relative grid grid-cols-1 md:grid-cols-2 gap-y-24 md:gap-x-10 text-white">
+              {/* Vertical divider line */}
+              <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[2px] bg-purple-400/50 transform -translate-x-1/2"></div>
+
+              {scheduleData[currentDay].events.map((event, i) => {
+                const isLeft = i % 2 === 0;
+
+                return (
+                  <div
+                    key={i}
+                    style={{ gridRow: i + 1 }}
+                    className={`relative flex flex-col ${
+                      isLeft
+                        ? "md:col-start-1 md:items-end text-right md:pr-10"
+                        : "md:col-start-2 md:items-start text-left md:pl-10"
+                    }`}
+                  >
+                    {/* Circle on the timeline */}
+                    <div
+                      className="hidden md:block absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-purple-400 rounded-full z-10"
+                      style={isLeft ? { right: "-28px" } : { left: "-28px" }}
+                    ></div>
+
+                    {/* Event Details */}
+                    <h3 className="text-2xl md:text-3xl font-bold tracking-wide drop-shadow-[0_0_6px_rgba(180,0,255,0.8)] uppercase font-michroma">
+                      {event.title}
+                    </h3>
+                    <p className="text-lg md:text-xl text-gray-200 mt-1 font-exo2">
+                      {event.time}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation */}
+        <div className="flex justify-center gap-6 mt-20">
+          <button
+            onClick={() => setCurrentDay((prev) => Math.max(prev - 1, 0))}
+            disabled={currentDay === 0}
+            className={`px-4 py-2 text-white border rounded-lg transition ${
+              currentDay === 0
+                ? "opacity-40 cursor-not-allowed"
+                : "hover:bg-purple-600/30 border-purple-400"
+            }`}
+          >
+            Prev
+          </button>
+          <button
+            onClick={() =>
+              setCurrentDay((prev) =>
+                Math.min(prev + 1, scheduleData.length - 1)
+              )
+            }
+            disabled={currentDay === scheduleData.length - 1}
+            className={`px-4 py-2 text-white border rounded-lg transition ${
+              currentDay === scheduleData.length - 1
+                ? "opacity-40 cursor-not-allowed"
+                : "hover:bg-purple-600/30 border-purple-400"
+            }`}
+          >
+            Next
+          </button>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default ScheduleCarousel;

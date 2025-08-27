@@ -4,24 +4,45 @@
   :root {
     --font-dm-sans: var(--font-dm-sans);
     --font-instrument-serif: var(--font-instrument-serif);
-    --font-playfair-display: var(--font-playfair-display); /* ✅ Added */
-    --font-poppins: var(--font-poppins); /* ✅ Added */
+    --font-playfair-display: var(--font-playfair-display);
+    --font-poppins: var(--font-poppins);
+    --font-orbitron: var(--font-orbitron);
+    --font-michroma: var(--font-michroma);
+    --font-exo2: var(--font-exo2);
+    --font-space-grotesk: var(--font-space-grotesk);
+    --font-rubik-glitch: var(--font-rubik-glitch);
+    --font-parisienne: var(--font-parisienne); /* ✅ Added */
   }
 
   .font-dm-sans {
     font-family: var(--font-dm-sans);
   }
-
   .font-instrument-serif {
     font-family: var(--font-instrument-serif);
   }
-
   .font-playfair-display {
     font-family: var(--font-playfair-display);
   }
-
-  .font-poppins { /* ✅ Added */
+  .font-poppins {
     font-family: var(--font-poppins);
+  }
+  .font-orbitron {
+    font-family: var(--font-orbitron);
+  }
+  .font-michroma {
+    font-family: var(--font-michroma);
+  }
+  .font-exo2 {
+    font-family: var(--font-exo2);
+  }
+  .font-space-grotesk {
+    font-family: var(--font-space-grotesk);
+  }
+  .font-rubik-glitch {
+    font-family: var(--font-rubik-glitch);
+  }
+  .font-parisienne { /* ✅ Added */
+    font-family: var(--font-parisienne);
   }
 
   .font-century-gothic {
@@ -29,33 +50,18 @@
   }
 }
 
-@layer components {
-  /* Hero section enhancements for pixel perfection */
-  .hero-bg {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+
+@layer utilities {
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
-  /* Menu button styling */
-  .menu-button {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-  }
-
-  .menu-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-  }
-
-  /* Date block and button shadows */
-  .hero-shadow {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-  }
-
-  /* Text overlay effect */
-  .text-overlay {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  .animate-spin-slow {
+    animation: spin-slow 40s linear infinite;
   }
 }
