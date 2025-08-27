@@ -6,7 +6,14 @@ import {
   Instrument_Serif,
   Playfair_Display,
   Poppins,
+  Orbitron,
+  Michroma,
+  Exo_2,
+  Space_Grotesk,
+  Rubik_Glitch,
+  Parisienne, // ✅ Added
 } from "next/font/google";
+
 import "./globals.css";
 
 // 🟤 Import Navbar & Footer
@@ -18,6 +25,13 @@ const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
+
+const parisienne = Parisienne({
+  variable: "--font-parisienne",
+  weight: ["400"], // only one weight available
+  subsets: ["latin"],
+});
+
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -48,11 +62,48 @@ const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
 });
 
+const orbitron = Orbitron({
+  variable: "--font-orbitron",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
+
+const michroma = Michroma({
+  variable: "--font-michroma",
+  subsets: ["latin"],
+  weight: ["400"],
+});
+
+const exo2 = Exo_2({
+  variable: "--font-exo2",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "900"],
+  style: ["normal", "italic"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
+// ✅ Add Rubik Glitch
+const rubikGlitch = Rubik_Glitch({
+  variable: "--font-rubik-glitch",
+  subsets: ["latin"],
+  weight: ["400"], // only one weight
+});
+
 export const metadata: Metadata = {
   title: "Invente 2025 - Chrono Shift",
-  description:
-    "Invente 2025: Imagine. Create. Inspire. - SSN College of Engineering Tech Festival",
+  description: "Invente 2025: Imagine. Create. Inspire. - SSN College of Engineering Tech Festival",
+  icons: {
+    icon: '/favicon.ico',       // main icon
+    shortcut: '/favicon.ico',   // shortcut for older browsers
+    apple: '/favicon.ico',      // optional Apple touch icon
+  },
 };
+
 
 export default function RootLayout({
   children,
@@ -61,23 +112,30 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.png" />
+      </head>
       <body
         className={`
-          ${geistSans.variable}
-          ${geistMono.variable}
-          ${dmSans.variable}
-          ${instrumentSerif.variable}
-          ${playfairDisplay.variable}
-          ${poppins.variable}
-          antialiased
-          bg-[#DEE8CE]
-        `}
+    ${geistSans.variable}
+    ${geistMono.variable}
+    ${dmSans.variable}
+    ${instrumentSerif.variable}
+    ${playfairDisplay.variable}
+    ${poppins.variable}
+    ${orbitron.variable}
+    ${michroma.variable}
+    ${exo2.variable}
+    ${spaceGrotesk.variable}
+    ${rubikGlitch.variable}
+    ${parisienne.variable} /* ✅ Added */
+    antialiased
+    bg-[#DEE8CE]
+  `}
       >
+
         <Navbar />
-
-        {/* ✅ Wrapper decides padding */}
         <PageWrapper>{children}</PageWrapper>
-
         <Footer />
       </body>
     </html>

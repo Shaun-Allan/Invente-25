@@ -1,120 +1,38 @@
 import React from "react";
+import Image from "next/image";
 
-export default function SponsorsPage() {
+export default function StayTunedPage() {
   return (
     <div
-      className="relative min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: 'url("/bg.png")' }}
+      className="relative min-h-screen w-full flex flex-col bg-cover bg-center text-white"
+      style={{ backgroundImage: 'url("/sponsors/bg.png")' }}
     >
       {/* Black Overlay */}
-      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="absolute inset-0 bg-black/90"></div>
 
-      {/* Main Content */}
-      <div className="relative flex flex-col items-center text-white px-4 py-8">
-        <div
-          className="flex items-center mb-9 mx-auto justify-center"
-          style={{ gap: "clamp(10px, 4vw, 40px)" }}
-        >
-          <h1 className="font-playfair-display text-[#B83000] tracking-[-0.04em] leading-[100%] font-bold text-6xl">
-            OUR SPONSORS ❤️
-          </h1>
-        </div>
+      {/* Header section for the title */}
+      <header className="relative z-10 flex justify-center pt-20 sm:pt-24">
+        <Image
+          src="/sponsors/title.svg"
+          alt="Our Sponsors"
+          width={1000} // Adjusted to a more manageable size
+          height={100} // Adjusted for aspect ratio
+          className="drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] w-[400px] sm:w-[800px] md:w-[1000px] h-auto"
+        />
+      </header>
 
-        <div className="flex flex-col items-center mb-10">
-          <img
-            src="/title.png"
-            alt="Title Sponsor"
-            className="w-40 sm:w-56 md:w-64 mb-4"
-          />
-          <img
-            src="/temenos.png"
-            alt=""
-            className="w-28 sm:w-36 md:w-40 mx-auto"
-          />
-        </div>
+      {/* Main Content - Centered in the remaining space */}
+      <main className="relative z-10 flex flex-grow flex-col items-center justify-center text-center p-4 -mt-20">
+        {/* "Stay Tuned" Message */}
+        <h1 className="text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-wide leading-tight drop-shadow-[0_0_20px_rgba(200,50,255,0.8)] font-michroma">
+          Stay Tuned!
+        </h1>
 
-        <div className="mb-12 text-center">
-          <h2
-            className="text-5xl sm:text-2xl md:text-xl font-playfair-display text-[#D3633B] mb-4"
-            style={{ fontSize: "clamp(30px, 5vw, 40px)" }}
-          >
-            Co-Sponsors
-          </h2>
-          <div className="flex flex-wrap justify-center gap-6">
-            <img src="/indium.png" alt="" className="w-30 sm:w-40 md:w-60" />
-            <img src="/jana.png" alt="" className="w-24 sm:w-40 md:w-60" />
-          </div>
-        </div>
-
-        <div className="mb-12 w-full px-4">
-          <h2
-            className="text-2xl sm:text-3xl md:text-4xl font-playfair-display text-[#D3633B] mb-6 text-center"
-            style={{ fontSize: "clamp(30px, 5vw, 40px)" }}
-          >
-            Department Sponsors
-          </h2>
-
-          <div className="space-y-5 mt-20">
-            {[1, 2, 3].map((row) => (
-              <div key={row} className="grid grid-cols-3 gap-6 justify-items-center">
-                <img
-                  src="/tnpl.png"
-                  alt=""
-                  className="w-[clamp(60px,20vw,250px)] h-auto"
-                />
-                <img
-                  src="/indium.png"
-                  alt=""
-                  className="w-[clamp(60px,20vw,250px)] h-auto"
-                />
-                <img
-                  src="/jana.png"
-                  alt=""
-                  className="w-[clamp(60px,20vw,250px)] h-auto"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mb-12 text-center">
-          <h2
-            className="text-2xl sm:text-3xl md:text-4xl font-playfair-display text-[#D3633B] mb-4"
-            style={{ fontSize: "clamp(30px, 5vw, 40px)" }}
-          >
-            Workshop & Hackathon Sponsors
-          </h2>
-          <div className="flex flex-wrap justify-center gap-6">
-            <img
-              src="/indium.png"
-              alt=""
-              className="w-[clamp(60px,20vw,250px)] h-auto"
-            />
-            <img
-              src="/jana.png"
-              alt=""
-              className="w-[clamp(60px,20vw,250px)] h-auto"
-            />
-          </div>
-        </div>
-
-        <div className="mb-12 text-center">
-          <h2
-            className="text-2xl sm:text-3xl md:text-4xl font-playfair-display text-[#D3633B] mb-4"
-            style={{ fontSize: "clamp(30px, 5vw, 40px)" }}
-          >
-            Fintech Partner
-          </h2>
-          <img
-            src="/temenos.png"
-            alt=""
-            className="w-[clamp(60px,20vw,250px)] h-auto mx-auto"
-          />
-        </div>
-      </div>
-
-      {/* Footer */}
-     
+        {/* Sub-text */}
+        <p className="mt-6 text-xl sm:text-2xl md:text-3xl text-gray-300 max-w-2xl font-exo2">
+          Exciting updates are on the way. Check back soon for more information!
+        </p>
+      </main>
     </div>
   );
 }

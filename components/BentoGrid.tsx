@@ -3,151 +3,183 @@
 import Image from "next/image";
 import Link from "next/link";
 
-// ✅ Custom utility for outlined text
-const outlinedText = "drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]";
+// This is a great utility class for text visibility!
+const outlinedText =
+  "drop-shadow-[0_0_6px_rgba(255,255,255,0.9)] drop-shadow-[0_0_12px_rgba(155,0,255,0.8)]";
 
 export default function BentoGrid({ onClose }: { onClose?: () => void }) {
   return (
-    <section className=" min-h-screen flex items-center justify-center p-4 md:p-6">
-      <div className="w-full max-w-6xl">
+    <section className="relative min-h-screen flex items-start md:items-center justify-center p-4 md:p-6 overflow-y-auto">
+
+      {/* Background */}
+      <Image
+        src="/bento/bg.jpg"
+        alt="Background"
+        fill
+        priority
+        className="object-cover -z-10"
+      />
+      <div className="absolute inset-0 bg-black/80 -z-10" />
+
+      {/* Grid Container */}
+      <div className="w-full max-w-7xl mx-auto">
         <div
           className="
-            grid 
-            grid-cols-1 
-            md:grid-cols-3 
-            auto-rows-[180px] 
-            md:auto-rows-[220px] 
-            lg:auto-rows-[200px] 
-            gap-4 
-            bg-[#2D2D2D] 
-            p-4 
-            rounded-3xl
+            grid
+            grid-cols-2
+            md:grid-cols-10
+            auto-rows-[30vw]
+            sm:auto-rows-[30vw]
+            md:auto-rows-[18vw]
+            lg:auto-rows-[240px]
+            gap-4
           "
         >
-          {/* Top Left */}
+          {/* All Events */}
+          <Link
+            href="/#events"
+            onClick={onClose}
+            className="relative col-span-2 md:col-span-5 overflow-hidden shadow-lg group border-2 border-transparent hover:border-white"
+          >
+            <Image
+              src="/bento/events.png"
+              alt="All Events"
+              fill
+              className="object-cover"
+            />
+            <div
+              className={`absolute bottom-4 left-4 
+                text-white font-orbitron font-bold text-lg lg:text-xl tracking-wide 
+                ${outlinedText}`}
+            >
+              ALL EVENTS
+            </div>
+          </Link>
+
+          {/* About */}
           <Link
             href="/about"
             onClick={onClose}
-            className="relative rounded-2xl overflow-hidden shadow-lg group col-span-1 row-span-1"
+            className="relative col-span-1 md:col-span-3 overflow-hidden shadow-lg group border-2 border-transparent hover:border-white"
           >
-            <Image src="/bento/farming.png" alt="Farming" fill className="object-cover" />
+            <Image
+              src="/bento/about.png"
+              alt="About"
+              fill
+              className="object-cover"
+            />
             <div
-              className={`absolute bottom-4 left-4 md:bottom-6 md:left-6 
-                text-white font-dm-sans font-bold text-lg md:text-xl tracking-wide 
-                opacity-90 transition-all duration-500 ${outlinedText} 
-                group-hover:left-1/2 group-hover:top-1/2 
-                group-hover:-translate-x-1/2 group-hover:-translate-y-1/2 
-                group-hover:text-center group-hover:opacity-100`}
+              className={`absolute bottom-4 left-4 
+                text-white font-orbitron font-bold text-lg lg:text-xl tracking-wide 
+                ${outlinedText}`}
             >
               ABOUT
             </div>
           </Link>
 
-          {/* Top Middle */}
+          {/* Gallery */}
           <Link
-            href="/"
+            href="/gallery"
             onClick={onClose}
-            className="relative rounded-2xl overflow-hidden shadow-lg group col-span-1 row-span-1"
+            className="relative col-span-1 md:col-span-2 overflow-hidden shadow-lg group border-2 border-transparent hover:border-white"
           >
-            <Image src="/bento/astronomy.png" alt="Astronomy" fill className="object-cover" />
-            <div className={`absolute bottom-4 left-4 md:bottom-6 md:left-6 
-              text-white font-dm-sans font-bold text-lg md:text-xl tracking-wide 
-              opacity-90 transition-all duration-500 ${outlinedText} 
-              group-hover:left-1/2 group-hover:top-1/2 
-              group-hover:-translate-x-1/2 group-hover:-translate-y-1/2 
-              group-hover:text-center group-hover:opacity-100`}
+            <Image
+              src="/bento/gallery.png"
+              alt="Gallery"
+              fill
+              className="object-cover object-[50%_18%] md:object-top"
+            />
+            <div
+              className={`absolute bottom-4 left-4 
+                text-white font-orbitron font-bold text-lg lg:text-xl tracking-wide 
+                ${outlinedText}`}
             >
-              EVENTS
+              GALLERY
             </div>
           </Link>
 
-          {/* Top Right (Tall) */}
+          {/* Hackathons & Workshops */}
           <Link
             href="/hackathons"
             onClick={onClose}
-            className="relative rounded-2xl overflow-hidden shadow-lg group col-span-1 row-span-1 md:row-span-2"
+            className="relative col-span-2 overflow-hidden shadow-lg group border-2 border-transparent hover:border-white"
           >
-            <Image src="/bento/evolution.png" alt="Evolution" fill className="object-cover" />
-            <div className={`absolute bottom-4 left-4 md:bottom-6 md:left-6 
-              text-white font-dm-sans font-bold text-lg md:text-xl tracking-wide 
-              opacity-90 transition-all duration-500 ${outlinedText} 
-              group-hover:left-1/2 group-hover:top-1/2 
-              group-hover:-translate-x-1/2 group-hover:-translate-y-1/2 
-              group-hover:text-center group-hover:opacity-100`}
+            <Image
+              src="/bento/hackathons.png"
+              alt="Hackathons & Workshops"
+              fill
+              className="object-cover object-[0%_30%] md:object-center"
+            />
+            <div
+              className={`absolute bottom-4 left-4 
+                text-white font-orbitron font-bold text-base lg:text-lg tracking-wide 
+                ${outlinedText}`}
             >
-              HACKATHONS / WORKSHOPS
+              HACKATHONS & WORKSHOPS
             </div>
           </Link>
 
-          {/* Middle Left (Tall) */}
+          {/* Schedule */}
           <Link
             href="/schedule"
             onClick={onClose}
-            className="relative rounded-2xl overflow-hidden shadow-lg group col-span-1 row-span-1 md:row-span-2"
+            className="relative col-span-1 md:col-span-2 overflow-hidden shadow-lg group border-2 border-transparent hover:border-white"
           >
-            <Image src="/bento/industry.png" alt="Industrial Revolution" fill className="object-cover" />
-            <div className={`absolute bottom-4 left-4 md:bottom-6 md:left-6 
-              text-white font-dm-sans font-bold text-lg md:text-xl tracking-wide 
-              opacity-90 transition-all duration-500 ${outlinedText} 
-              group-hover:left-1/2 group-hover:top-1/2 
-              group-hover:-translate-x-1/2 group-hover:-translate-y-1/2 
-              group-hover:text-center group-hover:opacity-100`}
+            {/* Note: Your filename is 'shcedule.png', which seems to be a typo. */}
+            <Image
+              src="/bento/shcedule.png"
+              alt="Schedule"
+              fill
+              className="object-cover"
+            />
+            <div
+              className={`absolute bottom-4 left-4 
+                text-white font-orbitron font-bold text-lg lg:text-xl tracking-wide 
+                ${outlinedText}`}
             >
               SCHEDULE
             </div>
           </Link>
 
-          {/* Middle */}
-          <Link
-            href="/sponsors"
-            onClick={onClose}
-            className="relative rounded-2xl overflow-hidden shadow-lg group col-span-1 row-span-1"
-          >
-            <Image src="/bento/moon.png" alt="Moon Landing" fill className="object-cover" />
-            <div className={`absolute bottom-4 left-4 md:bottom-6 md:left-6 
-              text-white font-dm-sans font-bold text-lg md:text-xl tracking-wide 
-              opacity-90 transition-all duration-500 ${outlinedText} 
-              group-hover:left-1/2 group-hover:top-1/2 
-              group-hover:-translate-x-1/2 group-hover:-translate-y-1/2 
-              group-hover:text-center group-hover:opacity-100`}
-            >
-              SPONSORS
-            </div>
-          </Link>
-
-          {/* Bottom Middle */}
+          {/* Hospitality */}
           <Link
             href="/hospitality"
             onClick={onClose}
-            className="relative rounded-2xl overflow-hidden shadow-lg group col-span-1 row-span-1"
+            className="relative col-span-1 md:col-span-4 overflow-hidden shadow-lg group border-2 border-transparent hover:border-white"
           >
-            <Image src="/bento/nuclear.png" alt="Nuclear Explosion" fill className="object-cover" />
-            <div className={`absolute bottom-4 left-4 md:bottom-6 md:left-6 
-              text-white font-dm-sans font-bold text-lg md:text-xl tracking-wide 
-              opacity-90 transition-all duration-500 ${outlinedText} 
-              group-hover:left-1/2 group-hover:top-1/2 
-              group-hover:-translate-x-1/2 group-hover:-translate-y-1/2 
-              group-hover:text-center group-hover:opacity-100`}
+            <Image
+              src="/bento/hospitality.png"
+              alt="Hospitality"
+              fill
+              className="object-cover"
+            />
+            <div
+              className={`absolute bottom-4 left-4 
+                text-white font-orbitron font-bold text-lg lg:text-xl tracking-wide 
+                ${outlinedText}`}
             >
               HOSPITALITY
             </div>
           </Link>
 
-          {/* Bottom Right */}
+          {/* Sponsors */}
           <Link
-            href="/gallery"
+            href="/sponsors"
             onClick={onClose}
-            className="relative rounded-2xl overflow-hidden shadow-lg group col-span-1 row-span-1"
+            className="relative col-span-2 overflow-hidden shadow-lg group border-2 border-transparent hover:border-white"
           >
-            <Image src="/bento/map.png" alt="Historical Map" fill className="object-cover" />
-            <div className={`absolute bottom-4 left-4 md:bottom-6 md:left-6 
-              text-white font-dm-sans font-bold text-lg md:text-xl tracking-wide 
-              opacity-90 transition-all duration-500 ${outlinedText} 
-              group-hover:left-1/2 group-hover:top-1/2 
-              group-hover:-translate-x-1/2 group-hover:-translate-y-1/2 
-              group-hover:text-center group-hover:opacity-100`}
+            <Image
+              src="/bento/sponsors.png"
+              alt="Sponsors"
+              fill
+              className="object-cover"
+            />
+            <div
+              className={`absolute bottom-4 left-4 
+                text-white font-orbitron font-bold text-lg lg:text-xl tracking-wide 
+                ${outlinedText}`}
             >
-              GALLERY
+              SPONSORS
             </div>
           </Link>
         </div>
