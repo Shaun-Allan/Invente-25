@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 // Data for the event grid - makes it easy to manage
 const events = [
   { name: "CSE", imageSrc: "/events/CSE.png", href: "/events?dept=cse" },
-  { name: "CSE (SNUC)", imageSrc: "/events/SNUC.png", href: "/events?dept=snuc" },
+  { name: "CSE (SNUC)", imageSrc: "/events/SNUC.png", href: "/events?dept=snuc-cse" },
   { name: "IT", imageSrc: "/events/IT.png", href: "/events?dept=it" },
   { name: "ECE", imageSrc: "/events/ECE.png", href: "/events?dept=ece" },
   { name: "EEE", imageSrc: "/events/EEE.png", href: "/events?dept=eee" },

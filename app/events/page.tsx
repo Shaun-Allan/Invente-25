@@ -76,7 +76,7 @@ function DepartmentEventsPageContent() {
   const getBackgroundImage = (deptSlug: string): string => {
     switch (deptSlug) {
       case 'cse': return `url('/events/inside/CSE.png')`;
-      case 'snuc': return `url('/events/inside/SNUC.png')`;
+      case 'snuc-cse': return `url('/events/inside/SNUC.png')`;
       case 'it': return `url('/events/inside/IT.png')`;
       case 'ece': return `url('/events/inside/ECE.png')`;
       case 'eee': return `url('/events/inside/EEE.png')`;
@@ -203,9 +203,9 @@ function DepartmentEventsPageContent() {
                         </div>
                       ))}
                     </div>
-                    <p className="text-center text-base sm:text-lg italic text-purple-300 my-8 font-michroma">
+                    {/* <p className="text-center text-base sm:text-lg italic text-purple-300 my-8 font-michroma">
                       Expect the unexpected. Let the chaos and fun begin!
-                    </p>
+                    </p> */}
                   </div>
 
                 </div>
