@@ -83,8 +83,8 @@ export default function Home() {
           </FuzzyText>
 
           <p className="text-white max-w-2xl text-sm sm:text-lg md:text-xl lg:text-2xl leading-loose font-orbitron">
-            Looking for fun? You've come to the right place! Since 2016,
-            INVENTE has been our flagship tech fest, catered to challenge
+            <span className='text-purple-600'>Looking for fun?</span> You've come to the right place! Since 2016,
+            <span className='text-purple-600'>INVENTE</span> has been our flagship tech fest, catered to challenge
             the spirits and intellects of students across the nation.
           </p>
 
