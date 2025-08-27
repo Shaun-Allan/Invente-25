@@ -308,4 +308,494 @@ export const eventsData: EventsData = {
       },
     ],
   },
+  "snuc-cse": {
+    technical: [
+      {
+        name: "Bug Bounty Blitz",
+        domain: "Cybersecurity",
+        catchphrase: "Find the bug, claim the glory. Happy hunting!",
+        teamSize: "2-3",
+        heads: [
+          { name: "Karan", contact: "9988776655" },
+          { name: "Anjali", contact: "8877665544" },
+        ],
+        description:
+          "A competitive event where teams are given a vulnerable web application. Their mission is to find and exploit as many security flaws as possible within the time limit. Points are awarded based on the severity of the bugs found.",
+        rounds: [
+          {
+            name: "Round 1 - The Hunt",
+            details:
+              "All teams will be given access to the same web application hosted on a local server. They will have a set amount of time to perform reconnaissance and find vulnerabilities ranging from XSS and SQL Injection to broken authentication.",
+            rules: [
+              "No DDoS or brute-force attacks on the server infrastructure are allowed.",
+              "Teams must document their findings with proof-of-concept screenshots or scripts.",
+              "Points are awarded for each unique, validated vulnerability.",
+              "Time Limit: 3 hours.",
+            ],
+            tieBreaker:
+              "The team that finds and reports the highest-severity bug first wins the tie.",
+          },
+        ],
+      },
+    ],
+    nonTechnical: [
+      {
+        name: "Tech Charades",
+        domain: "General Tech Knowledge",
+        catchphrase: "Act it out, guess the tech. No talking!",
+        teamSize: "3-4",
+        heads: [
+          { name: "Vikram", contact: "7766554433" },
+          { name: "Meera", contact: "6655443322" },
+        ],
+        description:
+          "A fun and frantic non-technical event where teams guess technology-related words, concepts, and company names acted out by their teammates. A test of communication and tech-savviness!",
+        rounds: [
+          {
+            name: "Round 1 - Easy Mode",
+            details:
+              "Teams will act out and guess common tech terms and company names (e.g., 'Google', 'CPU', 'Bluetooth'). Each team gets 90 seconds to guess as many words as possible.",
+            rules: [
+              "The actor cannot speak or make any sounds.",
+              "The actor cannot draw letters in the air.",
+              "A pass is allowed, but the word may reappear.",
+              "Scores from this round carry over.",
+            ],
+          },
+          {
+            name: "Round 2 - Hard Mode",
+            details:
+              "The difficulty ramps up with more abstract or complex concepts (e.g., 'Blockchain', 'Machine Learning', 'API'). The rules are the same, but the challenge is greater.",
+            rules: [
+              "Time limit per team: 120 seconds.",
+              "Words in this round are worth double the points.",
+              "Top 3 teams with the highest cumulative score win.",
+            ],
+            tieBreaker:
+              "A final, single-word act-off between the tied teams. The team that guesses the word fastest wins.",
+          },
+        ],
+      },
+    ],
+  },
+  "ece": {
+    technical: [
+      {
+        name: "Bug Bounty Blitz",
+        domain: "Cybersecurity",
+        catchphrase: "Find the bug, claim the glory. Happy hunting!",
+        teamSize: "2-3",
+        heads: [
+          { name: "Karan", contact: "9988776655" },
+          { name: "Anjali", contact: "8877665544" },
+        ],
+        description:
+          "A competitive event where teams are given a vulnerable web application. Their mission is to find and exploit as many security flaws as possible within the time limit. Points are awarded based on the severity of the bugs found.",
+        rounds: [
+          {
+            name: "Round 1 - The Hunt",
+            details:
+              "All teams will be given access to the same web application hosted on a local server. They will have a set amount of time to perform reconnaissance and find vulnerabilities ranging from XSS and SQL Injection to broken authentication.",
+            rules: [
+              "No DDoS or brute-force attacks on the server infrastructure are allowed.",
+              "Teams must document their findings with proof-of-concept screenshots or scripts.",
+              "Points are awarded for each unique, validated vulnerability.",
+              "Time Limit: 3 hours.",
+            ],
+            tieBreaker:
+              "The team that finds and reports the highest-severity bug first wins the tie.",
+          },
+        ],
+      },
+    ],
+    nonTechnical: [
+      {
+        name: "Tech Charades",
+        domain: "General Tech Knowledge",
+        catchphrase: "Act it out, guess the tech. No talking!",
+        teamSize: "3-4",
+        heads: [
+          { name: "Vikram", contact: "7766554433" },
+          { name: "Meera", contact: "6655443322" },
+        ],
+        description:
+          "A fun and frantic non-technical event where teams guess technology-related words, concepts, and company names acted out by their teammates. A test of communication and tech-savviness!",
+        rounds: [
+          {
+            name: "Round 1 - Easy Mode",
+            details:
+              "Teams will act out and guess common tech terms and company names (e.g., 'Google', 'CPU', 'Bluetooth'). Each team gets 90 seconds to guess as many words as possible.",
+            rules: [
+              "The actor cannot speak or make any sounds.",
+              "The actor cannot draw letters in the air.",
+              "A pass is allowed, but the word may reappear.",
+              "Scores from this round carry over.",
+            ],
+          },
+          {
+            name: "Round 2 - Hard Mode",
+            details:
+              "The difficulty ramps up with more abstract or complex concepts (e.g., 'Blockchain', 'Machine Learning', 'API'). The rules are the same, but the challenge is greater.",
+            rules: [
+              "Time limit per team: 120 seconds.",
+              "Words in this round are worth double the points.",
+              "Top 3 teams with the highest cumulative score win.",
+            ],
+            tieBreaker:
+              "A final, single-word act-off between the tied teams. The team that guesses the word fastest wins.",
+          },
+        ],
+      },
+    ],
+  },
+  "eee": {
+    technical: [
+      {
+        name: "Bug Bounty Blitz",
+        domain: "Cybersecurity",
+        catchphrase: "Find the bug, claim the glory. Happy hunting!",
+        teamSize: "2-3",
+        heads: [
+          { name: "Karan", contact: "9988776655" },
+          { name: "Anjali", contact: "8877665544" },
+        ],
+        description:
+          "A competitive event where teams are given a vulnerable web application. Their mission is to find and exploit as many security flaws as possible within the time limit. Points are awarded based on the severity of the bugs found.",
+        rounds: [
+          {
+            name: "Round 1 - The Hunt",
+            details:
+              "All teams will be given access to the same web application hosted on a local server. They will have a set amount of time to perform reconnaissance and find vulnerabilities ranging from XSS and SQL Injection to broken authentication.",
+            rules: [
+              "No DDoS or brute-force attacks on the server infrastructure are allowed.",
+              "Teams must document their findings with proof-of-concept screenshots or scripts.",
+              "Points are awarded for each unique, validated vulnerability.",
+              "Time Limit: 3 hours.",
+            ],
+            tieBreaker:
+              "The team that finds and reports the highest-severity bug first wins the tie.",
+          },
+        ],
+      },
+    ],
+    nonTechnical: [
+      {
+        name: "Tech Charades",
+        domain: "General Tech Knowledge",
+        catchphrase: "Act it out, guess the tech. No talking!",
+        teamSize: "3-4",
+        heads: [
+          { name: "Vikram", contact: "7766554433" },
+          { name: "Meera", contact: "6655443322" },
+        ],
+        description:
+          "A fun and frantic non-technical event where teams guess technology-related words, concepts, and company names acted out by their teammates. A test of communication and tech-savviness!",
+        rounds: [
+          {
+            name: "Round 1 - Easy Mode",
+            details:
+              "Teams will act out and guess common tech terms and company names (e.g., 'Google', 'CPU', 'Bluetooth'). Each team gets 90 seconds to guess as many words as possible.",
+            rules: [
+              "The actor cannot speak or make any sounds.",
+              "The actor cannot draw letters in the air.",
+              "A pass is allowed, but the word may reappear.",
+              "Scores from this round carry over.",
+            ],
+          },
+          {
+            name: "Round 2 - Hard Mode",
+            details:
+              "The difficulty ramps up with more abstract or complex concepts (e.g., 'Blockchain', 'Machine Learning', 'API'). The rules are the same, but the challenge is greater.",
+            rules: [
+              "Time limit per team: 120 seconds.",
+              "Words in this round are worth double the points.",
+              "Top 3 teams with the highest cumulative score win.",
+            ],
+            tieBreaker:
+              "A final, single-word act-off between the tied teams. The team that guesses the word fastest wins.",
+          },
+        ],
+      },
+    ],
+  },
+  "bme": {
+    technical: [
+      {
+        name: "Bug Bounty Blitz",
+        domain: "Cybersecurity",
+        catchphrase: "Find the bug, claim the glory. Happy hunting!",
+        teamSize: "2-3",
+        heads: [
+          { name: "Karan", contact: "9988776655" },
+          { name: "Anjali", contact: "8877665544" },
+        ],
+        description:
+          "A competitive event where teams are given a vulnerable web application. Their mission is to find and exploit as many security flaws as possible within the time limit. Points are awarded based on the severity of the bugs found.",
+        rounds: [
+          {
+            name: "Round 1 - The Hunt",
+            details:
+              "All teams will be given access to the same web application hosted on a local server. They will have a set amount of time to perform reconnaissance and find vulnerabilities ranging from XSS and SQL Injection to broken authentication.",
+            rules: [
+              "No DDoS or brute-force attacks on the server infrastructure are allowed.",
+              "Teams must document their findings with proof-of-concept screenshots or scripts.",
+              "Points are awarded for each unique, validated vulnerability.",
+              "Time Limit: 3 hours.",
+            ],
+            tieBreaker:
+              "The team that finds and reports the highest-severity bug first wins the tie.",
+          },
+        ],
+      },
+    ],
+    nonTechnical: [
+      {
+        name: "Tech Charades",
+        domain: "General Tech Knowledge",
+        catchphrase: "Act it out, guess the tech. No talking!",
+        teamSize: "3-4",
+        heads: [
+          { name: "Vikram", contact: "7766554433" },
+          { name: "Meera", contact: "6655443322" },
+        ],
+        description:
+          "A fun and frantic non-technical event where teams guess technology-related words, concepts, and company names acted out by their teammates. A test of communication and tech-savviness!",
+        rounds: [
+          {
+            name: "Round 1 - Easy Mode",
+            details:
+              "Teams will act out and guess common tech terms and company names (e.g., 'Google', 'CPU', 'Bluetooth'). Each team gets 90 seconds to guess as many words as possible.",
+            rules: [
+              "The actor cannot speak or make any sounds.",
+              "The actor cannot draw letters in the air.",
+              "A pass is allowed, but the word may reappear.",
+              "Scores from this round carry over.",
+            ],
+          },
+          {
+            name: "Round 2 - Hard Mode",
+            details:
+              "The difficulty ramps up with more abstract or complex concepts (e.g., 'Blockchain', 'Machine Learning', 'API'). The rules are the same, but the challenge is greater.",
+            rules: [
+              "Time limit per team: 120 seconds.",
+              "Words in this round are worth double the points.",
+              "Top 3 teams with the highest cumulative score win.",
+            ],
+            tieBreaker:
+              "A final, single-word act-off between the tied teams. The team that guesses the word fastest wins.",
+          },
+        ],
+      },
+    ],
+  },
+  "chem": {
+    technical: [
+      {
+        name: "Bug Bounty Blitz",
+        domain: "Cybersecurity",
+        catchphrase: "Find the bug, claim the glory. Happy hunting!",
+        teamSize: "2-3",
+        heads: [
+          { name: "Karan", contact: "9988776655" },
+          { name: "Anjali", contact: "8877665544" },
+        ],
+        description:
+          "A competitive event where teams are given a vulnerable web application. Their mission is to find and exploit as many security flaws as possible within the time limit. Points are awarded based on the severity of the bugs found.",
+        rounds: [
+          {
+            name: "Round 1 - The Hunt",
+            details:
+              "All teams will be given access to the same web application hosted on a local server. They will have a set amount of time to perform reconnaissance and find vulnerabilities ranging from XSS and SQL Injection to broken authentication.",
+            rules: [
+              "No DDoS or brute-force attacks on the server infrastructure are allowed.",
+              "Teams must document their findings with proof-of-concept screenshots or scripts.",
+              "Points are awarded for each unique, validated vulnerability.",
+              "Time Limit: 3 hours.",
+            ],
+            tieBreaker:
+              "The team that finds and reports the highest-severity bug first wins the tie.",
+          },
+        ],
+      },
+    ],
+    nonTechnical: [
+      {
+        name: "Tech Charades",
+        domain: "General Tech Knowledge",
+        catchphrase: "Act it out, guess the tech. No talking!",
+        teamSize: "3-4",
+        heads: [
+          { name: "Vikram", contact: "7766554433" },
+          { name: "Meera", contact: "6655443322" },
+        ],
+        description:
+          "A fun and frantic non-technical event where teams guess technology-related words, concepts, and company names acted out by their teammates. A test of communication and tech-savviness!",
+        rounds: [
+          {
+            name: "Round 1 - Easy Mode",
+            details:
+              "Teams will act out and guess common tech terms and company names (e.g., 'Google', 'CPU', 'Bluetooth'). Each team gets 90 seconds to guess as many words as possible.",
+            rules: [
+              "The actor cannot speak or make any sounds.",
+              "The actor cannot draw letters in the air.",
+              "A pass is allowed, but the word may reappear.",
+              "Scores from this round carry over.",
+            ],
+          },
+          {
+            name: "Round 2 - Hard Mode",
+            details:
+              "The difficulty ramps up with more abstract or complex concepts (e.g., 'Blockchain', 'Machine Learning', 'API'). The rules are the same, but the challenge is greater.",
+            rules: [
+              "Time limit per team: 120 seconds.",
+              "Words in this round are worth double the points.",
+              "Top 3 teams with the highest cumulative score win.",
+            ],
+            tieBreaker:
+              "A final, single-word act-off between the tied teams. The team that guesses the word fastest wins.",
+          },
+        ],
+      },
+    ],
+  },
+  "civil": {
+    technical: [
+      {
+        name: "Bug Bounty Blitz",
+        domain: "Cybersecurity",
+        catchphrase: "Find the bug, claim the glory. Happy hunting!",
+        teamSize: "2-3",
+        heads: [
+          { name: "Karan", contact: "9988776655" },
+          { name: "Anjali", contact: "8877665544" },
+        ],
+        description:
+          "A competitive event where teams are given a vulnerable web application. Their mission is to find and exploit as many security flaws as possible within the time limit. Points are awarded based on the severity of the bugs found.",
+        rounds: [
+          {
+            name: "Round 1 - The Hunt",
+            details:
+              "All teams will be given access to the same web application hosted on a local server. They will have a set amount of time to perform reconnaissance and find vulnerabilities ranging from XSS and SQL Injection to broken authentication.",
+            rules: [
+              "No DDoS or brute-force attacks on the server infrastructure are allowed.",
+              "Teams must document their findings with proof-of-concept screenshots or scripts.",
+              "Points are awarded for each unique, validated vulnerability.",
+              "Time Limit: 3 hours.",
+            ],
+            tieBreaker:
+              "The team that finds and reports the highest-severity bug first wins the tie.",
+          },
+        ],
+      },
+    ],
+    nonTechnical: [
+      {
+        name: "Tech Charades",
+        domain: "General Tech Knowledge",
+        catchphrase: "Act it out, guess the tech. No talking!",
+        teamSize: "3-4",
+        heads: [
+          { name: "Vikram", contact: "7766554433" },
+          { name: "Meera", contact: "6655443322" },
+        ],
+        description:
+          "A fun and frantic non-technical event where teams guess technology-related words, concepts, and company names acted out by their teammates. A test of communication and tech-savviness!",
+        rounds: [
+          {
+            name: "Round 1 - Easy Mode",
+            details:
+              "Teams will act out and guess common tech terms and company names (e.g., 'Google', 'CPU', 'Bluetooth'). Each team gets 90 seconds to guess as many words as possible.",
+            rules: [
+              "The actor cannot speak or make any sounds.",
+              "The actor cannot draw letters in the air.",
+              "A pass is allowed, but the word may reappear.",
+              "Scores from this round carry over.",
+            ],
+          },
+          {
+            name: "Round 2 - Hard Mode",
+            details:
+              "The difficulty ramps up with more abstract or complex concepts (e.g., 'Blockchain', 'Machine Learning', 'API'). The rules are the same, but the challenge is greater.",
+            rules: [
+              "Time limit per team: 120 seconds.",
+              "Words in this round are worth double the points.",
+              "Top 3 teams with the highest cumulative score win.",
+            ],
+            tieBreaker:
+              "A final, single-word act-off between the tied teams. The team that guesses the word fastest wins.",
+          },
+        ],
+      },
+    ],
+  },
+  "mech": {
+    technical: [
+      {
+        name: "Bug Bounty Blitz",
+        domain: "Cybersecurity",
+        catchphrase: "Find the bug, claim the glory. Happy hunting!",
+        teamSize: "2-3",
+        heads: [
+          { name: "Karan", contact: "9988776655" },
+          { name: "Anjali", contact: "8877665544" },
+        ],
+        description:
+          "A competitive event where teams are given a vulnerable web application. Their mission is to find and exploit as many security flaws as possible within the time limit. Points are awarded based on the severity of the bugs found.",
+        rounds: [
+          {
+            name: "Round 1 - The Hunt",
+            details:
+              "All teams will be given access to the same web application hosted on a local server. They will have a set amount of time to perform reconnaissance and find vulnerabilities ranging from XSS and SQL Injection to broken authentication.",
+            rules: [
+              "No DDoS or brute-force attacks on the server infrastructure are allowed.",
+              "Teams must document their findings with proof-of-concept screenshots or scripts.",
+              "Points are awarded for each unique, validated vulnerability.",
+              "Time Limit: 3 hours.",
+            ],
+            tieBreaker:
+              "The team that finds and reports the highest-severity bug first wins the tie.",
+          },
+        ],
+      },
+    ],
+    nonTechnical: [
+      {
+        name: "Tech Charades",
+        domain: "General Tech Knowledge",
+        catchphrase: "Act it out, guess the tech. No talking!",
+        teamSize: "3-4",
+        heads: [
+          { name: "Vikram", contact: "7766554433" },
+          { name: "Meera", contact: "6655443322" },
+        ],
+        description:
+          "A fun and frantic non-technical event where teams guess technology-related words, concepts, and company names acted out by their teammates. A test of communication and tech-savviness!",
+        rounds: [
+          {
+            name: "Round 1 - Easy Mode",
+            details:
+              "Teams will act out and guess common tech terms and company names (e.g., 'Google', 'CPU', 'Bluetooth'). Each team gets 90 seconds to guess as many words as possible.",
+            rules: [
+              "The actor cannot speak or make any sounds.",
+              "The actor cannot draw letters in the air.",
+              "A pass is allowed, but the word may reappear.",
+              "Scores from this round carry over.",
+            ],
+          },
+          {
+            name: "Round 2 - Hard Mode",
+            details:
+              "The difficulty ramps up with more abstract or complex concepts (e.g., 'Blockchain', 'Machine Learning', 'API'). The rules are the same, but the challenge is greater.",
+            rules: [
+              "Time limit per team: 120 seconds.",
+              "Words in this round are worth double the points.",
+              "Top 3 teams with the highest cumulative score win.",
+            ],
+            tieBreaker:
+              "A final, single-word act-off between the tied teams. The team that guesses the word fastest wins.",
+          },
+        ],
+      },
+    ],
+  },
 };
