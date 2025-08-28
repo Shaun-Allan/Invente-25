@@ -11,8 +11,8 @@ export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  // New state to track scroll position past 500px
   const [scrolledPast500, setScrolledPast500] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +20,12 @@ export default function Navbar() {
       setScrolled(window.scrollY > 10);
       // Set new state to true if user has scrolled more than 500px
       setScrolledPast500(window.scrollY > 100);
+      
+      // Calculate scroll progress
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollTop = window.scrollY;
+      const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      setScrollProgress(progress);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -33,9 +39,6 @@ export default function Navbar() {
   const isTransparent = scrolled || isHome;
 
   // Logic to determine if the mobile logo should be visible
-  // It's visible if:
-  // 1. We are NOT on the home page OR
-  // 2. We ARE on the home page AND have scrolled past 500px
   const showMobileLogo = !isHome || (isHome && scrolledPast500);
 
   const navbarStyle = isTransparent
@@ -102,6 +105,18 @@ export default function Navbar() {
               className="h-[60px] w-auto"
             />
           </Link>
+        </div>
+
+        {/* Scroll Progress Bar - Above navbar, expanding from center */}
+        <div className="absolute top-0 left-0 w-full h-1">
+          <div
+            className="absolute top-0 left-1/2 h-full bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 transition-all duration-150 ease-out origin-center"
+            style={{
+              width: `${scrollProgress}%`,
+              transform: 'translateX(-50%)',
+              boxShadow: '0 0 10px rgba(147, 51, 234, 0.5)'
+            }}
+          />
         </div>
       </nav>
 
