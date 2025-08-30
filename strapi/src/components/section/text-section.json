@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_section_text_sections",
+  "info": {
+    "displayName": "Text Section",
+    "icon": "align-justify",
+    "description": "A section with a title and a rich text content area for lists or paragraphs."
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}

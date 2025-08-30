@@ -1,22 +1,11 @@
 import Image from 'next/image';
 import { PresidentCard } from '@/components/about/PresidentCard';
+import { getPresidents } from '@/lib/api';
 
-// Data for the presidents
-const presidents = [
-    { department: 'Department of Biomedical Engineering', imageSrc: '/about/prez/Department of Biomedical Engineering.JPG', name: 'Shravan Kumar S', instagram: '@_shravan_k.04', phone: "+91 98844 76919" },
-    // { department: 'Department of Chemical Engineering', imageSrc: '/about/prez/Department of Chemical Engineering.jpg', name: 'Sooryaprakash B', instagram: '@your_insta_3', phone: "+91 98844 76919" },
-    { department: 'Department of Civil Engineering', imageSrc: '/about/prez/Department of Civil Engineering.jpg', name: 'Hariharan P', instagram: '@hariharan20_06', phone: "+91 87540 54142" },
-    // { department: 'Department of Computer Science Engineering', imageSrc: '/about/prez/Department of Computer Science.jpg', name: 'Chandravel Saravanan', instagram: '@your_insta_4', phone: "+91 86104 14291" },
-    // { department: 'Department of Electronics and Communiction Engineering', imageSrc: '/about/prez/Department of Electronics and.jpg', name: 'Sooryaprakash B', instagram: '@your_insta_5', phone: "+91 86104 14291" },
-    { department: 'Department of Electrical and Electronics Engineering', imageSrc: '/about/prez/Department of Electrical and Electronics Engineering.jpg', name: 'Sai Mandati', instagram: '@i.a.m.s.a.i', phone: "+91 73056 06002" },
-    { department: 'Department of Information Technology', imageSrc: '/about/prez/Department of Information Technology.jpeg', name: 'Kathir Kaman A', instagram: '@kathir_02_', phone: "+91 90720 56666" },
-    { department: 'Department of Mechanical Engineering', imageSrc: '/about/prez/Department of Mechanical Engineering.jpeg', name: 'Rahul Ayyappan Harish', instagram: '@rahulharish31', phone: "+91 99401 53838" },
-    // { department: 'Department of CSE, SNUC', imageSrc: '/about/prez/Department of CSE,.jpg', name: 'Sooryaprakash B', instagram: '@your_insta_3', phone: "+91 86104 14291" },
-    { department: 'Department of Commerce and Economics, SNUC', imageSrc: '/about/prez/Department of Commerce and Economics.jpeg', name: 'Aakash Ananthakrishnan ', instagram: '@aakash_ananthakrishnan', phone: "+91 87545 13854" },
-];
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1338";
 
-
-export default function AboutPage() {
+export default async function AboutPage() {
+    const presidents = await getPresidents();
     return (
         <div className="relative min-h-screen font-serif text-white bg-black">
             {/* Background with overlay */}
@@ -85,14 +74,14 @@ export default function AboutPage() {
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <Image
-                            src="/about/invente1.svg"
+                            src="/about/invente1.jpg"
                             alt="Invente Event 1"
                             width={500}
                             height={300}
                             className="shadow-lg w-full h-72 object-cover"
                         />
                         <Image
-                            src="/about/invente2.svg"
+                            src="/about/invente2.png"
                             alt="Invente Event 2"
                             width={500}
                             height={300}
@@ -105,17 +94,17 @@ export default function AboutPage() {
                 <section>
                     {/* --- DIVIDER ADDED HERE --- */}
                     <div className="w-full h-px bg-purple-400/30 mt-16 mb-12"></div>
-                    
+
                     <h2 className="text-5xl font-bold font-playfair-display text-purple-400 text-center mb-8 drop-shadow-[0_0_8px_rgba(168,85,247,0.7)]">DEPARTMENT PRESIDENTS</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
                         {presidents.map((president) => (
                             <PresidentCard
-                                key={president.name + president.department} // A more unique key
-                                department={president.department}
-                                imageSrc={president.imageSrc}
-                                name={president.name}
-                                instagram={president.instagram}
-                                phone={president.phone}
+                                key={president.id} // Use the unique ID from the API
+                                department={president.attributes.department}
+                                imageSrc={STRAPI_URL + president.attributes.photo.data?.attributes.url}
+                                name={president.attributes.name}
+                                instagram={president.attributes.instagramHandle!}
+                                phone={president.attributes.phone!}
                             />
                         ))}
                     </div>

@@ -5,80 +5,73 @@
     "singularName": "event",
     "pluralName": "events",
     "displayName": "Event",
-    "description": "Event management for the festival"
+    "description": "Festival Events"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
-  "pluginOptions": {},
   "attributes": {
     "name": {
       "type": "string",
       "required": true
     },
-    "description": {
-      "type": "richtext",
-      "required": true
-    },
-    "poster": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": ["images"]
-    },
     "department": {
       "type": "enumeration",
-      "enum": [
-        "SSN_CSE",
-        "SNU_CSE",
-        "IT",
-        "ECE",
-        "EEE",
-        "MECH",
-        "CHEM",
-        "CIVIL",
-        "BME",
-        "COM"
-      ],
+      "enum": ["CSE", "SNU_CSE", "IT", "ECE", "EEE", "BME", "CHEM", "CIVIL", "MECH", "COM"],
+      "required": true,
+      "description": "Select the department responsible for the event"
+    },
+    "class": {
+      "type": "enumeration",
+      "enum": ["technical", "non-technical"],
+      "required": true,
+      "description": "Must be technical or non-technical"
+    },
+    "catchphrase": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string",
       "required": true
     },
-    "type": {
+    "teamSize": {
+      "type": "string",
+      "required": true
+    },
+    "day": {
       "type": "enumeration",
       "enum": [
-        "TECHNICAL",
-        "NON_TECHNICAL",
-        "HACKATHON",
-        "WORKSHOP"
+        "Day 1",
+        "Day 2"
       ],
       "required": true
     },
-    "prizeDetails": {
+    "time": {
+      "type": "string",
+      "required": true
+    },
+    "venue": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "prizes": {
       "type": "component",
       "repeatable": true,
       "component": "event.prize-detail"
     },
-    "day": {
-      "type": "enumeration",
-      "enum": ["DAY_1", "DAY_2"],
-      "required": true
-    },
-    "location": {
-      "type": "string",
-      "required": true
-    },
-    "participantCount": {
-      "type": "string",
-      "required": true
+    "heads": {
+      "type": "component",
+      "repeatable": true,
+      "component": "event.coordinator"
     },
     "rounds": {
       "type": "component",
       "repeatable": true,
       "component": "event.round"
-    },
-    "coordinators": {
-      "type": "component",
-      "repeatable": true,
-      "component": "event.coordinator"
     }
   }
 }

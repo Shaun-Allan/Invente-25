@@ -5,22 +5,23 @@
     "singularName": "schedule",
     "pluralName": "schedules",
     "displayName": "Schedule",
-    "description": "Event schedules for both days"
+    "description": "The main event schedule for Day 1 and Day 2."
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
-  "pluginOptions": {},
   "attributes": {
-    "DAY_1": {
+    "day1": {
       "type": "component",
-      "repeatable": true,
-      "component": "schedule.schedule-item"
+      "repeatable": false,
+      "component": "schedule.day-schedule",
+      "required": false
     },
-    "DAY_2": {
+    "day2": {
       "type": "component",
-      "repeatable": true,
-      "component": "schedule.schedule-item"
+      "repeatable": false,
+      "component": "schedule.day-schedule",
+      "required": false
     }
   }
 }

@@ -2,49 +2,21 @@
   "collectionName": "components_schedule_schedule_items",
   "info": {
     "displayName": "Schedule Item",
-    "icon": "calendar"
+    "icon": "bulletList",
+    "description": "A single scheduled event with a name, time, and venue."
   },
   "options": {},
   "attributes": {
-    "eventName": {
+    "name": {
       "type": "string",
       "required": true
     },
-    "subTitle": {
-      "type": "string",
-      "required": false
-    },
-    "location": {
+    "time": {
       "type": "string",
       "required": true
     },
-    "timeRange": {
+    "venue": {
       "type": "string",
-      "required": true
-    },
-    "rounds": {
-      "type": "component",
-      "repeatable": true,
-      "component": "schedule.schedule-round"
-    },
-    "highlightNotInDeptPremises": {
-      "type": "boolean",
-      "default": false
-    },
-    "department": {
-      "type": "enumeration",
-      "enum": [
-        "SSN_CSE",
-        "SNU_CSE",
-        "IT",
-        "ECE",
-        "EEE",
-        "MECH",
-        "CHEM",
-        "CIVIL",
-        "BME",
-        "COM"
-      ],
       "required": true
     }
   }

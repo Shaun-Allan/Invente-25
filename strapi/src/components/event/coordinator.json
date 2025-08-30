@@ -4,13 +4,12 @@
     "displayName": "Coordinator",
     "icon": "user"
   },
-  "options": {},
   "attributes": {
     "name": {
       "type": "string",
       "required": true
     },
-    "phone": {
+    "contact": {
       "type": "string",
       "required": true
     }

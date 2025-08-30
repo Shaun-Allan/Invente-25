@@ -1,6 +1,11 @@
-FROM node:18-alpine
+FROM node:18
 
-RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev git > /dev/null 2>&1
+# Install system deps for sharp
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    python3 \
+    libvips-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt/app
 
@@ -12,7 +17,7 @@ RUN npm install
 
 COPY . .
 
-# Create uploads directory and set permissions
+# Create uploads directory
 RUN mkdir -p /opt/app/public/uploads && \
     chmod 777 /opt/app/public/uploads
 

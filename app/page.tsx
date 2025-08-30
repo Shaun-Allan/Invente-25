@@ -19,16 +19,23 @@ const events = [
   { name: "CHEM", imageSrc: "/events/CHEM.png", href: "/events?dept=chem" },
   { name: "CIVIL", imageSrc: "/events/CIVIL.png", href: "/events?dept=civil" },
   { name: "MECH", imageSrc: "/events/MECH.png", href: "/events?dept=mech" },
+  { name: "Commerce & Economics", imageSrc: "/events/COM.png", href: "/events?dept=com" },
 ];
 
+// Data for contacts
+const contacts = [
+  { name: "Vishnu A", phone: "+91 70100 38924" },
+  { name: "Hareeshwar", phone: "+91 83001 66914" },
+  { name: "Hairedh Raju", phone: "+91 97907 21403" },
+];
+
+
 export default function Home() {
-  // --- START OF CHANGES ---
   const [isPassesClicked, setIsPassesClicked] = useState(false);
 
   const handlePassesClick = () => {
-    setIsPassesClicked(true);
+    setIsPassesClicked(!isPassesClicked);
   };
-  // --- END OF CHANGES ---
 
   return (
     <div className="min-h-screen bg-black">
@@ -84,7 +91,7 @@ export default function Home() {
 
           <p className="text-white max-w-2xl text-sm sm:text-lg md:text-xl lg:text-2xl leading-loose font-orbitron">
             <span className='text-purple-600'>Looking for fun?</span> You've come to the right place! Since 2016,
-            <span className='text-purple-600'>INVENTE</span> has been our flagship tech fest, catered to challenge
+            <span className='text-purple-600'> INVENTE</span> has been our flagship tech fest, catered to challenge
             the spirits and intellects of students across the nation.
           </p>
 
@@ -127,6 +134,7 @@ export default function Home() {
       </section>
 
       {/* --- EVENTS GRID SECTION --- */}
+      {/* --- EVENTS GRID SECTION --- */}
       <section className="relative py-16 md:py-24">
         <div className="absolute inset-0 bg-black/80"></div>
         <div className="relative container mx-auto px-4">
@@ -148,7 +156,8 @@ export default function Home() {
                   className="w-full h-auto transition-transform duration-300 group-hover:brightness-50"
                 />
                 <div className="absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity duration-300 opacity-100 p-4">
-                  <span className="text-white text-5xl md:text-7xl tracking-widest drop-shadow-lg font-orbitron text-center">
+                  {/* ✨ THIS LINE IS THE FIX ✨ */}
+                  <span className="text-white text-4xl md:text-6xl tracking-widest drop-shadow-lg font-orbitron text-center">
                     {event.name}
                   </span>
                 </div>
@@ -157,6 +166,28 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* --- REGISTRATION QUERIES SECTION --- */}
+      <section className="relative py-16 md:py-24 bg-black">
+        <div className="container mx-auto px-4 text-center">
+          {/* CHANGED: Adjusted font sizes for mobile and added break-words to ensure wrapping. */}
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-purple-400 mb-12 md:mb-16 drop-shadow-[0_0_8px_rgba(168,85,247,0.7)] font-michroma break-words">
+            REGISTRATION QUERIES
+          </h2>
+          <p className="text-white/80 max-w-3xl mx-auto text-lg md:text-xl mb-12 font-orbitron">
+            For any questions or more information regarding registration, please feel free to contact our heads.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {contacts.map((contact) => (
+              <div key={contact.name} className="bg-gray-900/50 border border-purple-500/30 p-6 text-center transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/30">
+                <h3 className="text-xl lg:text-2xl font-bold text-white font-orbitron mb-2">{contact.name}</h3>
+                <p className="text-purple-400 text-lg font-mono">{contact.phone}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }
