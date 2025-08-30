@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_section_schedule_day_items",
+  "info": {
+    "displayName": "Schedule Day Item",
+    "icon": "pinMap"
+  },
+  "options": {},
+  "attributes": {
+    "dayTitle": {
+      "type": "string",
+      "required": true,
+      "default": "Day 1:"
+    },
+    "scheduleList": {
+      "type": "json",
+      "required": true,
+      "description": "Use a simple list for the schedule items."
+    }
+  }
+}

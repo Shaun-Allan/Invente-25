@@ -64,7 +64,7 @@ services:
       dockerfile: Dockerfile.nextjs
     container_name: nextjs-app
     environment:
-      NEXT_PUBLIC_STRAPI_URL: http://localhost:1338
+      NEXT_PUBLIC_STRAPI_URL: http://strapi:1338
       STRAPI_API_URL: http://strapi:1338
     ports:
       - "3005:3005"

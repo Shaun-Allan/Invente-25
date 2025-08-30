@@ -5,12 +5,11 @@
     "singularName": "sponsor",
     "pluralName": "sponsors",
     "displayName": "Sponsor",
-    "description": "Sponsors for the festival"
+    "description": "Sponsors for the event"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
-  "pluginOptions": {},
   "attributes": {
     "name": {
       "type": "string",
@@ -22,19 +21,9 @@
       "required": true,
       "allowedTypes": ["images"]
     },
-    "website": {
-      "type": "string",
-      "required": true
-    },
-    "type": {
+    "category": {
       "type": "enumeration",
-      "enum": [
-        "TITLE",
-        "CO_SPONSOR",
-        "DEPT",
-        "HACKATHON_WORKSHOP",
-        "FINTECH"
-      ],
+      "enum": ["title", "co-sponsor", "department", "hackathon", "workshop", "fintech", "t-shirt"],
       "required": true
     }
   }

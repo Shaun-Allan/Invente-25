@@ -365,16 +365,18 @@ export interface AdminUser extends Schema.CollectionType {
 export interface ApiEventEvent extends Schema.CollectionType {
   collectionName: 'events';
   info: {
-    description: 'Event management for the festival';
+    description: 'Festival Events';
     displayName: 'Event';
     pluralName: 'events';
     singularName: 'event';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    coordinators: Attribute.Component<'event.coordinator', true>;
+    catchphrase: Attribute.String;
+    class: Attribute.Enumeration<['technical', 'non-technical']> &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::event.event',
@@ -382,37 +384,154 @@ export interface ApiEventEvent extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
-    day: Attribute.Enumeration<['DAY_1', 'DAY_2']> & Attribute.Required;
+    day: Attribute.Enumeration<['Day 1', 'Day 2']> & Attribute.Required;
     department: Attribute.Enumeration<
       [
-        'SSN_CSE',
+        'CSE',
         'SNU_CSE',
         'IT',
         'ECE',
         'EEE',
-        'MECH',
+        'BME',
         'CHEM',
         'CIVIL',
-        'BME',
+        'MECH',
         'COM'
       ]
     > &
       Attribute.Required;
-    description: Attribute.RichText & Attribute.Required;
-    location: Attribute.String & Attribute.Required;
+    description: Attribute.String & Attribute.Required;
+    domain: Attribute.String & Attribute.Required;
+    heads: Attribute.Component<'event.coordinator', true>;
     name: Attribute.String & Attribute.Required;
-    participantCount: Attribute.String & Attribute.Required;
-    poster: Attribute.Media<'images'>;
-    prizeDetails: Attribute.Component<'event.prize-detail', true>;
-    publishedAt: Attribute.DateTime;
+    prizes: Attribute.Component<'event.prize-detail', true>;
     rounds: Attribute.Component<'event.round', true>;
-    type: Attribute.Enumeration<
-      ['TECHNICAL', 'NON_TECHNICAL', 'HACKATHON', 'WORKSHOP']
-    > &
-      Attribute.Required;
+    teamSize: Attribute.String & Attribute.Required;
+    time: Attribute.String & Attribute.Required;
     updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
       'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    venue: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface ApiHackathonWorkshopHackathonWorkshop
+  extends Schema.CollectionType {
+  collectionName: 'hackathon-workshop';
+  info: {
+    description: 'Manages individual hackathons and workshops.';
+    displayName: 'Hackathons and Workshops';
+    pluralName: 'hackathons-workshops';
+    singularName: 'hackathon-workshop';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    coordinators: Attribute.Component<'event.coordinator', true>;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::hackathon-workshop.hackathon-workshop',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    description: Attribute.String & Attribute.Required;
+    generalInstructions: Attribute.JSON &
+      Attribute.DefaultTo<
+        [
+          'Follow this format',
+          'SHOULD BE AN ARRAY OF RULES',
+          'No use of mobile phones or electronic devices during the competition.',
+          'Teams must follow the time limits for each task strictly.',
+          'The decision of the judges is final and binding.',
+          'Participants must maintain decorum and sportsmanship throughout the event.'
+        ]
+      >;
+    generalInstructionsTitle: Attribute.String;
+    meta: Attribute.Component<'hackathon.meta-info', true>;
+    prizes: Attribute.Component<'hackathon.prize', true>;
+    registrationFee: Attribute.String & Attribute.Required;
+    sections: Attribute.DynamicZone<
+      ['section.text-section', 'section.schedule-section']
+    >;
+    title: Attribute.String & Attribute.Required;
+    type: Attribute.Enumeration<['Hackathon', 'Workshop']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'Hackathon'>;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'api::hackathon-workshop.hackathon-workshop',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHospitalityHospitality extends Schema.SingleType {
+  collectionName: 'hospitalities';
+  info: {
+    description: 'Manages contact info and links for the Hospitality page.';
+    displayName: 'Hospitality Info';
+    pluralName: 'hospitalities';
+    singularName: 'hospitality';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    accommodationContacts: Attribute.Component<'event.coordinator', true>;
+    busRouteContacts: Attribute.Component<'event.coordinator', true>;
+    busRoutesUrl: Attribute.String;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::hospitality.hospitality',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'api::hospitality.hospitality',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPresidentPresident extends Schema.CollectionType {
+  collectionName: 'presidents';
+  info: {
+    description: 'Manages the department president profiles for the about page.';
+    displayName: 'President';
+    pluralName: 'presidents';
+    singularName: 'president';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::president.president',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    department: Attribute.String & Attribute.Required;
+    instagramHandle: Attribute.String & Attribute.Required;
+    name: Attribute.String & Attribute.Required;
+    phone: Attribute.String & Attribute.Required;
+    photo: Attribute.Media<'images'> & Attribute.Required;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'api::president.president',
       'oneToOne',
       'admin::user'
     > &
@@ -423,83 +542,58 @@ export interface ApiEventEvent extends Schema.CollectionType {
 export interface ApiScheduleSchedule extends Schema.SingleType {
   collectionName: 'schedules';
   info: {
-    description: 'Event schedules for both days';
+    description: 'The main event schedule for Day 1 and Day 2.';
     displayName: 'Schedule';
     pluralName: 'schedules';
     singularName: 'schedule';
   };
   options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::schedule.schedule',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    DAY_1: Attribute.Component<'schedule.schedule-item', true>;
-    DAY_2: Attribute.Component<'schedule.schedule-item', true>;
-    publishedAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'api::schedule.schedule',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiSettingSetting extends Schema.SingleType {
-  collectionName: 'settings';
-  info: {
-    description: 'Global settings and constants';
-    displayName: 'Settings';
-    pluralName: 'settings';
-    singularName: 'setting';
-  };
-  options: {
     draftAndPublish: false;
   };
   attributes: {
-    busRoutesUrl: Attribute.String;
-    contactEmail: Attribute.Email;
-    contactPhone: Attribute.String;
     createdAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::setting.setting',
+      'api::schedule.schedule',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
-    eventDate: Attribute.Date;
-    registrationUrl: Attribute.String;
-    socialLinks: Attribute.JSON;
+    day1: Attribute.Component<'schedule.day-schedule'>;
+    day2: Attribute.Component<'schedule.day-schedule'>;
     updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
-      'api::setting.setting',
+      'api::schedule.schedule',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
-    venue: Attribute.String;
   };
 }
 
 export interface ApiSponsorSponsor extends Schema.CollectionType {
   collectionName: 'sponsors';
   info: {
-    description: 'Sponsors for the festival';
+    description: 'Sponsors for the event';
     displayName: 'Sponsor';
     pluralName: 'sponsors';
     singularName: 'sponsor';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
+    category: Attribute.Enumeration<
+      [
+        'title',
+        'co-sponsor',
+        'department',
+        'hackathon',
+        'workshop',
+        'fintech',
+        't-shirt'
+      ]
+    > &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::sponsor.sponsor',
@@ -509,11 +603,6 @@ export interface ApiSponsorSponsor extends Schema.CollectionType {
       Attribute.Private;
     logo: Attribute.Media<'images'> & Attribute.Required;
     name: Attribute.String & Attribute.Required;
-    publishedAt: Attribute.DateTime;
-    type: Attribute.Enumeration<
-      ['TITLE', 'CO_SPONSOR', 'DEPT', 'HACKATHON_WORKSHOP', 'FINTECH']
-    > &
-      Attribute.Required;
     updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
       'api::sponsor.sponsor',
@@ -521,7 +610,6 @@ export interface ApiSponsorSponsor extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
-    website: Attribute.String & Attribute.Required;
   };
 }
 
@@ -962,8 +1050,10 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::event.event': ApiEventEvent;
+      'api::hackathon-workshop.hackathon-workshop': ApiHackathonWorkshopHackathonWorkshop;
+      'api::hospitality.hospitality': ApiHospitalityHospitality;
+      'api::president.president': ApiPresidentPresident;
       'api::schedule.schedule': ApiScheduleSchedule;
-      'api::setting.setting': ApiSettingSetting;
       'api::sponsor.sponsor': ApiSponsorSponsor;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

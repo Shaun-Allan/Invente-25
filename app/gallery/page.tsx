@@ -4,10 +4,18 @@ import { useState, useEffect } from 'react';
 
 // Define the list of images for the gallery carousel
 const galleryImages = [
-  '/gallery/1.png',
-  '/gallery/2.png',
-  '/gallery/3.png',
-  '/gallery/4.png',
+  { src: '/gallery/5.png', pos: "" },
+  { src: '/gallery/3.png', pos: "" },
+  { src: '/gallery/4.png', pos: "" },
+  { src: '/gallery/1.png', pos: "" },
+  { src: '/gallery/2.png', pos: "" },
+  { src: '/gallery/6.png', pos: "" },
+  { src: '/gallery/7.png', pos: "" },
+  { src: '/gallery/8.png', pos: "" },
+  { src: '/gallery/9.png', pos: "object-[0%_35%]" },
+  { src: '/gallery/10.png', pos: "object-[0%_30%]" },
+  { src: '/gallery/11.png', pos: "" },
+  { src: '/gallery/12.png', pos: "" },
 ];
 
 // Define the type for the arrow component props
@@ -139,7 +147,7 @@ export default function GalleryPage() {
       <div className="relative carousel-group w-full max-w-4xl lg:max-w-5xl z-10">
         {/* Gradient Border Effect from ProjectCard */}
         <div className="gradient-border"></div>
-        
+
         {/* Navigation Arrows */}
         <LeftArrow onClick={goToPrevious} />
         <RightArrow onClick={goToNext} />
@@ -150,14 +158,15 @@ export default function GalleryPage() {
             className="flex transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
-            {galleryImages.map((src, index) => (
+            {galleryImages.map((e, index) => (
               <div key={index} className="relative aspect-video w-full flex-shrink-0">
                 <img
-                  src={src}
+                  src={e.src}
                   alt={`Gallery image ${index + 1}`}
-                  className="w-full h-full object-cover"
+                  className={`w-full h-full object-cover ${e.pos}`}
                   loading="lazy"
                 />
+
               </div>
             ))}
           </div>

@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_section_schedule_sections",
+  "info": {
+    "displayName": "Schedule Section",
+    "icon": "calendar"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "days": {
+      "displayName": "Schedule Day Item",
+      "type": "component",
+      "repeatable": true,
+      "component": "section.schedule-day-item",
+      "required": true
+    }
+  }
+}

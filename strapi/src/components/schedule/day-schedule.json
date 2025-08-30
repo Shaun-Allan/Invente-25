@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_schedule_day_schedules",
+  "info": {
+    "displayName": "Day Schedule",
+    "icon": "calendar",
+    "description": "Holds the title image and list of events for a single day."
+  },
+  "options": {},
+  "attributes": {
+    "titleImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "scheduleItems": {
+      "type": "component",
+      "repeatable": true,
+      "component": "schedule.schedule-item",
+      "required": false
+    }
+  }
+}

@@ -4,15 +4,30 @@
     "displayName": "Round",
     "icon": "layer"
   },
-  "options": {},
   "attributes": {
-    "title": {
+    "name": {
       "type": "string",
       "required": true
     },
-    "description": {
+    "details": {
       "type": "text",
       "required": true
+    },
+    "rules": {
+      "type": "json",
+      "required": true,
+      "default": [
+        "Follow this format",
+        "SHOULD BE AN ARRAY OF RULES",
+        "No use of mobile phones or electronic devices during the competition.",
+        "Teams must follow the time limits for each task strictly.",
+        "The decision of the judges is final and binding.",
+        "Participants must maintain decorum and sportsmanship throughout the event."
+      ],
+      "description": "An array of rules for the event round. Each rule should be a string describing a specific guideline or restriction."
+    },
+    "tieBreaker": {
+      "type": "text"
     }
   }
 }

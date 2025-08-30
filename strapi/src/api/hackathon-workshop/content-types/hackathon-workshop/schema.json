@@ -1,0 +1,76 @@
+{
+  "kind": "collectionType",
+  "collectionName": "hackathon-workshop",
+  "info": {
+    "singularName": "hackathon-workshop",
+    "pluralName": "hackathons-workshops",
+    "displayName": "Hackathons and Workshops",
+    "description": "Manages individual hackathons and workshops."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Hackathon",
+        "Workshop"
+      ],
+      "required": true,
+      "default": "Hackathon"
+    },
+    "registrationFee": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "prizes": {
+      "displayName": "Prize",
+      "type": "component",
+      "repeatable": true,
+      "component": "hackathon.prize"
+    },
+    "meta": {
+      "displayName": "Meta Info",
+      "type": "component",
+      "repeatable": true,
+      "component": "hackathon.meta-info"
+    },
+    "generalInstructionsTitle": {
+      "type": "string"
+    },
+    "generalInstructions": {
+      "type": "json",
+      "description": "Use a bulleted or numbered list for the instructions.",
+      "default": [
+        "Follow this format",
+        "SHOULD BE AN ARRAY OF RULES",
+        "No use of mobile phones or electronic devices during the competition.",
+        "Teams must follow the time limits for each task strictly.",
+        "The decision of the judges is final and binding.",
+        "Participants must maintain decorum and sportsmanship throughout the event."
+      ]
+    },
+    "sections": {
+      "type": "dynamiczone",
+      "components": [
+        "section.text-section",
+        "section.schedule-section"
+      ]
+    },
+    "coordinators": {
+      "displayName": "Coordinator",
+      "type": "component",
+      "repeatable": true,
+      "component": "event.coordinator"
+    }
+  }
+}

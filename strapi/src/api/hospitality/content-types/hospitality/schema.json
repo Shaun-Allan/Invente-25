@@ -1,0 +1,33 @@
+{
+  "kind": "singleType",
+  "collectionName": "hospitalities",
+  "info": {
+    "singularName": "hospitality",
+    "pluralName": "hospitalities",
+    "displayName": "Hospitality Info",
+    "description": "Manages contact info and links for the Hospitality page."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "busRoutesUrl": {
+      "type": "string",
+      "description": "The URL for the 'Bus Routes' link."
+    },
+    "accommodationContacts": {
+      "displayName": "Accommodation Contacts",
+      "type": "component",
+      "repeatable": true,
+      "component": "event.coordinator",
+      "description": "List of contacts for accommodation queries."
+    },
+    "busRouteContacts": {
+      "displayName": "Bus Route Contacts",
+      "type": "component",
+      "repeatable": true,
+      "component": "event.coordinator",
+      "description": "List of contacts for bus route queries."
+    }
+  }
+}
