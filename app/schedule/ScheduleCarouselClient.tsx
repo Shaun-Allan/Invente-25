@@ -19,7 +19,7 @@ const formatTime = (timeString: string): string => {
   });
 };
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "http://192.168.1.10:1338";
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "https://ssnsnucinvente.com";
 
 const ScheduleCarouselClient = ({ schedule }: { schedule: Schedule }) => {
   const [currentDay, setCurrentDay] = useState(0);
@@ -71,10 +71,10 @@ const ScheduleCarouselClient = ({ schedule }: { schedule: Schedule }) => {
 
                 {/* Main Content */}
                 <main className="relative z-10 flex flex-grow flex-col items-center justify-center text-center p-4">
-                  <h1 className="text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-wide leading-tight drop-shadow-[0_0_20px_rgba(200,50,255,0.8)] font-michroma">
+                  <h1 className="text-5xl sm:text-5xl md:text-5xl font-extrabold tracking-wide leading-tight drop-shadow-[0_0_20px_rgba(200,50,255,0.8)] font-michroma">
                     Stay Tuned!
                   </h1>
-                  <p className="mt-6 text-xl sm:text-2xl md:text-3xl text-gray-300 max-w-2xl font-exo2">
+                  <p className="mt-6 text-xl sm:text-xl md:text-xl text-gray-300 max-w-2xl font-exo2">
                     Exciting updates are on the way. Check back soon for more information!
                   </p>
                 </main>
@@ -168,3 +168,4 @@ const ScheduleCarouselClient = ({ schedule }: { schedule: Schedule }) => {
 };
 
 export default ScheduleCarouselClient;
+

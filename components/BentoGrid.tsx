@@ -22,16 +22,16 @@ export default function BentoGrid({ onClose }: { onClose?: () => void }) {
       <div className="absolute inset-0 bg-black/80 -z-10" />
 
       {/* Grid Container */}
-      <div className="w-full max-w-7xl mx-auto">
+      <div className="w-full max-w-5xl mx-auto">
         <div
           className="
             grid
             grid-cols-2
             md:grid-cols-10
-            auto-rows-[30vw]
-            sm:auto-rows-[30vw]
-            md:auto-rows-[18vw]
-            lg:auto-rows-[240px]
+            auto-rows-[28vw]
+            sm:auto-rows-[28vw]
+            md:auto-rows-[12vw]
+            lg:auto-rows-[200px]
             gap-4
           "
         >

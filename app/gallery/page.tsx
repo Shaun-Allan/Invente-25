@@ -144,7 +144,7 @@ export default function GalleryPage() {
       />
 
       {/* Carousel Container */}
-      <div className="relative carousel-group w-full max-w-4xl lg:max-w-5xl z-10">
+      <div className="relative carousel-group w-full max-w-4xl lg:max-w-4xl z-10">
         {/* Gradient Border Effect from ProjectCard */}
         <div className="gradient-border"></div>
 

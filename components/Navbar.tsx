@@ -45,7 +45,7 @@ export default function Navbar() {
     ? "bg-black/50 backdrop-blur-md"
     : "bg-[#0D001A] shadow-md";
 
-  const paddingStyle = isTransparent ? "py-1 sm:py-2" : "py-0 sm:py-3";
+  const paddingStyle = isTransparent ? "py-1 sm:py-1" : "py-0 sm:py-2";
 
   return (
     <>
@@ -65,9 +65,9 @@ export default function Navbar() {
             <Image
               src="/logos/invente.png"
               alt="Invente Logo"
-              width={122}
+              width={102}
               height={40}
-              className="h-auto w-auto ml-0 sm:ml-4 hidden sm:block"
+              className="h-auto w-auto  ml-0 sm:ml-4 hidden sm:block"
             />
           </Link>
         </div>
@@ -91,18 +91,18 @@ export default function Navbar() {
             <Image
               src="/logos/snu.svg"
               alt="SNU Logo"
-              width={100}
+              width={80}
               height={40}
-              className="h-[60px] w-auto"
+              className="h-[40px] w-auto"
             />
           </Link>
           <Link href="/">
             <Image
               src="/logos/ssn.svg"
               alt="SSN Logo"
-              width={100}
+              width={80}
               height={40}
-              className="h-[60px] w-auto"
+              className="h-[40px] w-auto"
             />
           </Link>
         </div>

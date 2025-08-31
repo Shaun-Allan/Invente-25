@@ -170,7 +170,7 @@ const HackathonsClientView = ({ hackathons, workshops, registrationUrl }: { hack
                         width={600}
                         height={100}
                         alt="Hackathons Title"
-                        className="h-auto w-full max-w-[400px] sm:max-w-[500px]"
+                        className="h-auto w-full max-w-[400px] sm:max-w-[400px]"
                     />
                 </div>
 
@@ -182,7 +182,7 @@ const HackathonsClientView = ({ hackathons, workshops, registrationUrl }: { hack
                             onClick={() => setSelectedEvent(hackathon)}
                         >
 
-                            <h1 className="text-5xl sm:text-6xl font-rubik-glitch text-purple-500 text-center tracking-wide break-words drop-shadow-[0_0_8px_rgba(168,85,247,0.7)] uppercase">
+                            <h1 className="text-5xl sm:text-5xl font-rubik-glitch text-purple-500 text-center tracking-wide break-words drop-shadow-[0_0_8px_rgba(168,85,247,0.7)] uppercase">
                                 {hackathon.attributes.title}
                             </h1>
 
@@ -196,7 +196,7 @@ const HackathonsClientView = ({ hackathons, workshops, registrationUrl }: { hack
                         width={600}
                         height={100}
                         alt="Workshops Title"
-                        className="h-auto w-full max-w-[400px] sm:max-w-[500px]"
+                        className="h-auto w-full max-w-[400px] sm:max-w-[400px]"
                     />
                 </div>
 
@@ -231,3 +231,4 @@ const HackathonsClientView = ({ hackathons, workshops, registrationUrl }: { hack
 };
 
 export default HackathonsClientView;
+

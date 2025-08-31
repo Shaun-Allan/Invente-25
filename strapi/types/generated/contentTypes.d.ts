@@ -400,7 +400,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
       ]
     > &
       Attribute.Required;
-    description: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
     domain: Attribute.String & Attribute.Required;
     heads: Attribute.Component<'event.coordinator', true>;
     name: Attribute.String & Attribute.Required;
@@ -440,7 +440,7 @@ export interface ApiHackathonWorkshopHackathonWorkshop
       'admin::user'
     > &
       Attribute.Private;
-    description: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
     generalInstructions: Attribute.JSON &
       Attribute.DefaultTo<
         [

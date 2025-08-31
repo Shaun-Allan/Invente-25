@@ -24,15 +24,15 @@ export default async function AboutPage() {
 
                 {/* SSN Institution Section */}
                 <section className="mb-16">
-                    <h2 className="text-5xl font-bold font-playfair-display text-purple-400 mb-6 drop-shadow-[0_0_8px_rgba(168,85,247,0.7)]">SSN INSTITUTION</h2>
+                    <h2 className="text-4xl font-bold font-playfair-display text-purple-400 mb-6 drop-shadow-[0_0_8px_rgba(168,85,247,0.7)]">SSN INSTITUTION</h2>
                     <div className="flex flex-col md:flex-row items-center gap-6 mb-6">
-                        <p className="text-xl text-white font-exo2 leading-relaxed">
+                        <p className="text-lg text-white font-exo2 leading-relaxed">
                             SSN Institutions, founded by Dr. Shiv Nadar, Chairman of HCL Technologies, stands out as a premier center of higher learning with a mission of pursuing excellence in education and research. The institutions, with their diverse and dynamic community of students, offer a distinctive combination of some of the finest graduate, undergraduate, and research programs, accomplished faculty, world-class facilities, and a residential campus set on a sprawling 250 acres of sylvan surroundings.
                         </p>
                         <Image src="/about/ssn_fountin.svg" alt="SSN Institution Fountain" width={400} height={300} className=" shadow-lg" />
                     </div>
                     <div className="flex flex-col md:flex-row-reverse items-center gap-6">
-                        <p className="text-xl text-white font-exo2 leading-relaxed">
+                        <p className="text-lg text-white font-exo2 leading-relaxed">
                             SSN Institutions provide a variety of stimulating environments for intellectual development, free-thinking, and personal growth, challenging its students with dynamic learning opportunities and equipping them with the skills, insights, attitudes and practical experiences that are necessary to take up responsibilities in the society.
                             <span className="block mt-4 p-4 bg-purple-950/50 text-white">
                                 Students of SSN get a unique opportunity to rub shoulders with a diverse and talented peer group and have access to a big and distinguished alumni network that is spread all over the world. More than anything else, SSN is an experience that will help shape the rest of your life. Welcome to an exciting journey of discovery, learning, and growth.
@@ -45,7 +45,7 @@ export default async function AboutPage() {
                 {/* SNU Chennai Section */}
                 <section className="mb-16">
                     <h2 className="text-5xl font-bold font-playfair-display text-purple-400 text-center mb-6 drop-shadow-[0_0_8px_rgba(168,85,247,0.7)]">SNU CHENNAI</h2>
-                    <p className="text-xl text-white font-exo2 leading-relaxed text-center mb-6">
+                    <p className="text-lg text-white font-exo2 leading-relaxed text-center mb-6">
                         Shiv Nadar University Chennai is a research-focused university with a student-centric approach to teaching and learning. The University is committed to creating a research and innovation ecosystem for both its faculty members and its students. It offers a wide range of academic programs at the undergraduate, postgraduate and doctoral levels. The University's rich undergraduate programs in engineering and commerce are intertwined with a strong foundation in the core sciences, humanities and social sciences, making our graduates well-rounded to face the challenges of the modern world.
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -69,7 +69,7 @@ export default async function AboutPage() {
                 {/* INVENTE Section */}
                 <section className="mb-16">
                     <h2 className="text-5xl font-bold font-playfair-display text-purple-400 text-center mb-6 drop-shadow-[0_0_8px_rgba(168,85,247,0.7)]">INVENTE</h2>
-                    <p className="text-xl text-white font-exo2 leading-relaxed text-center mb-6">
+                    <p className="text-lg text-white font-exo2 leading-relaxed text-center mb-6">
                         INVENTE, the flagship technical symposium of SSN College of Engineering, is a platform for students to showcase their technical prowess, consisting of a vast array of technical and non-technical competitions. Dreamt of by students and for the students, Invente serves as a launchpad for young, innovative minds to conquer the world of technology through their futuristic ideas. With over 50+ events spanning various disciplines, Invente attracts thousands of participants from across the state, eager to compete among the best engineering talents. And amongst the tense skillset displays of our participants are our fun-filled non-technical events for when they want to wind down. With events of all kinds that would pique anyone's interests, Invente'25 promises you a memorable experience.
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

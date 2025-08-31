@@ -18,7 +18,7 @@ const Dropdown: React.FC<DropdownProps> = ({ title, events, isOpen, onToggle, on
     <div className="mb-4">
       <button
         onClick={onToggle}
-        className="w-full bg-purple-800/80 text-white p-4 text-left text-xl md:text-2xl font-michroma flex justify-between items-center transition-colors hover:bg-purple-700"
+        className="w-full bg-purple-800/80 text-white px-4 py-3 text-left text-xl md:text-lg font-michroma flex justify-between items-center transition-colors hover:bg-purple-700"
       >
         {title}
         <svg
@@ -31,12 +31,12 @@ const Dropdown: React.FC<DropdownProps> = ({ title, events, isOpen, onToggle, on
         </svg>
       </button>
       {isOpen && (
-        <div className="bg-black/80 py-2">
+        <div className="bg-black/80 py-1">
           {events.map((event) => (
             <button
               key={event.id}
               onClick={() => onSelectEvent(event)}
-              className={`block w-full text-left px-6 py-3 text-lg md:text-xl font-orbitron transition-colors ${selectedEventName === event.attributes.name ? 'bg-purple-600 text-white' : 'text-gray-300 hover:bg-purple-900/50 hover:text-white'}`}
+              className={`block w-full text-left px-6 py-2 text-lg md:text-md font-orbitron transition-colors ${selectedEventName === event.attributes.name ? 'bg-purple-600 text-white' : 'text-gray-300 hover:bg-purple-900/50 hover:text-white'}`}
             >
               {event.attributes.name}
             </button>
@@ -100,8 +100,8 @@ export default function DepartmentEventsClientView({
       <div className="min-h-screen w-full bg-black/55">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
           <div className="flex flex-col md:flex-row gap-8 lg:gap-12">
-            <aside className="w-full md:w-1/3 lg:w-1/4 md:sticky md:top-8 self-start">
-              <h1 className="text-center md:text-start text-4xl sm:text-5xl md:text-6xl block font-playfair-display text-purple-400 mb-6 border-b-2 border-purple-500/30 pb-2">
+            <aside className="w-full md:w-1/4 lg:w-1/5 md:sticky md:top-8 self-start">
+              <h1 className="text-center md:text-start text-4xl sm:text-4xl md:text-4xl block font-playfair-display text-purple-400 mb-6 border-b-2 border-purple-500/30 pb-2">
                 {departmentName}
               </h1>
               <Dropdown
@@ -124,11 +124,11 @@ export default function DepartmentEventsClientView({
             <main className="w-full md:w-2/3 lg:w-3/4">
               {selectedEvent ? (
                 <div className="p-4 sm:p-6 md:p-10 text-white font-sans">
-                  <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-rubik-glitch text-purple-400 text-center mb-6 tracking-wide break-words drop-shadow-[0_0_8px_rgba(168,85,247,0.7)]">
+                  <h2 className="text-4xl sm:text-4xl md:text-4xl lg:text-5xl font-rubik-glitch text-purple-400 text-center mb-6 tracking-wide break-words drop-shadow-[0_0_8px_rgba(168,85,247,0.7)]">
                     {selectedEvent.attributes.name.toUpperCase()}
                   </h2>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 text-center my-6 text-base sm:text-lg md:text-xl font-michroma bg-black/30 p-4 rounded-lg">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 text-center my-6 text-base sm:text-md md:text-lg font-michroma bg-black/30 p-4 rounded-lg">
                     <p>
                       <strong className="text-purple-300">Domain:</strong> {selectedEvent.attributes.domain}
                     </p>
@@ -145,7 +145,7 @@ export default function DepartmentEventsClientView({
                       <strong className="text-purple-300">Time:</strong> {selectedEvent.attributes.time}
                     </p>
                   </div>
-                  {selectedEvent.attributes.catchphrase && <p className="text-center text-2xl sm:text-3xl lg:text-4xl italic text-gray-300 my-8 font-parisienne drop-shadow-[0_0_8px_rgba(168,85,247,0.8)] [text-shadow:0_0_5px_#a855f7,0_0_10px_#a855f7,0_0_20px_#a855f7,0_0_40px_#a855f7]">
+                  {selectedEvent.attributes.catchphrase && <p className="text-center text-2xl sm:text-2 xl lg:text-2xl italic text-gray-300 my-8 font-parisienne drop-shadow-[0_0_8px_rgba(168,85,247,0.8)] [text-shadow:0_0_5px_#a855f7,0_0_10px_#a855f7,0_0_20px_#a855f7,0_0_40px_#a855f7]">
                     "{selectedEvent.attributes.catchphrase}"
                   </p>}
                   {/* ✨ REGISTER BUTTON ADDED HERE */}
@@ -159,7 +159,7 @@ export default function DepartmentEventsClientView({
                       > */}
                       <button
                         onClick={handlePassesClick}
-                        className="relative overflow-hidden uppercase italic bg-purple-600 text-white px-5 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 font-bold text-sm sm:text-base md:text-lg shadow-lg transition-colors duration-300 ease-in-out font-orbitron group"
+                        className="relative overflow-hidden uppercase italic bg-purple-600 text-white px-5 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 font-bold text-sm sm:text-sm md:text-sm shadow-lg transition-colors duration-300 ease-in-out font-orbitron group"
                       >
                         {/* Background slide effect */}
                         <div
@@ -186,19 +186,19 @@ export default function DepartmentEventsClientView({
 
 
                   <div className="my-8">
-                    <h3 className="text-center text-xl md:text-2xl font-michroma text-purple-300 mb-6">Event Heads</h3>
+                    <h3 className="text-center text-xl md:text-xl font-michroma text-purple-300 mb-6">Event Heads</h3>
                     <div className="flex justify-center gap-4 flex-wrap">
                       {(selectedEvent.attributes.heads || []).map(head => (
                         <div key={head.name} className="px-6 py-3 sm:px-8 md:px-12 md:py-4 text-white shadow-lg hover:scale-105 transform transition-all duration-300 w-full sm:w-auto min-w-40 text-center" style={{ background: 'linear-gradient(to bottom right, rgba(76, 29, 149, 0.4), rgba(120, 74, 226, 0.4))' }}>
-                          <p className="font-bold text-lg md:text-xl font-michroma">{head.name}</p>
-                          <p className="text-sm md:text-base text-gray-300 mt-1 font-michroma">{head.contact}</p>
+                          <p className="font-bold text-lg md:text-sm font-michroma">{head.name}</p>
+                          <p className="text-sm md:text-sm text-gray-300 mt-1 font-michroma">{head.contact}</p>
                         </div>
                       ))}
                     </div>
                   </div>
                   <hr className="border-purple-500/30 my-8" />
                   <div className="my-8 p-5 md:p-8 bg-black/30 ">
-                    <p className="text-gray-200 leading-relaxed text-base md:text-lg font-exo2">{selectedEvent.attributes.description}</p>
+                    <p className="text-gray-200 leading-relaxed text-base md:text-base font-exo2">{selectedEvent.attributes.description}</p>
                   </div>
 
                   {/* ✨ NEW: Prize Pool Section */}
@@ -209,8 +209,8 @@ export default function DepartmentEventsClientView({
                         <div className="flex justify-center gap-4 flex-wrap">
                           {(selectedEvent.attributes.prizes || []).map(prize => (
                             <div key={prize.title} className="px-6 py-3 sm:px-8 md:px-12 md:py-4 text-white shadow-lg hover:scale-105 transform transition-all duration-300 w-full sm:w-auto min-w-40 text-center" style={{ background: 'linear-gradient(to bottom right, rgba(168, 85, 247, 0.3), rgba(109, 40, 217, 0.5))' }}>
-                              <p className="font-bold text-lg md:text-xl font-michroma">{prize.title}</p>
-                              <p className="text-lg md:text-xl text-yellow-300 mt-1 font-orbitron">
+                              <p className="font-bold text-lg md:text-sm font-michroma">{prize.title}</p>
+                              <p className="text-lg md:text-sm text-yellow-300 mt-1 font-orbitron">
                                 ₹{new Intl.NumberFormat('en-IN').format(prize.amount)}
                               </p>
                             </div>
@@ -226,12 +226,19 @@ export default function DepartmentEventsClientView({
                     <div className="space-y-8">
                       {(selectedEvent.attributes.rounds || []).map((round, index) => (
                         <div key={index} className="p-5 md:p-6 border border-purple-700  bg-black/20">
-                          <h4 className="text-xl md:text-2xl font-bold text-purple-400 mb-3 font-michroma">{round.name}</h4>
-                          <p className="text-gray-300 leading-relaxed mb-4 text-base md:text-lg font-exo2">{round.details}</p>
-                          <h5 className="font-bold text-base md:text-lg mb-2 text-purple-200 font-exo2">Rules & Regulations:</h5>
-                          <ul className="list-disc list-inside space-y-1 text-gray-400 text-sm md:text-base font-exo2">
-                            {(Array.isArray(round.rules) ? round.rules : []).map((rule, i) => <li key={i}>{rule}</li>)}
-                          </ul>
+                          <h4 className="text-xl md:text-xl font-bold text-purple-400 mb-3 font-michroma">{round.name}</h4>
+                          <p className="text-gray-300 leading-relaxed mb-4 text-base md:text-base font-exo2">{round.details}</p>
+                          {Array.isArray(round.rules) && round.rules.length > 0 ? (
+                            <div>
+                              <h5 className="font-bold text-base md:text-base mb-2 text-purple-200 font-exo2">Rules & Regulations:</h5>
+                              <ul className="list-disc list-inside space-y-1 text-gray-400 text-sm md:text-sm font-exo2">
+                                {(Array.isArray(round.rules) ? round.rules : []).map((rule, i) => <li key={i}>{rule}</li>)}
+                              </ul>
+                            </div>
+                          ) : (
+                            <div></div>
+                          )}
+
                           {round.tieBreaker && (
                             <div className="mt-4">
                               <h5 className="font-bold text-base md:text-lg text-purple-200 font-exo2">Tie Breaker:</h5>

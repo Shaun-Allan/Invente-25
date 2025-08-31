@@ -16,6 +16,12 @@ const nextConfig: NextConfig = {
         port: '1338',
         pathname: '/uploads/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'ssnsnucinvente.com',
+        port: '',
+        pathname: '/uploads/**',
+      },
     ],
   },
 };

@@ -17,13 +17,27 @@
     },
     "department": {
       "type": "enumeration",
-      "enum": ["CSE", "SNU_CSE", "IT", "ECE", "EEE", "BME", "CHEM", "CIVIL", "MECH", "COM"],
+      "enum": [
+        "CSE",
+        "SNU_CSE",
+        "IT",
+        "ECE",
+        "EEE",
+        "BME",
+        "CHEM",
+        "CIVIL",
+        "MECH",
+        "COM"
+      ],
       "required": true,
       "description": "Select the department responsible for the event"
     },
     "class": {
       "type": "enumeration",
-      "enum": ["technical", "non-technical"],
+      "enum": [
+        "technical",
+        "non-technical"
+      ],
       "required": true,
       "description": "Must be technical or non-technical"
     },
@@ -55,7 +69,7 @@
       "required": true
     },
     "description": {
-      "type": "string",
+      "type": "text",
       "required": true
     },
     "prizes": {

@@ -145,7 +145,7 @@ export default function SponsorsPage() {
                         {sponsor.attributes.logo?.data ? (
                           <div className="relative w-full h-full p-4">
                             <Image
-                              src={`${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1338'}${sponsor.attributes.logo.data.attributes.url}`}
+                              src={`${'https://ssnsnucinvente.com'}${sponsor.attributes.logo.data.attributes.url}`}
                               alt={sponsor.attributes.logo.data.attributes.alternativeText || sponsor.attributes.name}
                               fill
                               className="object-contain group-hover:scale-110 transition-transform duration-300"
