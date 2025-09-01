@@ -58,46 +58,41 @@ export default function Home() {
 
         {/* <div className="absolute top-[12%] left-1/2 md:left-[65%] transform -translate-x-1/2 z-10"></div> */}
 
-        {/* CONTAINER FOR ALL RIGHT-SIDE CONTENT */}
-        <div className="absolute top-0  left-1/2 xl:left-[65%] transform -translate-x-1/2 z-10 h-full w-full xl:w-1/2">
+        {/* CONTAINER FOR ALL CONTENT */}
+        <div className="absolute top-0 left-0 right-0 z-10 h-full w-full">
 
-          {/* 1. Invente Logo Container */}
-          <div className="absolute top-[10%] sm:top-[12%] w-full flex flex-col  items-center z-10">
+          {/* University Logos - Extreme Left and Right */}
+          <div className="absolute top-[15%] sm:top-[10%] w-full flex justify-between items-center px-2 sm:px-4 md:px-6 lg:px-8">
+            {/* SNUC Logo - Extreme Left */}
+            <Image
+              src="/logos/snu.svg"
+              alt="Shiv Nadar University Logo"
+              width={100}
+              height={50}
+              className="w-[60px] h-auto sm:w-[70px] md:w-[80px] lg:w-[100px]"
+            />
+            {/* SSN Logo - Extreme Right */}
+            <Image
+              src="/logos/ssn.svg"
+              alt="SSN College of Engineering Logo"
+              width={80}
+              height={40}
+              className="w-[50px] h-auto sm:w-[60px] md:w-[70px] lg:w-[80px]"
+            />
+          </div>
 
-            {/* Container for the logos */}
-            <div className='flex items-center gap-4 sm:gap-8 md:gap-16'>
-              <Image
-                src="/logos/ssn.svg"
-                alt="SSN College of Engineering Logo"
-                width={100}
-                height={50}
-                className="w-[60px] h-auto sm:w-[80px] md:w-[90px]"
-              />
-              <Image
-                src="/logos/invente.png"
-                alt="Invente Logo"
-                width={320}
-                height={120}
-                className="w-[180px] sm:w-[240px] md:w-[200px] lg:w-[200px] h-auto"
-              />
-              <Image
-                src="/logos/snu.svg"
-                alt="Shiv Nadar University Logo"
-                width={100}
-                height={50}
-                className="w-[60px] h-auto sm:w-[80px] md:w-[90px]"
-              />
-            </div>
+          {/* 1. Symposium Text Container */}
+          <div className="absolute top-[25%] sm:top-[22%] w-full flex flex-col items-center z-10">
 
-            {/* ✨ NEW SUBTITLE TEXT ✨ */}
-            <p className="text-white/90 text-sm sm:text-md md:text-md font-semibold tracking-widest uppercase text-center font-orbitron mt-2 sm:mt-0">
+            {/* ✨ SUBTITLE TEXT ✨ */}
+            <p className="text-white/90 text-sm sm:text-md md:text-lg font-semibold tracking-widest uppercase text-center font-orbitron">
               A National Level Technical Symposium
             </p>
 
           </div>
 
           {/* 2. ChronoShift Text Container */}
-          <div className="absolute top-[32%] sm:top-[35%] w-full flex flex-col items-center text-center px-4">
+          <div className="absolute top-[37%] sm:top-[35%] w-full flex flex-col items-center text-center px-4">
             <Image
               src="/chronos.png"
               alt="Chrono"
@@ -153,8 +148,8 @@ export default function Home() {
       <section className="relative py-16 md:py-24">
         <div className="absolute inset-0 bg-black/80"></div>
         <div className="relative container mx-auto px-4">
-          <h2 className="text-4xl md:text-6xl font-bold text-purple-400 text-center sm:text-left mb-12 md:mb-16 lg:mb-24 drop-shadow-[0_0_8px_rgba(168,85,247,0.7)] font-michroma" id="events">
-            ALL EVENTS
+          <h2 className="text-3xl md:text-5xl font-bold text-purple-400 text-center sm:text-left mb-12 md:mb-16 lg:mb-24 drop-shadow-[0_0_8px_rgba(168,85,247,0.7)] font-michroma" id="events">
+            EVENTS
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {events.map((event) => (
