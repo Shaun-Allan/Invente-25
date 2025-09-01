@@ -70,9 +70,9 @@ export default function Navbar() {
               <Menu size={28} className="text-white" />
             </button>
             {/* ✅ Invente logo now fades in on desktop homepage scroll */}
-            {/* <Link 
+            <Link 
               href="/" 
-              className={`flex-shrink-0 transition-opacity duration-300 ${showDesktopLogos ? 'opacity-100' : 'lg:opacity-0'}`}
+              className={`flex-shrink-0 hidden sm:block transition-opacity duration-300 ${showDesktopLogos ? 'opacity-100' : 'lg:opacity-0'}`}
             >
               <Image
                 src="/logos/invente.png"
@@ -81,7 +81,7 @@ export default function Navbar() {
                 height={40}
                 className="h-auto w-28 sm:w-32"
               />
-            </Link> */}
+            </Link>
           </div>
           
           {/* Center: Desktop Navigation */}
@@ -139,7 +139,7 @@ export default function Navbar() {
             </Link>
             <Link 
               href="/" 
-              className={`flex-shrink-0 transition-opacity duration-300 ${showDesktopLogos ? 'opacity-100' : 'lg:opacity-0'}`}
+              className={`flex-shrink-0 transition-opacity duration-300 block sm:hidden ${showDesktopLogos ? 'opacity-100' : 'lg:opacity-0'}`}
             >
               <Image
                 src="/logos/invente.png"
