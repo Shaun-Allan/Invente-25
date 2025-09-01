@@ -19,7 +19,7 @@ import BentoGrid from "./BentoGrid";
 
 // Navigation items with icons, derived from your BentoGrid
 const navItems = [
-  { name: "All Events", href: "/#events", icon: LayoutGrid },
+  { name: "Events", href: "/#events", icon: LayoutGrid },
   { name: "About", href: "/about", icon: Info },
   { name: "Hackathons", href: "/hackathons", icon: TerminalSquare },
   { name: "Schedule", href: "/schedule", icon: Clock },
