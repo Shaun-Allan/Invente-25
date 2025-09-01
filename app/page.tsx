@@ -81,8 +81,8 @@ export default function Home() {
             />
           </div>
 
-          {/* 1. Symposium Text Container */}
-          <div className="absolute top-[25%] sm:top-[22%] w-full flex flex-col items-center z-10">
+          {/* 1. Symposium Text Container - Moved to Right Side */}
+          <div className="absolute top-[25%] sm:top-[22%] right-0 w-full md:w-[60%] lg:w-[55%] flex flex-col items-center z-10 md:pr-8 lg:pr-12">
 
             {/* ✨ SUBTITLE TEXT ✨ */}
             <p className="text-white/90 text-sm sm:text-md md:text-lg font-semibold tracking-widest uppercase text-center font-orbitron">
@@ -91,20 +91,31 @@ export default function Home() {
 
           </div>
 
-          {/* 2. ChronoShift Text Container */}
-          <div className="absolute top-[37%] sm:top-[35%] w-full flex flex-col items-center text-center px-4">
+          {/* 2. ChronoShift Text Container - Moved to Right Side */}
+          <div className="absolute top-[37%] sm:top-[35%] right-0 w-full md:w-[60%] lg:w-[55%] flex flex-col items-center text-center px-4 md:pr-8 lg:pr-12">
+            {/* Invente Logo - Centered above Chronoshift */}
+            <div className="mb-6 -mt-4">
+              <Image
+                src="/logos/invente.png"
+                alt="Invente Logo"
+                width={250}
+                height={100}
+                className="w-[140px] sm:w-[180px] md:w-[220px] lg:w-[250px] h-auto drop-shadow-[0_0_20px_rgba(168,85,247,0.8)]"
+              />
+            </div>
+            
             <Image
               src="/chronos.png"
               alt="Chrono"
               width={800}
               height={450}
-              className="w-[400px] sm:w-[480px] md:w-[500px] lg:w-[550px] h-auto drop-shadow-[0_0_30px_rgba(168,85,247,1)]"
+              className="w-[300px] sm:w-[350px] md:w-[400px] lg:w-[450px] h-auto drop-shadow-[0_0_30px_rgba(168,85,247,1)]"
             />
             <FuzzyText
               fontFamily="'Space Grotesk', sans-serif"
               fontWeight="700"
               fontStyle="italic"
-              fontSize="clamp(80px, 90px, 100px)"
+              fontSize="clamp(60px, 70px, 80px)"
               baseIntensity={0.5}
               hoverIntensity={0.8}
               enableHover={true}
@@ -115,7 +126,7 @@ export default function Home() {
             </FuzzyText>
 
 
-            <p className="text-white max-w-2xl text-sm sm:text-md md:text-md lg:text-md leading-loose font-orbitron mt-8">
+            <p className="text-white max-w-xl text-sm sm:text-md md:text-md lg:text-md leading-loose font-orbitron mt-8">
               <span className='text-purple-600'>Looking for fun?</span> You've come to the right place! Since 2016,
               <span className='text-purple-600'> INVENTE</span> has been our flagship tech fest, catered to challenge
               the spirits and intellects of students across the nation.
