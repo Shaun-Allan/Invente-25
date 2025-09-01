@@ -166,7 +166,7 @@ export default function BentoGrid({ onClose }: { onClose?: () => void }) {
           <Link
             href="/sponsors"
             onClick={onClose}
-            className="relative col-span-1 md:col-span-2 overflow-hidden shadow-lg group border-2 border-transparent hover:border-white"
+            className="relative col-span-2 md:col-span-2 overflow-hidden shadow-lg group border-2 border-transparent hover:border-white"
           >
             <Image
               src="/bento/sponsors.png"
@@ -184,7 +184,7 @@ export default function BentoGrid({ onClose }: { onClose?: () => void }) {
           </Link>
 
           {/* Registration */}
-          <Link
+          {/* <Link
             href="/#"
             onClick={onClose}
             className="relative col-span-1 md:col-span-2 overflow-hidden shadow-lg group border-2 border-transparent hover:border-white bg-gradient-to-br from-purple-600 to-purple-800"
@@ -200,7 +200,7 @@ export default function BentoGrid({ onClose }: { onClose?: () => void }) {
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white/80 font-orbitron text-sm">
               Coming Soon
             </div>
-          </Link>
+          </Link> */}
 
           {/* Previous Year */}
           <Link
