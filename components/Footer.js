@@ -20,8 +20,8 @@ const ssnTeam = [
 const snucTeam = [
   { name: 'Joshua Bharathi', linkedin: 'https://www.linkedin.com/in/joshuabharathi/' },
   { name: 'Priyadharshini Sridhar', linkedin: 'https://www.linkedin.com/in/priyadharshini-sridhar/' },
-  { name: 'Venkat', linkedin: '#' },
-  { name: 'Vishal', linkedin: '#' },
+  { name: 'Venkat', linkedin: 'https://www.linkedin.com/in/venkataraman-tsk-490564302/' },
+  { name: 'Vishal', linkedin: 'https://www.linkedin.com/in/vismbs/' },
   { name: 'Aditya B', linkedin: 'https://www.linkedin.com/in/b-aditya20/' },
 ];
 
@@ -53,7 +53,7 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 lg:space-x-8">
           <div className="flex items-center space-x-4 sm:space-x-6 order-1 sm:order-2">
             <div className="w-full h-16 sm:w-20 sm:h-20 lg:w-40 lg:h-24">
-              <a href="https://www.snu.edu.in/" target="_blank" rel="noopener noreferrer" aria-label="Visit Shiv Nadar University Website">
+              <a href="https://www.snuchennai.edu.in/" target="_blank" rel="noopener noreferrer" aria-label="Visit Shiv Nadar University Website">
                 <Image 
                   src="/logos/snu.svg" 
                   alt="SNU Logo" 

@@ -52,7 +52,7 @@ export default function BentoGrid({ onClose }: { onClose?: () => void }) {
                 text-white font-orbitron font-bold text-lg lg:text-xl tracking-wide 
                 ${outlinedText}`}
             >
-              ALL EVENTS
+              EVENTS
             </div>
           </Link>
 
@@ -166,7 +166,7 @@ export default function BentoGrid({ onClose }: { onClose?: () => void }) {
           <Link
             href="/sponsors"
             onClick={onClose}
-            className="relative col-span-2 overflow-hidden shadow-lg group border-2 border-transparent hover:border-white"
+            className="relative col-span-1 md:col-span-2 overflow-hidden shadow-lg group border-2 border-transparent hover:border-white"
           >
             <Image
               src="/bento/sponsors.png"
@@ -180,6 +180,46 @@ export default function BentoGrid({ onClose }: { onClose?: () => void }) {
                 ${outlinedText}`}
             >
               SPONSORS
+            </div>
+          </Link>
+
+          {/* Registration */}
+          <Link
+            href="/#"
+            onClick={onClose}
+            className="relative col-span-1 md:col-span-2 overflow-hidden shadow-lg group border-2 border-transparent hover:border-white bg-gradient-to-br from-purple-600 to-purple-800"
+          >
+            <div className="absolute inset-0 bg-black/40" />
+            <div
+              className={`absolute bottom-4 left-4 
+                text-white font-orbitron font-bold text-lg lg:text-xl tracking-wide 
+                ${outlinedText}`}
+            >
+              REGISTRATION
+            </div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white/80 font-orbitron text-sm">
+              Coming Soon
+            </div>
+          </Link>
+
+          {/* Previous Year */}
+          <Link
+            href="https://invente2024.netlify.app"
+            onClick={onClose}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative col-span-2 md:col-span-4 overflow-hidden shadow-lg group border-2 border-transparent hover:border-white bg-gradient-to-br from-gray-700 to-gray-900"
+          >
+            <div className="absolute inset-0 bg-black/40" />
+            <div
+              className={`absolute bottom-4 left-4 
+                text-white font-orbitron font-bold text-lg lg:text-xl tracking-wide 
+                ${outlinedText}`}
+            >
+              PREVIOUS YEAR (2024)
+            </div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white/80 font-orbitron text-sm text-center">
+              View Invente 2024
             </div>
           </Link>
         </div>
