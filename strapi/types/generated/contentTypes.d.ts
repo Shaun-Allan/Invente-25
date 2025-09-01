@@ -384,7 +384,8 @@ export interface ApiEventEvent extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
-    day: Attribute.Enumeration<['Day 1', 'Day 2']> & Attribute.Required;
+    day: Attribute.Enumeration<['Day 1', 'Day 2', 'Day 1 & 2']> &
+      Attribute.Required;
     department: Attribute.Enumeration<
       [
         'CSE',

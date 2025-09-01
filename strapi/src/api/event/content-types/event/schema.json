@@ -56,7 +56,8 @@
       "type": "enumeration",
       "enum": [
         "Day 1",
-        "Day 2"
+        "Day 2",
+        "Day 1 & 2"
       ],
       "required": true
     },

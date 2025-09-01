@@ -4,131 +4,152 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+  Menu,
+  LayoutGrid,
+  Info,
+  TerminalSquare,
+  Clock,
+  Home,
+  HeartHandshake,
+  Image as ImageIcon,
+} from "lucide-react";
 import BentoGrid from "./BentoGrid";
+
+// Navigation items with icons, derived from your BentoGrid
+const navItems = [
+  { name: "All Events", href: "/#events", icon: LayoutGrid },
+  { name: "About", href: "/about", icon: Info },
+  { name: "Hackathons", href: "/hackathons", icon: TerminalSquare },
+  { name: "Schedule", href: "/schedule", icon: Clock },
+  { name: "Hospitality", href: "/hospitality", icon: Home },
+  { name: "Sponsors", href: "/sponsors", icon: HeartHandshake },
+  { name: "Gallery", href: "/gallery", icon: ImageIcon },
+];
 
 export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [scrolledPast500, setScrolledPast500] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  // This state is no longer needed for styling but kept for logic if you need it elsewhere
+  const [scrolled, setScrolled] = useState(false); 
+  const [scrolledPast100, setScrolledPast100] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Set scrolled to true if user has scrolled more than 10px
       setScrolled(window.scrollY > 10);
-      // Set new state to true if user has scrolled more than 500px
-      setScrolledPast500(window.scrollY > 100);
-      
-      // Calculate scroll progress
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollTop = window.scrollY;
-      const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-      setScrollProgress(progress);
+      setScrolledPast100(window.scrollY > 100);
     };
-
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const isHome = pathname === "/";
-  const isTransparent = scrolled || isHome;
+  
+  // Simplified style logic
+  const navbarStyle = isHome ? "bg-black/50 backdrop-blur-md" : "bg-[#0D001A] shadow-md";
+  const paddingStyle = "py-2"; // This was the same in all conditions
 
-  // Logic to determine if the mobile logo should be visible
-  const showMobileLogo = !isHome || (isHome && scrolledPast500);
-
-  const navbarStyle = isTransparent
-    ? "bg-black/50 backdrop-blur-md"
-    : "bg-[#0D001A] shadow-md";
-
-  const paddingStyle = isTransparent ? "py-1 sm:py-1" : "py-0 sm:py-2";
+  // ✅ New logic to determine logo visibility on desktop homepage
+  const showDesktopLogos = !isHome || (isHome && scrolledPast100);
 
   return (
     <>
-      {/* Navbar */}
       <nav
-        className={`fixed top-0 left-0 w-full z-50 px-6 flex items-center justify-between transition-all duration-300 ${navbarStyle} ${paddingStyle}`}
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navbarStyle} ${paddingStyle}`}
       >
-        {/* Left - Menu + Invente Logo */}
-        <div className="flex items-center gap-4">
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="p-2 rounded-lg hover:bg-white/10 transition"
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+          
+          {/* Left Side: Mobile Menu Button & Main Logo */}
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="p-2 rounded-lg hover:bg-white/10 transition lg:hidden"
+              aria-label="Open menu"
+            >
+              <Menu size={28} className="text-white" />
+            </button>
+            {/* ✅ Invente logo now fades in on desktop homepage scroll */}
+            <Link 
+              href="/" 
+              className={`flex-shrink-0 transition-opacity duration-300 ${showDesktopLogos ? 'opacity-100' : 'lg:opacity-0'}`}
+            >
+              <Image
+                src="/logos/invente.png"
+                alt="Invente Logo"
+                width={122}
+                height={40}
+                className="h-auto w-28 sm:w-32"
+              />
+            </Link>
+          </div>
+          
+          {/* Center: Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-1">
+            {navItems.map((item, index) => {
+              const isActive = pathname === item.href;
+              return (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, y: -25 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                >
+                  <Link
+                    href={item.href}
+                    className={`relative px-4 py-2 rounded-lg font-medium transition-colors duration-300 flex items-center font-orbitron text-sm
+                      ${isActive ? "text-white" : "text-gray-400 hover:text-white"}`}
+                  >
+                    <span>{item.name}</span>
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeDesktopTab"
+                        className="absolute inset-0 bg-purple-500/20 border border-purple-400/30 rounded-lg -z-10"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      />
+                    )}
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Right Side: University Logos */}
+          {/* ✅ University logos now fade in on desktop homepage scroll */}
+          <div 
+            className={`flex items-center gap-6 transition-opacity duration-300 ${showDesktopLogos ? 'opacity-100' : 'opacity-0'}`}
           >
-            <Menu size={28} className="text-white" />
-          </button>
-          <Link href="/">
-            <Image
-              src="/logos/invente.png"
-              alt="Invente Logo"
-              width={102}
-              height={40}
-              className="h-auto w-auto  ml-0 sm:ml-4 hidden sm:block"
-            />
-          </Link>
-        </div>
-
-        {/* Mobile Invente Logo - Visibility now conditional */}
-        <Link href="/">
-          <Image
-            src="/logos/invente.png"
-            alt="Invente Logo"
-            width={122}
-            height={40}
-            className={`h-auto w-auto sm:hidden transition-opacity duration-300 ${
-              showMobileLogo ? "opacity-100" : "opacity-0"
-            }`}
-          />
-        </Link>
-
-        {/* Right - SNU & SSN Logos (hidden on mobile) */}
-        <div className="hidden md:flex items-center gap-6">
-          <Link href="/">
-            <Image
-              src="/logos/snu.svg"
-              alt="SNU Logo"
-              width={80}
-              height={40}
-              className="h-[40px] w-auto"
-            />
-          </Link>
-          <Link href="/">
-            <Image
-              src="/logos/ssn.svg"
-              alt="SSN Logo"
-              width={80}
-              height={40}
-              className="h-[40px] w-auto"
-            />
-          </Link>
-        </div>
-
-        {/* Scroll Progress Bar - Above navbar, expanding from center */}
-        <div className="absolute top-0 left-0 w-full h-1">
-          <div
-            className="absolute top-0 left-1/2 h-full bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 transition-all duration-150 ease-out origin-center"
-            style={{
-              width: `${scrollProgress}%`,
-              transform: 'translateX(-50%)',
-              boxShadow: '0 0 10px rgba(147, 51, 234, 0.5)'
-            }}
-          />
+            <Link href="https://www.snu.edu.in/" target="_blank" className="hidden sm:block">
+              <Image
+                src="/logos/snu.svg"
+                alt="SNU Logo"
+                width={80}
+                height={40}
+                className="h-[40px] w-auto"
+              />
+            </Link>
+            <Link href="https://www.ssn.edu.in/" target="_blank">
+              <Image
+                src="/logos/ssn.svg"
+                alt="SSN Logo"
+                width={80}
+                height={40}
+                className="h-[40px] w-auto"
+              />
+            </Link>
+          </div>
         </div>
       </nav>
 
-      {/* Fade-in Bento Grid Overlay */}
+      {/* Mobile Bento Grid Overlay */}
       <div
-        className={`fixed top-0 left-0 w-full h-screen bg-black/70 backdrop-blur-md z-40 transition-opacity duration-500 ease-in-out ${
+        className={`fixed top-0 left-0 w-full h-screen bg-black/70 backdrop-blur-md z-40 transition-opacity duration-500 ease-in-out lg:hidden ${
           menuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="pt-20">
+        <div className="pt-24 h-full overflow-y-auto">
           <BentoGrid onClose={() => setMenuOpen(false)} />
         </div>
       </div>

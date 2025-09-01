@@ -24,8 +24,10 @@ module.exports = [
         'https://www.ssnsnucinvente.com',
         // Add other origins if needed, e.g., for local development
         'http://localhost:3005',
+        'http://localhost:3000',
         'http://localhost:1338',
       ],
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
     },
   },
   'strapi::poweredBy',
