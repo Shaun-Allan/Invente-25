@@ -62,14 +62,14 @@ export default function Home() {
         <div className="absolute top-0 left-0 right-0 z-10 h-full w-full">
 
           {/* University Logos - Extreme Left and Right */}
-          <div className="absolute top-[15%] sm:top-[10%] w-full flex justify-between items-center px-2 sm:px-4 md:px-6 lg:px-8">
+          <div className="absolute top-[14%] sm:top-[15%] w-full flex justify-between items-center px-2 sm:px-4 md:px-6 lg:px-8">
             {/* SNUC Logo - Extreme Left */}
             <Image
               src="/logos/snu.svg"
               alt="Shiv Nadar University Logo"
               width={100}
               height={50}
-              className="w-[60px] h-auto sm:w-[70px] md:w-[80px] lg:w-[100px]"
+              className="w-[80px] h-auto sm:w-[70px] md:w-[80px] lg:w-[100px]"
             />
             {/* SSN Logo - Extreme Right */}
             <Image
@@ -77,30 +77,30 @@ export default function Home() {
               alt="SSN College of Engineering Logo"
               width={80}
               height={40}
-              className="w-[50px] h-auto sm:w-[60px] md:w-[70px] lg:w-[80px]"
+              className="w-[70px] h-auto sm:w-[60px] md:w-[70px] lg:w-[80px]"
             />
           </div>
 
           {/* 1. Symposium Text Container - Moved to Right Side */}
-          <div className="absolute top-[25%] sm:top-[22%] right-0 w-full md:w-[60%] lg:w-[55%] flex flex-col items-center z-10 md:pr-8 lg:pr-12">
+          <div className="absolute top-[23%] sm:top-[20%] right-0 w-full md:w-[60%] lg:w-[55%] flex flex-col items-center z-10 md:pr-8 lg:pr-12">
 
             {/* ✨ SUBTITLE TEXT ✨ */}
-            <p className="text-white/90 text-sm sm:text-md md:text-lg font-semibold tracking-widest uppercase text-center font-orbitron">
+            <p className="text-white/90 text-sm sm:text-md md:text-md font-semibold tracking-widest uppercase text-center font-orbitron">
               A National Level Technical Symposium
             </p>
 
           </div>
 
           {/* 2. ChronoShift Text Container - Moved to Right Side */}
-          <div className="absolute top-[37%] sm:top-[35%] right-0 w-full md:w-[60%] lg:w-[55%] flex flex-col items-center text-center px-4 md:pr-8 lg:pr-12">
+          <div className="absolute top-[32%] sm:top-[25%] right-0 w-full md:w-[60%] lg:w-[55%] flex flex-col items-center text-center px-4 md:pr-8 lg:pr-12">
             {/* Invente Logo - Centered above Chronoshift */}
-            <div className="mb-6 -mt-4">
+            <div className="-mb-2 -mt-4">
               <Image
                 src="/logos/invente.png"
                 alt="Invente Logo"
                 width={250}
                 height={100}
-                className="w-[140px] sm:w-[180px] md:w-[220px] lg:w-[250px] h-auto drop-shadow-[0_0_20px_rgba(168,85,247,0.8)]"
+                className="w-[200px] sm:w-[180px] md:w-[220px] lg:w-[250px] h-auto drop-shadow-[0_0_20px_rgba(168,85,247,0.8)]"
               />
             </div>
             
