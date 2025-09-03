@@ -162,7 +162,6 @@ const HackathonModal = ({ hackathon, onClose, registrationUrl }: { hackathon: Ha
                         ))}
                     </div>
 
-                    {/* --- NEW Meta Data Section --- */}
                     <ul className="flex flex-wrap justify-center gap-4 sm:gap-7 list-none my-12 bg-purple-900/20 border border-purple-500/30 text-white text-sm sm:text-base p-3 font-michroma">
                         <li className="text-center">
                             {hackathon.attributes.registrationFee ? `₹${hackathon.attributes.registrationFee}` : 'Free'}
@@ -177,44 +176,18 @@ const HackathonModal = ({ hackathon, onClose, registrationUrl }: { hackathon: Ha
                             </li>
                         ))}
                     </ul>
-                    {/* --- END Meta Data Section --- */}
-
 
                     {registrationUrl && (
                         <div className="my-8 flex justify-center">
-                            {/* <a
-                        href={registrationUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-
-                      > */}
                             <button
                                 className="relative overflow-hidden uppercase italic bg-purple-600 text-white px-5 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 font-bold text-sm sm:text-sm md:text-sm shadow-lg transition-colors duration-300 ease-in-out font-orbitron group"
                             >
-                                {/* Background slide effect */}
-                                <div
-                                    className={`absolute inset-0 bg-white -translate-x-full transition-transform duration-300  group-hover:translate-x-0`}
-                                ></div>
-
-                                {/* "Get Passes" text */}
-                                <span
-                                    className={`relative z-10 inline-block transition-transform duration-300  group-hover:translate-x-[200%]`}
-                                >
-                                    Register
-                                </span>
-
-                                {/* "Coming Soon" text */}
-                                <span
-                                    className={`absolute inset-0 flex items-center justify-center text-black font-bold -translate-x-full transition-transform duration-300 z-20  group-hover:translate-x-0`}
-                                >
-                                    Coming Soon
-                                </span>
+                                <div className={`absolute inset-0 bg-white -translate-x-full transition-transform duration-300  group-hover:translate-x-0`}></div>
+                                <span className={`relative z-10 inline-block transition-transform duration-300  group-hover:translate-x-[200%]`}>Register</span>
+                                <span className={`absolute inset-0 flex items-center justify-center text-black font-bold -translate-x-full transition-transform duration-300 z-20  group-hover:translate-x-0`}>Coming Soon</span>
                             </button>
-                            {/* </a> */}
                         </div>
                     )}
-
-
 
                     <div className="my-8 bg-purple-900/20 p-6 border border-purple-500/30">
                         <MarkdownRenderer content={hackathon.attributes.description} />
@@ -226,6 +199,19 @@ const HackathonModal = ({ hackathon, onClose, registrationUrl }: { hackathon: Ha
                                 </ul>
                             </div>
                         )}
+
+                        {/* --- NEW Schedule Section --- */}
+                        {hackathon.attributes.schedule && Array.isArray(hackathon.attributes.schedule) && (
+                            <div className="mt-8">
+                                <p className="text-left text-lg sm:text-xl font-bold font-michroma mb-4">Schedule</p>
+                                <ul className="list-disc list-inside text-left text-base sm:text-lg space-y-2 pl-4">
+                                    {(hackathon.attributes.schedule as string[]).map((item, index) => (
+                                        <li key={index}>{item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                        {/* --- END Schedule Section --- */}
                     </div>
 
                     <h3 className="text-center text-2xl sm:text-3xl font-bold mb-6 mt-10 font-michroma">Coordinators</h3>
@@ -247,8 +233,6 @@ const HackathonModal = ({ hackathon, onClose, registrationUrl }: { hackathon: Ha
                             </button>
                         ))}
                     </div>
-
-
 
                     <div className="bg-purple-900/20 p-6 border border-purple-500/30">
                         <MarkdownRenderer content={activeTrack.description} />
@@ -275,8 +259,6 @@ const HackathonModal = ({ hackathon, onClose, registrationUrl }: { hackathon: Ha
         </div>
     );
 };
-
-
 
 
 // ============================================================================

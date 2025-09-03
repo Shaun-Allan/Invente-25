@@ -64,7 +64,7 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="p-2 rounded-lg hover:bg-white/10 transition lg:hidden"
+              className="p-2  hover:bg-white/10 transition lg:hidden"
               aria-label="Open menu"
             >
               <Menu size={28} className="text-white" />
@@ -97,14 +97,14 @@ export default function Navbar() {
                 >
                   <Link
                     href={item.href}
-                    className={`relative px-4 py-2 rounded-lg font-medium transition-colors duration-300 flex items-center font-orbitron text-sm
+                    className={`relative px-4 py-2  font-medium transition-colors duration-300 flex items-center font-orbitron text-sm
                       ${isActive ? "text-white" : "text-gray-400 hover:text-white"}`}
                   >
                     <span>{item.name}</span>
                     {isActive && (
                       <motion.div
                         layoutId="activeDesktopTab"
-                        className="absolute inset-0 bg-purple-500/20 border border-purple-400/30 rounded-lg -z-10"
+                        className="absolute inset-0 bg-purple-500/20 border border-purple-400/30  -z-10"
                         transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                       />
                     )}
