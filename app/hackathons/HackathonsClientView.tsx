@@ -318,7 +318,7 @@ const HackathonsClientView = ({ hackathons, workshops, registrationUrl }: { hack
                     <WorkshopModal workshop={selectedEvent as Workshop} onClose={() => setSelectedEvent(null)} registrationUrl={registrationUrl} />
                 )}
             </div>
-        </main>
+        </main> 
     );
 };
 
