@@ -1,0 +1,80 @@
+{
+  "kind": "collectionType",
+  "collectionName": "hackathons",
+  "info": {
+    "singularName": "hackathon",
+    "pluralName": "hackathons",
+    "displayName": "Hackathon",
+    "description": "Manages individual hackathon events."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "registrationFee": {
+      "type": "string",
+      "required": true
+    },
+    "meta": {
+      "displayName": "Meta Info",
+      "type": "component",
+      "repeatable": true,
+      "component": "hackathon.meta-info"
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "generalInstructionsTitle": {
+      "type": "string"
+    },
+    "generalInstructions": {
+      "type": "json",
+      "description": "Use a bulleted or numbered list for the instructions.",
+      "default": [
+        "Follow this format",
+        "SHOULD BE AN ARRAY OF RULES",
+        "No use of mobile phones or electronic devices during the competition.",
+        "Teams must follow the time limits for each task strictly.",
+        "The decision of the judges is final and binding.",
+        "Participants must maintain decorum and sportsmanship throughout the event."
+      ]
+    },
+    "schedule": {
+      "type": "json",
+      "required": true,
+      "description": "A single JSON object for the 24-hour event schedule.",
+      "default": [
+        "Follow this format",
+        "SHOULD BE AN ARRAY OF RULES",
+        "No use of mobile phones or electronic devices during the competition.",
+        "Teams must follow the time limits for each task strictly.",
+        "The decision of the judges is final and binding.",
+        "Participants must maintain decorum and sportsmanship throughout the event."
+      ]
+    },
+    "sponsors": {
+      "displayName": "Sponsor",
+      "type": "component",
+      "repeatable": true,
+      "component": "hackathon.sponsor"
+    },
+    "tracks": {
+      "displayName": "Track",
+      "type": "component",
+      "repeatable": true,
+      "component": "hackathon.track",
+      "required": true
+    },
+    "coordinators": {
+      "displayName": "Coordinator",
+      "type": "component",
+      "repeatable": true,
+      "component": "event.coordinator"
+    }
+  }
+}

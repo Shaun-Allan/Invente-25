@@ -73,6 +73,39 @@ export interface HackathonPrize extends Schema.Component {
   };
 }
 
+export interface HackathonSponsor extends Schema.Component {
+  collectionName: 'components_hackathon_sponsors';
+  info: {
+    description: 'Defines a sponsor for the hackathon.';
+    displayName: 'Sponsor';
+    icon: 'handshake';
+  };
+  attributes: {
+    logo: Attribute.Media<'images'> & Attribute.Required;
+    name: Attribute.String & Attribute.Required;
+    tier: Attribute.Enumeration<
+      ['Title Sponsor', 'Compenents Sponsor', 'Prize Pool Sponsor']
+    > &
+      Attribute.Required;
+  };
+}
+
+export interface HackathonTrack extends Schema.Component {
+  collectionName: 'components_hackathon_tracks';
+  info: {
+    description: 'A specific track or theme within the hackathon.';
+    displayName: 'Track';
+    icon: 'road';
+  };
+  attributes: {
+    description: Attribute.Text & Attribute.Required;
+    detailsPdf: Attribute.Media<'files'>;
+    name: Attribute.String & Attribute.Required;
+    prizes: Attribute.Component<'hackathon.prize', true>;
+    sections: Attribute.Component<'section.text-section', true>;
+  };
+}
+
 export interface ScheduleDaySchedule extends Schema.Component {
   collectionName: 'components_schedule_day_schedules';
   info: {
@@ -148,6 +181,8 @@ declare module '@strapi/types' {
       'event.round': EventRound;
       'hackathon.meta-info': HackathonMetaInfo;
       'hackathon.prize': HackathonPrize;
+      'hackathon.sponsor': HackathonSponsor;
+      'hackathon.track': HackathonTrack;
       'schedule.day-schedule': ScheduleDaySchedule;
       'schedule.schedule-item': ScheduleScheduleItem;
       'section.schedule-day-item': SectionScheduleDayItem;

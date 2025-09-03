@@ -1,0 +1,32 @@
+{
+    "collectionName": "components_hackathon_sponsors",
+    "info": {
+        "displayName": "Sponsor",
+        "icon": "handshake",
+        "description": "Defines a sponsor for the hackathon."
+    },
+    "options": {},
+    "attributes": {
+        "name": {
+            "type": "string",
+            "required": true
+        },
+        "logo": {
+            "type": "media",
+            "multiple": false,
+            "required": true,
+            "allowedTypes": [
+                "images"
+            ]
+        },
+        "tier": {
+            "type": "enumeration",
+            "enum": [
+                "Title Sponsor",
+                "Compenents Sponsor",
+                "Prize Pool Sponsor"
+            ],
+            "required": true
+        }
+    }
+}

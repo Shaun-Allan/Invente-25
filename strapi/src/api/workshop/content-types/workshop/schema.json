@@ -1,11 +1,11 @@
 {
   "kind": "collectionType",
-  "collectionName": "hackathon-workshop",
+  "collectionName": "workshop",
   "info": {
-    "singularName": "hackathon-workshop",
-    "pluralName": "hackathons-workshops",
-    "displayName": "Hackathons and Workshops",
-    "description": "Manages individual hackathons and workshops."
+    "singularName": "workshop",
+    "pluralName": "workshops",
+    "displayName": "Workshops",
+    "description": "Manages individual workshops."
   },
   "options": {
     "draftAndPublish": false
@@ -14,15 +14,6 @@
     "title": {
       "type": "string",
       "required": true
-    },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "Hackathon",
-        "Workshop"
-      ],
-      "required": true,
-      "default": "Hackathon"
     },
     "registrationFee": {
       "type": "string",

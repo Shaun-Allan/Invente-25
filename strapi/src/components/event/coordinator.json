@@ -4,6 +4,7 @@
     "displayName": "Coordinator",
     "icon": "user"
   },
+  "options": {},
   "attributes": {
     "name": {
       "type": "string",

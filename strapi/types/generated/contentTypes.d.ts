@@ -420,14 +420,13 @@ export interface ApiEventEvent extends Schema.CollectionType {
   };
 }
 
-export interface ApiHackathonWorkshopHackathonWorkshop
-  extends Schema.CollectionType {
-  collectionName: 'hackathon-workshop';
+export interface ApiHackathonHackathon extends Schema.CollectionType {
+  collectionName: 'hackathons';
   info: {
-    description: 'Manages individual hackathons and workshops.';
-    displayName: 'Hackathons and Workshops';
-    pluralName: 'hackathons-workshops';
-    singularName: 'hackathon-workshop';
+    description: 'Manages individual hackathon events.';
+    displayName: 'Hackathon';
+    pluralName: 'hackathons';
+    singularName: 'hackathon';
   };
   options: {
     draftAndPublish: false;
@@ -436,7 +435,7 @@ export interface ApiHackathonWorkshopHackathonWorkshop
     coordinators: Attribute.Component<'event.coordinator', true>;
     createdAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::hackathon-workshop.hackathon-workshop',
+      'api::hackathon.hackathon',
       'oneToOne',
       'admin::user'
     > &
@@ -455,18 +454,25 @@ export interface ApiHackathonWorkshopHackathonWorkshop
       >;
     generalInstructionsTitle: Attribute.String;
     meta: Attribute.Component<'hackathon.meta-info', true>;
-    prizes: Attribute.Component<'hackathon.prize', true>;
+    name: Attribute.String & Attribute.Required;
     registrationFee: Attribute.String & Attribute.Required;
-    sections: Attribute.DynamicZone<
-      ['section.text-section', 'section.schedule-section']
-    >;
-    title: Attribute.String & Attribute.Required;
-    type: Attribute.Enumeration<['Hackathon', 'Workshop']> &
+    schedule: Attribute.JSON &
       Attribute.Required &
-      Attribute.DefaultTo<'Hackathon'>;
+      Attribute.DefaultTo<
+        [
+          'Follow this format',
+          'SHOULD BE AN ARRAY OF RULES',
+          'No use of mobile phones or electronic devices during the competition.',
+          'Teams must follow the time limits for each task strictly.',
+          'The decision of the judges is final and binding.',
+          'Participants must maintain decorum and sportsmanship throughout the event.'
+        ]
+      >;
+    sponsors: Attribute.Component<'hackathon.sponsor', true>;
+    tracks: Attribute.Component<'hackathon.track', true> & Attribute.Required;
     updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
-      'api::hackathon-workshop.hackathon-workshop',
+      'api::hackathon.hackathon',
       'oneToOne',
       'admin::user'
     > &
@@ -607,6 +613,56 @@ export interface ApiSponsorSponsor extends Schema.CollectionType {
     updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
       'api::sponsor.sponsor',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiWorkshopWorkshop extends Schema.CollectionType {
+  collectionName: 'workshop';
+  info: {
+    description: 'Manages individual workshops.';
+    displayName: 'Workshops';
+    pluralName: 'workshops';
+    singularName: 'workshop';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    coordinators: Attribute.Component<'event.coordinator', true>;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::workshop.workshop',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    description: Attribute.Text & Attribute.Required;
+    generalInstructions: Attribute.JSON &
+      Attribute.DefaultTo<
+        [
+          'Follow this format',
+          'SHOULD BE AN ARRAY OF RULES',
+          'No use of mobile phones or electronic devices during the competition.',
+          'Teams must follow the time limits for each task strictly.',
+          'The decision of the judges is final and binding.',
+          'Participants must maintain decorum and sportsmanship throughout the event.'
+        ]
+      >;
+    generalInstructionsTitle: Attribute.String;
+    meta: Attribute.Component<'hackathon.meta-info', true>;
+    prizes: Attribute.Component<'hackathon.prize', true>;
+    registrationFee: Attribute.String & Attribute.Required;
+    sections: Attribute.DynamicZone<
+      ['section.text-section', 'section.schedule-section']
+    >;
+    title: Attribute.String & Attribute.Required;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'api::workshop.workshop',
       'oneToOne',
       'admin::user'
     > &
@@ -1051,11 +1107,12 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::event.event': ApiEventEvent;
-      'api::hackathon-workshop.hackathon-workshop': ApiHackathonWorkshopHackathonWorkshop;
+      'api::hackathon.hackathon': ApiHackathonHackathon;
       'api::hospitality.hospitality': ApiHospitalityHospitality;
       'api::president.president': ApiPresidentPresident;
       'api::schedule.schedule': ApiScheduleSchedule;
       'api::sponsor.sponsor': ApiSponsorSponsor;
+      'api::workshop.workshop': ApiWorkshopWorkshop;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

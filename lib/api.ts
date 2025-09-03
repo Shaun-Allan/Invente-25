@@ -57,9 +57,8 @@ async function fetchAPI<T>(
   };
 
   const queryString = qs.stringify(urlParamsObject);
-  const requestUrl = `${STRAPI_URL}/api${path}${
-    queryString ? `?${queryString}` : ""
-  }`;
+  const requestUrl = `${STRAPI_URL}/api${path}${queryString ? `?${queryString}` : ""
+    }`;
   console.log(requestUrl)
   try {
     const response = await fetch(requestUrl, {
@@ -100,12 +99,12 @@ export type SponsorType = "title" | "co-sponsor" | "department" | "hackathon" | 
 
 
 export interface StrapiMedia {
-    data?: {
-        attributes: {
-            url: string;
-            alternativeText?: string;
-        }
+  data?: {
+    attributes: {
+      url: string;
+      alternativeText?: string;
     }
+  }
 }
 
 export interface ScheduleItem {
@@ -195,26 +194,26 @@ export interface Sponsor {
 
 
 export interface ScheduledEvent {
-    id: number;
-    title: string;
-    time: string;
-    venue: string;
+  id: number;
+  title: string;
+  time: string;
+  venue: string;
 }
 
 export interface ScheduleDay {
-    id: number;
-    attributes: {
-        day: 'Day 1' | 'Day 2';
-        titleImage: {
-            data?: {
-                attributes: {
-                    url: string;
-                    alternativeText?: string;
-                }
-            }
-        };
-        events: ScheduledEvent[];
-    }
+  id: number;
+  attributes: {
+    day: 'Day 1' | 'Day 2';
+    titleImage: {
+      data?: {
+        attributes: {
+          url: string;
+          alternativeText?: string;
+        }
+      }
+    };
+    events: ScheduledEvent[];
+  }
 }
 
 export interface Settings {
@@ -272,25 +271,62 @@ export interface ScheduleSection {
 }
 
 // Main Interface for the Hackathon/Workshop Collection Type
-export interface HackathonWorkshop {
+// --- HACKATHON-SPECIFIC TYPES (NEW) ---
+export interface HackathonSponsor {
+  id: number;
+  name: string;
+  logo: StrapiMedia;
+  tier?: string;
+}
+
+export interface HackathonTrack {
+  id: number;
+  name: string;
+  prizes: Prize[];
+  description: string;
+  sections: TextSection[];
+  detailsPdf: StrapiMedia;
+}
+
+export interface Hackathon {
+  id: number;
+  attributes: {
+    name: string;
+    registrationFee: string;
+    meta: MetaInfo[];
+    description: string;
+    generalInstructionsTitle?: string;
+    generalInstructions?: any; // JSON
+    schedule: any; // JSON
+    sponsors: HackathonSponsor[];
+    tracks: HackathonTrack[];
+    coordinators: Coordinator[];
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+  }
+}
+
+
+// --- WORKSHOP-SPECIFIC TYPES (NEW) ---
+export interface Workshop {
   id: number;
   attributes: {
     title: string;
-    type: "Hackathon" | "Workshop";
     registrationFee: string;
-    mainImage: StrapiMedia;
-    description: any; // Rich Text
+    description: string;
     prizes: Prize[];
     meta: MetaInfo[];
     generalInstructionsTitle?: string;
-    generalInstructions?: any; // Rich Text
+    generalInstructions?: any; // JSON
     sections: (TextSection | ScheduleSection)[]; // Dynamic Zone
     coordinators: Coordinator[];
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
-  };
+  }
 }
+
 
 export interface President {
   id: number;
@@ -340,7 +376,7 @@ export async function getEvents(filters?: {
     populate: "*", // Change "deep" to "*"
     sort: ["name:asc"],
   };
-  
+
   // ... (rest of the function is unchanged)
   if (filters) {
     const filterParams: any = {};
@@ -461,9 +497,9 @@ export async function getPresidents(): Promise<President[]> {
     >("/presidents", params);
 
     return response.data?.map((item) => ({
-        id: item.id,
-        attributes: item.attributes,
-      })) || [];
+      id: item.id,
+      attributes: item.attributes,
+    })) || [];
   } catch (error) {
     console.error("Failed to fetch presidents:", error);
     return [];
@@ -479,7 +515,7 @@ export async function getPresidents(): Promise<President[]> {
 export async function getSchedule(): Promise<Schedule | null> {
   try {
     const response = await fetchAPI<StrapiSingleResponse<Schedule>>(
-      "/schedule", 
+      "/schedule",
       {
         // ✅ UPDATED: Use a specific populate object for nested content
         populate: {
@@ -504,26 +540,60 @@ export async function getSchedule(): Promise<Schedule | null> {
   }
 }
 
-export async function getHackathonsAndWorkshops(filters?: {
-  type?: "Hackathon" | "Workshop";
-}): Promise<HackathonWorkshop[]> {
-  
-  // ✨ THIS IS THE FIX ✨
-  const params: any = {
+export async function getHackathons(): Promise<Hackathon[]> {
+  const params = {
     populate: {
-      // We want to populate everything at the top level (mainImage, prizes, etc.)
-      mainImage: "*",
-      prizes: "*",
-      meta: "*",
-      coordinators: "*",
-      // For the dynamic zone, we need to be more specific
-      sections: {
-        // For each component in the zone, populate its fields
+      meta: '*',
+      coordinators: '*',
+      sponsors: {
+        populate: 'logo',
+      },
+      tracks: {
         populate: {
-          // For the schedule-section, we need to populate its 'days' component
+          prizes: '*',
+          sections: '*',
+          detailsPdf: '*',
+        },
+      },
+    },
+    sort: ["name:asc"],
+  };
+
+  try {
+    const response = await fetchAPI<StrapiCollectionResponse<Hackathon["attributes"]>>("/hackathons", params);
+    return response.data?.map(item => ({ id: item.id, attributes: item.attributes })) || [];
+  } catch (error) {
+    console.error("Failed to fetch hackathons:", error);
+    return [];
+  }
+}
+
+/**
+ * Fetches a single hackathon by its ID.
+ */
+export async function getHackathonById(id: number): Promise<Hackathon | null> {
+  try {
+    const response = await fetchAPI<StrapiSingleResponse<Hackathon["attributes"]>>(`/hackathons/${id}`, { populate: "deep" });
+    return response.data ? { id: response.data.id, attributes: response.data.attributes } : null;
+  } catch (error) {
+    console.error(`Failed to fetch hackathon with id ${id}:`, error);
+    return null;
+  }
+}
+
+/**
+ * Fetches all workshops with their related data.
+ */
+export async function getWorkshops(): Promise<Workshop[]> {
+  const params = {
+    populate: {
+      meta: '*',
+      prizes: '*',
+      coordinators: '*',
+      sections: {
+        populate: {
           days: {
-            // And for the 'days' component, populate all its fields
-            populate: "*",
+            populate: '*',
           },
         },
       },
@@ -531,42 +601,28 @@ export async function getHackathonsAndWorkshops(filters?: {
     sort: ["title:asc"],
   };
 
-  if (filters?.type) {
-    params.filters = { type: { $eq: filters.type } };
-  }
-
   try {
-    const response = await fetchAPI<
-      StrapiCollectionResponse<HackathonWorkshop["attributes"]>
-    >("/hackathons-workshops", params);
-
-    return response.data?.map((item) => ({
-        id: item.id,
-        attributes: item.attributes,
-      })) || [];
+    const response = await fetchAPI<StrapiCollectionResponse<Workshop["attributes"]>>("/workshops", params);
+    return response.data?.map(item => ({ id: item.id, attributes: item.attributes })) || [];
   } catch (error) {
-    console.error("Failed to fetch hackathons and workshops:", error);
+    console.error("Failed to fetch workshops:", error);
     return [];
   }
 }
+
 /**
- * Fetches a single Hackathon or Workshop by its ID.
+ * Fetches a single workshop by its ID.
  */
-export async function getHackathonOrWorkshopById(id: number): Promise<HackathonWorkshop | null> {
+export async function getWorkshopById(id: number): Promise<Workshop | null> {
   try {
-    const response = await fetchAPI<StrapiSingleResponse<HackathonWorkshop["attributes"]>>(
-      `/hackathons-workshops/${id}`,
-      { populate: "deep" }
-    );
-    return {
-      id: response.data.id,
-      attributes: response.data.attributes,
-    };
+    const response = await fetchAPI<StrapiSingleResponse<Workshop["attributes"]>>(`/workshops/${id}`, { populate: "deep" });
+    return response.data ? { id: response.data.id, attributes: response.data.attributes } : null;
   } catch (error) {
-    console.error(`Failed to fetch hackathon/workshop with id ${id}:`, error);
+    console.error(`Failed to fetch workshop with id ${id}:`, error);
     return null;
   }
 }
+
 
 
 
@@ -624,7 +680,8 @@ export async function getAllData() {
     sponsors,
     schedule,
     settings,
-    hackathonsAndWorkshops,
+    hackathons,
+    workshops,
     presidents,
     hospitalityInfo, // Added
   ] = await Promise.all([
@@ -632,7 +689,8 @@ export async function getAllData() {
     getSponsors(),
     getSchedule(),
     getSettings(),
-    getHackathonsAndWorkshops(),
+    getHackathons(),
+    getWorkshops(),
     getPresidents(),
     getHospitalityInfo(), // Added
   ]);
@@ -642,7 +700,8 @@ export async function getAllData() {
     sponsors,
     schedule,
     settings,
-    hackathonsAndWorkshops,
+    hackathons,
+    workshops,
     presidents,
     hospitalityInfo, // Added
   };

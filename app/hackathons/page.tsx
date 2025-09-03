@@ -1,4 +1,4 @@
-import { getHackathonsAndWorkshops } from "@/lib/api"; // ✨ ADD getRegistrationUrl
+import { getHackathons, getWorkshops } from "@/lib/api";
 import HackathonsClientView from "./HackathonsClientView";
 import { Suspense } from "react";
 
@@ -9,23 +9,17 @@ const LoadingUI = () => (
 );
 
 export default async function HackathonsPage() {
-  // ✨ FETCH REGISTRATION URL ALONGSIDE EVENTS
-  const [allMajorEvents, registrationUrl] = await Promise.all([
-    getHackathonsAndWorkshops(),
-    "/",
+  // Fetch data from separate endpoints
+  const [hackathons, workshops, registrationUrl] = await Promise.all([
+    getHackathons(),
+    getWorkshops(),
+    "google.com",
   ]);
 
-  // Filter them into separate arrays
-  const hackathons = allMajorEvents.filter(
-    (event) => event.attributes.type === "Hackathon"
-  );
-  const workshops = allMajorEvents.filter(
-    (event) => event.attributes.type === "Workshop"
-  );
-
+  // No filtering needed anymore
   return (
     <Suspense fallback={<LoadingUI />}>
-      {/* ✨ PASS THE URL AS A PROP */}
+      {/* Pass the separate data arrays and URL as props */}
       <HackathonsClientView 
         hackathons={hackathons} 
         workshops={workshops} 

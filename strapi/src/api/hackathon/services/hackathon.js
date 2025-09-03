@@ -2,4 +2,4 @@
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::hackathon-workshop.hackathon-workshop');
+module.exports = createCoreService('api::hackathon.hackathon');

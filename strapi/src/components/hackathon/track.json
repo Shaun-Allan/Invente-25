@@ -1,0 +1,40 @@
+{
+    "collectionName": "components_hackathon_tracks",
+    "info": {
+        "displayName": "Track",
+        "icon": "road",
+        "description": "A specific track or theme within the hackathon."
+    },
+    "options": {},
+    "attributes": {
+        "name": {
+            "type": "string",
+            "required": true
+        },
+        "prizes": {
+            "displayName": "Prize",
+            "type": "component",
+            "repeatable": true,
+            "component": "hackathon.prize"
+        },
+        "description": {
+            "type": "text",
+            "required": true
+        },
+        "sections": {
+            "displayName": "Text Section",
+            "type": "component",
+            "repeatable": true,
+            "component": "section.text-section"
+        },
+        "detailsPdf": {
+            "type": "media",
+            "multiple": false,
+            "required": false,
+            "allowedTypes": [
+                "files"
+            ],
+            "description": "A PDF with additional information about the track."
+        }
+    }
+}
