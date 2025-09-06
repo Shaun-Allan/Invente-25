@@ -164,7 +164,7 @@ export interface Event {
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
-    day: 'Day 1' | 'Day 2' | 'Day 1 & 2';
+    day: 'Day 1' | 'Day 2' | 'Day 1 & 2' | 'TBA';
     time: string;
     venue: string;
     prizes: PrizeDetail[];
