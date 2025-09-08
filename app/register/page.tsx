@@ -38,9 +38,7 @@ export default function RegisterPage() {
   
   const [techEvents, setTechEvents] = useState<Event[]>([]);
   const [groupedEvents, setGroupedEvents] = useState<Record<string, Event[]>>({});
-  const [techPasses, setTechPasses] = useState<TechPass[]>([
-    { id: Date.now(), slot1: '', slot2: '', slot3: '', slot4: '' },
-  ]);
+  const [techPasses, setTechPasses] = useState<TechPass[]>([{ id: Date.now(), slot1: '', slot2: '', slot3: '', slot4: '' }]);
   const [isTechPassModalOpen, setIsTechPassModalOpen] = useState(false);
 
   const initialMemberState: HackinfinityMember = { name: '', email: '', contact: '', gender: '', department: '', year: '' };
@@ -58,29 +56,29 @@ export default function RegisterPage() {
   const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
   const [successfulPaymentId, setSuccessfulPaymentId] = useState<string | null>(null);
 
+  // ✅ NEW: State for the manual verification popup
+  const [isVerificationModalOpen, setIsVerificationModalOpen] = useState(false);
+
   const PASS_PRICE = 300;
   const HACKINFINITY_PRICE_PER_HEAD = 300;
 
   useEffect(() => {
-    const checkRazorpaySuccess = () => {
-      const queryParams = new URLSearchParams(window.location.search);
-      const paymentId = queryParams.get('razorpay_payment_id');
-      if (paymentId) {
-        console.log("Razorpay Payment Successful! Payment ID:", paymentId);
-        setSuccessfulPaymentId(paymentId);
-        setIsThankYouModalOpen(true);
-        window.history.replaceState({}, document.title, window.location.pathname);
-      }
-    };
-    checkRazorpaySuccess();
-    
+    // ✅ NEW: Restore form data from localStorage on page load
+    const savedTechPasses = localStorage.getItem('techPasses');
+    const savedHackinfinityForm = localStorage.getItem('hackinfinityForm');
+    if (savedTechPasses) {
+      setTechPasses(JSON.parse(savedTechPasses));
+    }
+    if (savedHackinfinityForm) {
+      setHackinfinityForm(JSON.parse(savedHackinfinityForm));
+    }
+
     const fetchAndProcessEvents = async () => {
       try {
         setIsLoading(true);
         const allEvents = await getEvents();
         const filteredTechEvents = allEvents.filter(e => e.attributes.class === 'technical');
         setTechEvents(filteredTechEvents);
-
         const grouped = filteredTechEvents.reduce((acc, event) => {
           const dept = event.attributes.department || 'Other';
           if (!acc[dept]) acc[dept] = [];
@@ -97,11 +95,14 @@ export default function RegisterPage() {
     fetchAndProcessEvents();
   }, []);
 
+  // ✅ UPDATED: Now saves form data before redirecting
   const handleConfirmAndBuy = () => {
-    const razorpayBaseUrl = 'https://rzp.io/l/ssn-snuc-sponsorship';
-    const callbackUrl = window.location.href.split('?')[0]; 
-    const redirectUrl = `${razorpayBaseUrl}?callback_url=${encodeURIComponent(callbackUrl)}`;
-    window.location.href = redirectUrl;
+    // Save current form state to localStorage
+    localStorage.setItem('techPasses', JSON.stringify(techPasses));
+    localStorage.setItem('hackinfinityForm', JSON.stringify(hackinfinityForm));
+    
+    // Redirect to your payment link
+    window.location.href = 'https://rzp.io/l/ssn-snuc-sponsorship'; // USE YOUR CORRECT /l/ LINK IF YOU GET ONE, OTHERWISE THIS FLOW IS THE ONLY WAY
   };
 
   const tabs = ["Tech Passes", "Non-tech Events", "Hackinfinity"];
@@ -111,38 +112,31 @@ export default function RegisterPage() {
       <div className="min-h-screen bg-black/80 backdrop-blur-sm">
         <main className="container mx-auto px-4 py-16 md:py-24 text-white">
           <div className="flex flex-col md:flex-row gap-8">
-            {/* --- Tab Navigation (Sidebar on Desktop) --- */}
             <aside className="w-full md:w-1/4">
-              {/* ✅ UPDATED: Changed to flex-col for all screen sizes */}
               <div className="flex flex-col justify-start gap-2">
                 {tabs.map(tab => (
-                  <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`
-                      w-full               
-                      p-4               
-                      text-left
-                      text-sm sm:text-base
-                      font-orbitron uppercase tracking-wider transition-colors duration-300 
-                      ${activeTab === tab ? 'bg-purple-600/80 text-white' : 'bg-gray-900/50 text-purple-300 hover:bg-gray-800/70'}
-                    `}
-                  >
+                  <button key={tab} onClick={() => setActiveTab(tab)} className={`w-full p-4 text-left text-sm sm:text-base font-orbitron uppercase tracking-wider transition-colors duration-300 ${activeTab === tab ? 'bg-purple-600/80 text-white' : 'bg-gray-900/50 text-purple-300 hover:bg-gray-800/70'}`}>
                     {tab}
                   </button>
                 ))}
               </div>
+              
+              {/* ✅ NEW: "Verify Payment" button */}
+              <div className="mt-8 border-t-2 border-purple-500/30 pt-4 text-center">
+                  <p className="text-sm text-gray-400 mb-2">Completed your payment?</p>
+                  <button 
+                    onClick={() => setIsVerificationModalOpen(true)}
+                    className="w-full bg-green-600/80 text-white p-3 font-orbitron uppercase text-sm tracking-wider hover:bg-green-500/80 transition-colors"
+                  >
+                    Verify Payment
+                  </button>
+              </div>
             </aside>
 
-            {/* --- Tab Content Area --- */}
             <div className="w-full md:w-3/4">
               <h1 className="text-4xl md:text-6xl font-bold text-purple-400 text-center mb-16 mt-10 sm:mt-0 font-michroma drop-shadow-[0_0_8px_rgba(168,85,247,0.7)]">
                 GET YOUR PASSES
               </h1>
-              {/* <p className="text-center text-white/80 mb-12 font-orbitron max-w-2xl mx-auto">
-                Choose your desired pass type. Tech passes grant access to workshops, while Hackinfinity is our flagship hackathon.
-              </p> */}
-
               {activeTab === 'Tech Passes' && <TechPassesContent {...{ techPasses, setTechPasses, groupedEvents, techEvents, isLoading, setIsTechPassModalOpen }} />}
               {activeTab === 'Non-tech Events' && <NonTechContent />}
               {activeTab === 'Hackinfinity' && <HackinfinityForm {...{ hackinfinityForm, setHackinfinityForm, setIsHackinfinityModalOpen, HACKINFINITY_PRICE_PER_HEAD }} />}
@@ -151,13 +145,57 @@ export default function RegisterPage() {
         </main>
       </div>
       
-      {/* --- Modals --- */}
       {isTechPassModalOpen && <TechPassSummaryModal {...{ techPasses, techEvents, PASS_PRICE, setIsModalOpen: setIsTechPassModalOpen, handleConfirmAndBuy }} />}
       {isHackinfinityModalOpen && <HackinfinitySummaryModal {...{ formState: hackinfinityForm, HACKINFINITY_PRICE_PER_HEAD, setIsModalOpen: setIsHackinfinityModalOpen, handleConfirmAndBuy }} />}
       {isThankYouModalOpen && <ThankYouModal {...{ successfulPaymentId, setIsThankYouModalOpen }} />}
+      {/* ✅ NEW: Render the verification modal */}
+      {isVerificationModalOpen && <VerificationModal setSuccessfulPaymentId={setSuccessfulPaymentId} setIsVerificationModalOpen={setIsVerificationModalOpen} setIsThankYouModalOpen={setIsThankYouModalOpen} />}
     </div>
   );
 }
+
+// ============================================================================
+// --- Sub-Components ---
+// ============================================================================
+
+// ✅ NEW: Modal for manual payment verification
+const VerificationModal = ({ setSuccessfulPaymentId, setIsVerificationModalOpen, setIsThankYouModalOpen }: any) => {
+    const [pastedId, setPastedId] = useState('');
+
+    const handleVerify = () => {
+        if (pastedId.trim()) {
+            // Log the ID the user pasted
+            console.log("User submitted Payment ID for verification:", pastedId.trim());
+            
+            // Show the success message
+            setSuccessfulPaymentId(pastedId.trim());
+            setIsVerificationModalOpen(false);
+            setIsThankYouModalOpen(true);
+        }
+    }
+
+    return (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50 p-4">
+            <div className="bg-gray-900 border border-purple-500 max-w-lg w-full p-8 relative text-center">
+                <button onClick={() => setIsVerificationModalOpen(false)} className="absolute top-4 right-4 text-white hover:text-purple-400 font-bold text-2xl">&times;</button>
+                <h2 className="text-3xl font-bold text-purple-400 mb-4 font-michroma">Verify Your Payment</h2>
+                <p className="text-white/80 mb-6 font-exo2">Please copy the Payment ID from the Razorpay success screen and paste it below to confirm your registration.</p>
+                <input 
+                    type="text"
+                    value={pastedId}
+                    onChange={(e) => setPastedId(e.target.value)}
+                    placeholder="Paste Payment ID here (e.g., pay_...)"
+                    className="w-full bg-gray-800 border border-purple-500/50 text-white p-3 focus:ring-2 focus:ring-purple-500 focus:outline-none font-mono"
+                />
+                <div className="mt-8">
+                    <button onClick={handleVerify} className="uppercase bg-purple-600 text-white px-8 py-3 font-bold text-md shadow-lg hover:bg-purple-700 transition font-orbitron">
+                        Confirm Registration
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 
 // ============================================================================

@@ -39,7 +39,7 @@ interface StrapiCollectionResponse<T> {
 const STRAPI_URL =
   process.env.STRAPI_API_URL ||
   process.env.NEXT_PUBLIC_STRAPI_URL ||
-  "https://ssnsnucinvente.com";
+  "http://localhost:1338";
 
 // --- Core API Fetch Function (Unchanged) ---
 
