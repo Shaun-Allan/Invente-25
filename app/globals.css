@@ -54,6 +54,62 @@
 
 
 @layer utilities {
+  /* Decorative background: radial glows + subtle grid */
+  .bg-app-grid {
+    background-color: #000;
+    background-image:
+      radial-gradient(1200px 600px at 50% -10%, rgba(147, 51, 234, 0.12), transparent 60%),
+      radial-gradient(800px 400px at 80% 10%, rgba(236, 72, 153, 0.10), transparent 60%),
+      radial-gradient(800px 400px at 20% 20%, rgba(59, 130, 246, 0.08), transparent 60%),
+      repeating-linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.05) 0px,
+        rgba(255, 255, 255, 0.05) 1px,
+        transparent 1px,
+        transparent 24px
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.05) 0px,
+        rgba(255, 255, 255, 0.05) 1px,
+        transparent 1px,
+        transparent 24px
+      );
+    background-size: auto, auto, auto, 24px 24px, 24px 24px;
+    background-position: center top, right top, left top, 0 0, 0 0;
+  }
+
+  /* Slightly enlarge UI on desktop like reference site */
+  :root { font-size: 16px; }
+  @media (min-width: 1024px) { /* lg */
+    :root { font-size: 18px; }
+  }
+  @media (min-width: 1536px) { /* 2xl */
+    :root { font-size: 19px; }
+  }
+
+  /* Glow animation for CTA buttons */
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 0 rgba(168, 85, 247, 0.0); }
+    50% { box-shadow: 0 0 32px rgba(168, 85, 247, 0.35); }
+  }
+
+  .animate-glow {
+    animation: glow 3s ease-in-out infinite;
+  }
+
+  /* Animated gradient background utility for buttons/badges */
+  @keyframes shift-gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .bg-animated-gradient {
+    background: linear-gradient(90deg, #7c3aed, #db2777, #06b6d4, #7c3aed);
+    background-size: 300% 300%;
+    animation: shift-gradient 8s ease infinite;
+  }
+
   @keyframes spin-slow {
     from {
       transform: rotate(0deg);

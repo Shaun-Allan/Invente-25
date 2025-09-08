@@ -221,34 +221,55 @@ export default function DepartmentEventsClientView({
                     </>
                   )}
 
-                  <div>
-                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-michroma text-purple-300 mb-6">Rounds :</h3>
-                    <div className="space-y-8">
-                      {(selectedEvent.attributes.rounds || []).map((round, index) => (
-                        <div key={index} className="p-5 md:p-6 border border-purple-700  bg-black/20">
-                          <h4 className="text-xl md:text-xl font-bold text-purple-400 mb-3 font-michroma">{round.name}</h4>
-                          <p className="text-gray-300 leading-relaxed mb-4 text-base md:text-base font-exo2">{round.details}</p>
-                          {Array.isArray(round.rules) && round.rules.length > 0 ? (
-                            <div>
-                              <h5 className="font-bold text-base md:text-base mb-2 text-purple-200 font-exo2">Rules & Regulations:</h5>
-                              <ul className="list-disc list-inside space-y-1 text-gray-400 text-sm md:text-sm font-exo2">
-                                {(Array.isArray(round.rules) ? round.rules : []).map((rule, i) => <li key={i}>{rule}</li>)}
-                              </ul>
-                            </div>
-                          ) : (
-                            <div></div>
-                          )}
-
-                          {round.tieBreaker && (
-                            <div className="mt-4">
-                              <h5 className="font-bold text-base md:text-lg text-purple-200 font-exo2">Tie Breaker:</h5>
-                              <p className="text-gray-400 text-sm md:text-base font-exo2">{round.tieBreaker}</p>
-                            </div>
-                          )}
+                 
+              <div>
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-michroma text-purple-300 mb-6">Rounds :</h3>
+                <div className="space-y-8 mx-auto max-w-3xl">
+                  {(selectedEvent.attributes.rounds || []).map((round, index) => (
+                    <div
+                      key={index}
+                      className="
+                        p-5 md:p-6
+                        rounded-xl
+                        border-2 border-purple-500/40
+                        bg-gradient-to-br from-purple-900/40 via-black/30 to-purple-800/30
+                        shadow-[0_8px_32px_0_rgba(168,85,247,0.37)]
+                        backdrop-blur-lg
+                        backdrop-saturate-150
+                        ring-1 ring-purple-400/30
+                        transition-all duration-300
+                        hover:scale-105
+                        hover:ring-2
+                        hover:ring-purple-400
+                      "
+                      style={{
+                        boxShadow: '0 4px 32px 0 rgba(168,85,247,0.37), 0 1.5px 8px 0 rgba(0,0,0,0.25)',
+                        border: '1.5px solid rgba(168,85,247,0.25)',
+                        background: 'rgba(30, 0, 60, 0.35)',
+                      }}
+                    >
+                      <h4 className="text-xl md:text-xl font-bold text-purple-400 mb-3 font-michroma drop-shadow-[0_0_8px_rgba(168,85,247,0.7)]">
+                        {round.name}
+                      </h4>
+                      <p className="text-gray-200 leading-relaxed mb-4 text-base md:text-base font-exo2">{round.details}</p>
+                      {Array.isArray(round.rules) && round.rules.length > 0 && (
+                        <div>
+                          <h5 className="font-bold text-base md:text-base mb-2 text-purple-200 font-exo2">Rules & Regulations:</h5>
+                          <ul className="list-disc list-inside space-y-1 text-purple-100 text-sm md:text-sm font-exo2">
+                            {round.rules.map((rule, i) => <li key={i}>{rule}</li>)}
+                          </ul>
                         </div>
-                      ))}
+                      )}
+                      {round.tieBreaker && (
+                        <div className="mt-4">
+                          <h5 className="font-bold text-base md:text-lg text-purple-200 font-exo2">Tie Breaker:</h5>
+                          <p className="text-purple-100 text-sm md:text-base font-exo2">{round.tieBreaker}</p>
+                        </div>
+                      )}
                     </div>
-                  </div>
+                  ))}
+                </div>
+              </div>
                 </div>
               ) : (
                 <div className="flex items-center justify-center h-96">

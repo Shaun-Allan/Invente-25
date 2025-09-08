@@ -4,6 +4,7 @@ import { getEvents, Event } from '@/lib/api'; // ✨ ADD getRegistrationUrl
 import DepartmentEventsClientView from './DepartmentEventsClientView';
 import { unstable_noStore as noStore } from 'next/cache';
 
+
 // Correctly map URL slugs to the simple API department names.
 const mapSlugToApiDept = (slug: string): string => {
   const map: { [key: string]: string } = {

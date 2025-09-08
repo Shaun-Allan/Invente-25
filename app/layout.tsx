@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import {
   Geist,
   Geist_Mono,
@@ -11,15 +11,15 @@ import {
   Exo_2,
   Space_Grotesk,
   Rubik_Glitch,
-  Parisienne, // ✅ Added
+  Parisienne, // âœ… Added
 } from "next/font/google";
 
 import "./globals.css";
 
-// 🟤 Import Navbar & Footer
+// ðŸŸ¤ Import Navbar & Footer
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import PageWrapper from "@/components/PageWrapper"; // ✅ new wrapper
+import PageWrapper from "@/components/PageWrapper"; // âœ… new wrapper
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -87,7 +87,7 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["400", "700"],
 });
 
-// ✅ Add Rubik Glitch
+// âœ… Add Rubik Glitch
 const rubikGlitch = Rubik_Glitch({
   variable: "--font-rubik-glitch",
   subsets: ["latin"],
@@ -128,9 +128,8 @@ export default function RootLayout({
     ${exo2.variable}
     ${spaceGrotesk.variable}
     ${rubikGlitch.variable}
-    ${parisienne.variable} /* ✅ Added */
-    antialiased
-    bg-[#DEE8CE]
+    ${parisienne.variable} /* âœ… Added */
+    antialiased bg-black bg-app-grid text-white selection:bg-purple-500/30 selection:text-white
   `}
       >
 

@@ -1,6 +1,3 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { getSponsors, Sponsor, SponsorType } from "@/lib/api";
 
@@ -14,46 +11,21 @@ const SPONSOR_CATEGORIES: { type: SponsorType; title: string }[] = [
   { type: "t-shirt", title: "T-Shirt Sponsors" },
 ];
 
-export default function SponsorsPage() {
-  const [sponsors, setSponsors] = useState<Sponsor[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    async function fetchSponsors() {
-      try {
-        const sponsorData = await getSponsors();
-        setSponsors(sponsorData);
-      } catch (err) {
-        setError("Failed to load sponsors");
-        console.error("Error fetching sponsors:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchSponsors();
-  }, []);
+export default async function SponsorsPage() {
+  // Fetch sponsors on the server to avoid client-side env/runtime issues
+  let sponsors: Sponsor[] = [];
+  let error: string | null = null;
+  try {
+    sponsors = await getSponsors();
+  } catch (err) {
+    error = "Failed to load sponsors";
+    console.error("Error fetching sponsors:", err);
+  }
 
   // Helper function to get sponsors by category
   const getSponsorsByCategory = (category: SponsorType) => {
     return sponsors.filter(sponsor => sponsor.attributes.category === category);
   };
-
-  // Show loading state
-  if (loading) {
-    return (
-      <div
-        className="relative min-h-screen w-full flex flex-col bg-cover bg-center text-white"
-        style={{ backgroundImage: 'url("/sponsors/bg.png")' }}
-      >
-        <div className="absolute inset-0 bg-black/90"></div>
-        <div className="relative z-10 flex flex-grow items-center justify-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-white"></div>
-        </div>
-      </div>
-    );
-  }
 
   // Show "Stay Tuned" if no sponsors or error
   if (error || sponsors.length === 0) {

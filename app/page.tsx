@@ -4,6 +4,7 @@ import { useState } from 'react'; // <-- ADD THIS LINE
 import Image from "next/image";
 import Link from "next/link";
 import FuzzyText from "@/components/FuzzyText";
+import Tilt from "@/components/events/Tilt";
 
 export const dynamic = "force-dynamic";
 // export const revalidate = 0;
@@ -139,7 +140,7 @@ export default function Home() {
 
               <button
                 onClick={handlePassesClick}
-                className="relative overflow-hidden uppercase italic bg-purple-600 text-white px-5 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 font-bold text-sm sm:text-base md:text-md shadow-lg transition-colors duration-300 ease-in-out font-orbitron group"
+                className="relative overflow-hidden uppercase italic bg-animated-gradient animate-glow rounded-md text-white px-5 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 font-bold text-sm sm:text-base md:text-md shadow-lg transition-colors duration-300 ease-in-out font-orbitron group border border-white/10"
               >
                 <div className={`absolute inset-0 bg-white -translate-x-full transition-transform duration-300 ${isPassesClicked ? 'translate-x-0' : 'group-hover:translate-x-0'}`}></div>
                 <span className={`relative z-10 inline-block transition-transform duration-300 ${isPassesClicked ? 'translate-x-[200%]' : 'group-hover:translate-x-[200%]'}`}>Get Passes</span>
@@ -164,25 +165,28 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {events.map((event) => (
-              <Link
-                key={event.name}
-                href={event.href}
-                className="group relative block overflow-hidden border-2 border-purple-500/30 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/40"
-              >
-                <Image
-                  src={event.imageSrc}
-                  alt={event.name}
-                  width={600}
-                  height={338}
-		  unoptimized={true}
-                  className="w-full h-auto transition-transform duration-300 group-hover:brightness-50"
-                />
-                <div className="absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity duration-300 opacity-100 p-4">
-                  <span className="text-white text-4xl md:text-4xl xl:text-4xl tracking-widest drop-shadow-lg font-orbitron text-center">
-                    {event.name}
-                  </span>
-                </div>
-              </Link>
+              <Tilt key={event.name} className="will-change-transform">
+                <Link
+                  href={event.href}
+                  className="group relative block rounded-lg p-[2px] bg-gradient-to-br from-purple-500/40 via-fuchsia-500/30 to-cyan-400/30 transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-purple-500/30"
+                >
+                  <div className="relative rounded-md overflow-hidden bg-black">
+                    <Image
+                      src={event.imageSrc}
+                      alt={event.name}
+                      width={600}
+                      height={338}
+                      unoptimized={true}
+                      className="w-full h-auto transition-transform duration-300 group-hover:brightness-50"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity duration-300 opacity-100 p-4">
+                      <span className="text-white text-3xl md:text-4xl xl:text-4xl tracking-widest drop-shadow-lg font-orbitron text-center">
+                        {event.name}
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              </Tilt>
             ))}
           </div>
         </div>
@@ -211,4 +215,3 @@ export default function Home() {
     </div>
   );
 }
-
