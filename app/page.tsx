@@ -1,10 +1,10 @@
 'use client'; // <-- ADD THIS LINE
 
-import { useState } from 'react'; // <-- ADD THIS LINE
 import Image from "next/image";
 import Link from "next/link";
 import FuzzyText from "@/components/FuzzyText";
 import Tilt from "@/components/events/Tilt";
+import { motion } from "framer-motion";
 
 export const dynamic = "force-dynamic";
 // export const revalidate = 0;
@@ -32,17 +32,13 @@ const contacts = [
 
 
 export default function Home() {
-  const [isPassesClicked, setIsPassesClicked] = useState(false);
 
-  const handlePassesClick = () => {
-    setIsPassesClicked(!isPassesClicked);
-  };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="h-screen overflow-y-auto bg-black snap-y snap-proximity">
       {/* Hero Section */}
       <section
-        className="relative h-screen overflow-hidden"
+        className="relative h-screen overflow-hidden snap-center"
         style={{
           backgroundImage: "url(/hero.png)",
           backgroundPosition: "center",
@@ -134,18 +130,16 @@ export default function Home() {
             </p>
 
             <div className="flex flex-row gap-4 justify-center items-center mt-8">
-              <button className="uppercase bg-black/80 text-white px-5 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 font-bold text-sm sm:text-base md:text-md shadow-lg hover:bg-gray-900 transition font-orbitron border border-white">
+              <button className="uppercase bg-black/80 text-white px-5 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 font-bold text-sm sm:text-base md:text-md shadow-lg hover:bg-gray-900 transition font-orbitron border border-white/10 rounded-md">
                 Sept 26 - 27
               </button>
 
-              <button
-                onClick={handlePassesClick}
-                className="relative overflow-hidden uppercase italic bg-animated-gradient animate-glow rounded-md text-white px-5 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 font-bold text-sm sm:text-base md:text-md shadow-lg transition-colors duration-300 ease-in-out font-orbitron group border border-white/10"
+              <a
+                href="/register"
+                className="relative uppercase italic bg-animated-gradient glow-on-hover hover:scale-105 rounded-md text-white px-5 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 font-bold text-sm sm:text-base md:text-md shadow-lg transition-all duration-300 ease-in-out font-orbitron border border-white/10"
               >
-                <div className={`absolute inset-0 bg-white -translate-x-full transition-transform duration-300 ${isPassesClicked ? 'translate-x-0' : 'group-hover:translate-x-0'}`}></div>
-                <span className={`relative z-10 inline-block transition-transform duration-300 ${isPassesClicked ? 'translate-x-[200%]' : 'group-hover:translate-x-[200%]'}`}>Get Passes</span>
-                <span className={`absolute inset-0 flex items-center justify-center text-black font-bold -translate-x-full transition-transform duration-300 z-20 ${isPassesClicked ? 'translate-x-0' : 'group-hover:translate-x-0'}`}>Coming Soon</span>
-              </button>
+                Get Passes
+              </a>
             </div>
           </div>
         </div>
@@ -157,13 +151,28 @@ export default function Home() {
       </section>
 
       {/* --- EVENTS GRID SECTION --- */}
-      <section className="relative py-16 md:py-24">
+      <section className="relative py-16 md:py-24 snap-center">
         <div className="absolute inset-0 bg-black/80"></div>
-        <div className="relative container mx-auto px-4">
-          <h2 className="text-3xl md:text-5xl font-bold text-purple-400 text-center sm:text-left mb-12 md:mb-16 lg:mb-24 drop-shadow-[0_0_8px_rgba(168,85,247,0.7)] font-michroma" id="events">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="relative container mx-auto px-4"
+        >
+          <h2
+            id="events"
+            className="text-3xl md:text-5xl font-bold text-purple-400 text-center font-michroma animate-text-glow mb-8 md:mb-12"
+          >
             EVENTS
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="mt-6 md:mt-8 lg:mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+          >
             {events.map((event) => (
               <Tilt key={event.name} className="will-change-transform">
                 <Link
@@ -188,14 +197,14 @@ export default function Home() {
                 </Link>
               </Tilt>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* --- REGISTRATION QUERIES SECTION --- */}
-      <section className="relative py-16 md:py-24 bg-black">
+      <section className="relative py-16 md:py-24 bg-black snap-center">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-purple-400 mb-12 md:mb-16 drop-shadow-[0_0_8px_rgba(168,85,247,0.7)] font-michroma break-words">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-purple-400 mb-12 md:mb-16 font-michroma break-words animate-text-glow">
             REGISTRATION QUERIES
           </h2>
           <p className="text-white/80 max-w-3xl mx-auto text-lg md:text-xl mb-12 font-orbitron">

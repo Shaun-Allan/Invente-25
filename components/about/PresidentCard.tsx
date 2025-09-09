@@ -1,4 +1,6 @@
+"use client";
 import Image from 'next/image';
+import Link from 'next/link';
 
 type PresidentCardProps = {
   department: string;
@@ -9,6 +11,8 @@ type PresidentCardProps = {
 };
 
 export const PresidentCard = ({ department, imageSrc, name, instagram, phone }: PresidentCardProps) => {
+  const cleanedPhone = (phone || '').replace(/\s+/g, '');
+  const igHandle = (instagram || '').replace(/^@/, '');
   return (
     <div className="bg-[url('/about/dept_card.jpg')] bg-cover bg-center bg-no-repeat p-3 flex flex-col items-center justify-center text-center hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20 group relative overflow-hidden h-auto border-2 border-purple-400/40">
       {/* Dark overlay */}
@@ -33,16 +37,23 @@ export const PresidentCard = ({ department, imageSrc, name, instagram, phone }: 
           <p className="font-semibold text-2xl font-poppins text-white group-hover:text-purple-100 transition-colors duration-300 text-center break-words max-w-[260px]">
             {name}
           </p>
-
-          <p className="text-base font-poppins text-purple-200 group-hover:text-purple-100 transition-colors duration-300">
-            {phone}
-          </p>
+          {cleanedPhone ? (
+            <a href={`tel:${cleanedPhone}`} className="text-base font-poppins text-purple-200 group-hover:text-purple-100 transition-colors duration-300 underline-offset-4 hover:underline">
+              {phone}
+            </a>
+          ) : (
+            <span className="text-base font-poppins text-purple-300/70">—</span>
+          )}
         </div>
 
         {/* Instagram */}
-        <p className="text-base font-poppins text-purple-200 group-hover:text-purple-100 transition-colors duration-300 mt-2 text-center break-words max-w-[220px]">
-          Instagram: {instagram}
-        </p>
+        {igHandle ? (
+          <Link href={`https://instagram.com/${igHandle}`} target="_blank" rel="noopener noreferrer" className="text-base font-poppins text-purple-200 group-hover:text-purple-100 transition-colors duration-300 mt-2 text-center break-words max-w-[220px] underline-offset-4 hover:underline">
+            Instagram: @{igHandle}
+          </Link>
+        ) : (
+          <span className="text-base font-poppins text-purple-300/70 mt-2 text-center break-words max-w-[220px]">Instagram: —</span>
+        )}
       </div>
     </div>
   );

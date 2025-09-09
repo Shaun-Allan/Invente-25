@@ -1,11 +1,27 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Hackathon, Workshop, TextSection, HackathonSponsor } from "@/lib/api"; // Import new types
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 
 const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "https://ssnsnucinvente.com";
+
+// Simple scroll-reveal animation variants
+const containerVariants = {
+    hidden: { opacity: 0, y: 24 },
+    show: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.5, ease: "easeOut", staggerChildren: 0.12 }
+    }
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 24 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } }
+};
 
 // Helper component to safely render Rich Text (Markdown) from Strapi
 const MarkdownRenderer = ({ content }: { content: any }) => {
@@ -33,36 +49,14 @@ const WorkshopModal = ({ workshop, onClose, registrationUrl }: { workshop: Works
                 </ul>
                 {registrationUrl && (
                     <div className="my-8 flex justify-center">
-                        {/* <a
-                        href={registrationUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-
-                      > */}
-                        <button
-
-                            className="relative overflow-hidden uppercase italic bg-purple-600 text-white px-5 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 font-bold text-sm sm:text-sm md:text-sm shadow-lg transition-colors duration-300 ease-in-out font-orbitron group"
+                        <a
+                            href={registrationUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="uppercase italic bg-animated-gradient glow-on-hover hover:scale-105 text-white px-5 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 font-bold text-sm sm:text-sm md:text-sm shadow-lg transition-all duration-300 ease-in-out font-orbitron border border-white/10 rounded-md"
                         >
-                            {/* Background slide effect */}
-                            <div
-                                className={`absolute inset-0 bg-white -translate-x-full transition-transform duration-300  group-hover:translate-x-0`}
-                            ></div>
-
-                            {/* "Get Passes" text */}
-                            <span
-                                className={`relative z-10 inline-block transition-transform duration-300 group-hover:translate-x-[200%]`}
-                            >
-                                Register
-                            </span>
-
-                            {/* "Coming Soon" text */}
-                            <span
-                                className={`absolute inset-0 flex items-center justify-center text-black font-bold -translate-x-full transition-transform duration-300 z-20  group-hover:translate-x-0`}
-                            >
-                                Coming Soon
-                            </span>
-                        </button>
-                        {/* </a> */}
+                            Register
+                        </a>
                     </div>
                 )}
                 <MarkdownRenderer content={workshop.attributes.description} />
@@ -179,13 +173,14 @@ const HackathonModal = ({ hackathon, onClose, registrationUrl }: { hackathon: Ha
 
                     {registrationUrl && (
                         <div className="my-8 flex justify-center">
-                            <button
-                                className="relative overflow-hidden uppercase italic bg-purple-600 text-white px-5 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 font-bold text-sm sm:text-sm md:text-sm shadow-lg transition-colors duration-300 ease-in-out font-orbitron group"
+                            <a
+                                href={registrationUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="uppercase italic bg-animated-gradient glow-on-hover hover:scale-105 text-white px-5 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 font-bold text-sm sm:text-sm md:text-sm shadow-lg transition-all duration-300 ease-in-out font-orbitron border border-white/10 rounded-md"
                             >
-                                <div className={`absolute inset-0 bg-white -translate-x-full transition-transform duration-300  group-hover:translate-x-0`}></div>
-                                <span className={`relative z-10 inline-block transition-transform duration-300  group-hover:translate-x-[200%]`}>Register</span>
-                                <span className={`absolute inset-0 flex items-center justify-center text-black font-bold -translate-x-full transition-transform duration-300 z-20  group-hover:translate-x-0`}>Coming Soon</span>
-                            </button>
+                                Register
+                            </a>
                         </div>
                     )}
 
@@ -283,32 +278,60 @@ const HackathonsClientView = ({ hackathons, workshops, registrationUrl }: { hack
             </div>
             <div className="absolute inset-0 z-5 bg-black/50"></div>
             <div className="relative z-10 flex w-full max-w-6xl flex-col items-center">
-                <div className="mt-16 mb-12">
-                    <Image src="/hackathons/Hackathons.png" width={600} height={100} alt="Hackathons Title" className="h-auto w-full max-w-[400px] sm:max-w-[400px]" />
-                </div>
-                <div className="flex w-full flex-col gap-8 md:flex-row">
-                    {hackathons.map((hackathon) => (
-                        <div key={hackathon.id} className="group flex flex-1 cursor-pointer items-center justify-center border-2 border-purple-500 bg-black/60 p-8 backdrop-blur-sm transition-all duration-300 hover:border-purple-300 hover:shadow-2xl hover:shadow-purple-500/40 sm:p-8" onClick={() => setSelectedEvent(hackathon)}>
-                            <h1 className="text-5xl sm:text-5xl font-rubik-glitch text-purple-500 text-center tracking-wide break-words drop-shadow-[0_0_8px_rgba(168,85,247,0.7)] uppercase">{hackathon.attributes.name}</h1>
-                        </div>
-                    ))}
-                </div>
-                <div className="my-16">
-                    <Image src="/hackathons/WORKSHOPS.png" width={600} height={100} alt="Workshops Title" className="h-auto w-full max-w-[400px] sm:max-w-[400px]" />
-                </div>
-                {workshops.length > 0 ? (
-                    <div className="flex w-full flex-col gap-8 md:flex-row">
-                        {workshops.map((workshop) => (
-                            <div key={workshop.id} className="group flex flex-1 cursor-pointer items-center justify-center border-2 border-purple-500 bg-black/60 p-8 backdrop-blur-sm transition-all duration-300 hover:border-purple-300 hover:shadow-2xl hover:shadow-purple-500/40 sm:p-12" onClick={() => setSelectedEvent(workshop)}>
-                                <h1 className="text-5xl sm:text-6xl font-rubik-glitch text-purple-500 text-center mb-6 tracking-wide break-words drop-shadow-[0_0_8px_rgba(168,85,247,0.7)] uppercase">{workshop.attributes.title}</h1>
-                            </div>
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, amount: 0.3 }}
+                    className="w-full flex flex-col items-center"
+                >
+                    <motion.div variants={itemVariants} className="mt-16 mb-12">
+                        <Image src="/hackathons/Hackathons.png" width={600} height={100} alt="Hackathons Title" className="h-auto w-full max-w-[400px] sm:max-w-[400px]" />
+                    </motion.div>
+
+                    <motion.div variants={itemVariants} className="flex w-full flex-col gap-8 md:flex-row">
+                        {hackathons.map((hackathon) => (
+                            <motion.div
+                                variants={itemVariants}
+                                key={hackathon.id}
+                                className="group flex flex-1 cursor-pointer items-center justify-center border-2 border-purple-500 bg-black/60 p-8 backdrop-blur-sm transition-all duration-300 hover:border-purple-300 hover:shadow-2xl hover:shadow-purple-500/40 sm:p-8"
+                                onClick={() => setSelectedEvent(hackathon)}
+                            >
+                                <h1 className="text-5xl sm:text-5xl font-rubik-glitch text-purple-500 text-center tracking-wide break-words drop-shadow-[0_0_8px_rgba(168,85,247,0.7)] uppercase">{hackathon.attributes.name}</h1>
+                            </motion.div>
                         ))}
-                    </div>
-                ) : (
-                    <div className="border border-purple-500 bg-black/60 px-12 py-4 backdrop-blur-sm">
-                        <p className="text-xl font-semibold tracking-widest sm:text-2xl font-michroma text-center">Coming Soon..</p>
-                    </div>
-                )}
+                    </motion.div>
+                </motion.div>
+
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, amount: 0.3 }}
+                    className="w-full flex flex-col items-center"
+                >
+                    <motion.div variants={itemVariants} className="my-16">
+                        <Image src="/hackathons/WORKSHOPS.png" width={600} height={100} alt="Workshops Title" className="h-auto w-full max-w-[400px] sm:max-w-[400px]" />
+                    </motion.div>
+                    {workshops.length > 0 ? (
+                        <motion.div variants={itemVariants} className="flex w-full flex-col gap-8 md:flex-row">
+                            {workshops.map((workshop) => (
+                                <motion.div
+                                    variants={itemVariants}
+                                    key={workshop.id}
+                                    className="group flex flex-1 cursor-pointer items-center justify-center border-2 border-purple-500 bg-black/60 p-8 backdrop-blur-sm transition-all duration-300 hover:border-purple-300 hover:shadow-2xl hover:shadow-purple-500/40 sm:p-12"
+                                    onClick={() => setSelectedEvent(workshop)}
+                                >
+                                    <h1 className="text-5xl sm:text-6xl font-rubik-glitch text-purple-500 text-center mb-6 tracking-wide break-words drop-shadow-[0_0_8px_rgba(168,85,247,0.7)] uppercase">{workshop.attributes.title}</h1>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    ) : (
+                        <motion.div variants={itemVariants} className="border border-purple-500 bg-black/60 px-12 py-4 backdrop-blur-sm">
+                            <p className="text-xl font-semibold tracking-widest sm:text-2xl font-michroma text-center">Coming Soon..</p>
+                        </motion.div>
+                    )}
+                </motion.div>
 
                 {/* Conditional Modal Rendering */}
                 {selectedEvent && 'tracks' in selectedEvent.attributes && (

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 // Define the list of images for the gallery carousel
 const galleryImages = [
@@ -75,43 +75,7 @@ export default function GalleryPage() {
   // State to keep track of the current image index
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
-    // Inject CSS styles for gradient border effect
-    const style = document.createElement('style');
-    style.innerHTML = `
-      @keyframes gradient-move {
-        0% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: 0% 50%;
-        }
-      }
-
-      .gradient-border {
-        position: absolute;
-        inset: -0.5rem;
-        border-radius: 0.5rem;
-        background: linear-gradient(270deg, #6366f1, #8b5cf6, #ec4899, #6366f1);
-        background-size: 400% 400%;
-        filter: blur(150px);
-        opacity: 1;
-        pointer-events: none;
-        z-index: 0;
-        animation: gradient-move 6s ease infinite;
-      }
-    `;
-    document.head.appendChild(style);
-
-    return () => {
-      if (document.head.contains(style)) {
-        document.head.removeChild(style);
-      }
-    };
-  }, []);
+  // CSS moved to app/globals.css (no DOM access required)
 
   // Function to go to the previous image
   const goToPrevious = () => {
@@ -126,6 +90,8 @@ export default function GalleryPage() {
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
   };
+
+  const nextIndex = (currentIndex + 1) % galleryImages.length;
 
   return (
     <main
@@ -152,24 +118,34 @@ export default function GalleryPage() {
         <LeftArrow onClick={goToPrevious} />
         <RightArrow onClick={goToNext} />
 
-        {/* Image Display Area with sliding animation */}
-        <div className="overflow-hidden">
-          <div
-            className="flex transition-transform duration-500 ease-in-out"
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-          >
-            {galleryImages.map((e, index) => (
-              <div key={index} className="relative aspect-video w-full flex-shrink-0">
-                <img
-                  src={e.src}
-                  alt={`Gallery image ${index + 1}`}
-                  className={`w-full h-full object-cover ${e.pos}`}
-                  loading="lazy"
-                />
-
-              </div>
-            ))}
+        {/* Image Display Area with crossfade + circular next preview */}
+        <div className="relative w-full aspect-video overflow-hidden">
+          {/* Circular preview of the next image sitting behind */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <img
+              key={nextIndex}
+              src={galleryImages[nextIndex].src}
+              alt="Next preview"
+              className={`preview-circle h-[68%] w-[68%] object-cover opacity-75 blur-[1px] ${galleryImages[nextIndex].pos}`}
+              loading="lazy"
+            />
           </div>
+
+          {galleryImages.map((e, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-all duration-700 ease-in-out ${
+                index === currentIndex ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-105 z-0'
+              }`}
+            >
+              <img
+                src={e.src}
+                alt={`Gallery image ${index + 1}`}
+                className={`w-full h-full object-cover ${e.pos}`}
+                loading="lazy"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </main>

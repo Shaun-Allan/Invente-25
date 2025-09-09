@@ -98,9 +98,9 @@ export const metadata: Metadata = {
   title: "Invente 2025 - Chrono Shift",
   description: "Invente 2025: Imagine. Create. Inspire. - SSN College of Engineering Tech Festival",
   icons: {
-    icon: '/favicon.ico',       // main icon
-    shortcut: '/favicon.ico',   // shortcut for older browsers
-    apple: '/favicon.ico',      // optional Apple touch icon
+    icon: '/favicon.png',       // main icon
+    shortcut: '/favicon.png',   // shortcut for older browsers
+    apple: '/favicon.png',      // optional Apple touch icon
   },
 };
 
@@ -113,7 +113,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </head>
       <body
         className={`

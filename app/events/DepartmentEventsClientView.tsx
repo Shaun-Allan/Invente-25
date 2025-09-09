@@ -64,11 +64,7 @@ export default function DepartmentEventsClientView({
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(initialEvent);
   const [openDropdown, setOpenDropdown] = useState<'technical' | 'nonTechnical' | null>(initialDropdown);
 
-  const [isPassesClicked, setIsPassesClicked] = useState(false);
-
-  const handlePassesClick = () => {
-    setIsPassesClicked(!isPassesClicked);
-  };
+  // removed temporary CTA animation state
 
   const getBackgroundImage = (slug: string): string => {
     switch (slug) {
@@ -151,36 +147,14 @@ export default function DepartmentEventsClientView({
                   {/* ✨ REGISTER BUTTON ADDED HERE */}
                   {registrationUrl && (
                     <div className="my-8 flex justify-center">
-                      {/* <a
+                      <a
                         href={registrationUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-
-                      > */}
-                      <button
-                        onClick={handlePassesClick}
-                        className="relative overflow-hidden uppercase italic bg-purple-600 text-white px-5 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 font-bold text-sm sm:text-sm md:text-sm shadow-lg transition-colors duration-300 ease-in-out font-orbitron group"
+                        className="uppercase italic bg-animated-gradient glow-on-hover hover:scale-105 text-white px-5 sm:px-6 md:px-8 lg:px-10 py-2 sm:py-3 md:py-4 font-bold text-sm sm:text-sm md:text-sm shadow-lg transition-all duration-300 ease-in-out font-orbitron border border-white/10 rounded-md"
                       >
-                        {/* Background slide effect */}
-                        <div
-                          className={`absolute inset-0 bg-white -translate-x-full transition-transform duration-300 ${isPassesClicked ? 'translate-x-0' : 'group-hover:translate-x-0'}`}
-                        ></div>
-
-                        {/* "Get Passes" text */}
-                        <span
-                          className={`relative z-10 inline-block transition-transform duration-300 ${isPassesClicked ? 'translate-x-[200%]' : 'group-hover:translate-x-[200%]'}`}
-                        >
-                          Register
-                        </span>
-
-                        {/* "Coming Soon" text */}
-                        <span
-                          className={`absolute inset-0 flex items-center justify-center text-black font-bold -translate-x-full transition-transform duration-300 z-20 ${isPassesClicked ? 'translate-x-0' : 'group-hover:translate-x-0'}`}
-                        >
-                          Coming Soon
-                        </span>
-                      </button>
-                      {/* </a> */}
+                        Register
+                      </a>
                     </div>
                   )}
 
